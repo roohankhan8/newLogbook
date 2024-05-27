@@ -1,215 +1,43 @@
-{% extends 'website/sidenavbar.html' %}
-{% block title %}Step 4: DRAWING BOARD{% endblock %}
-{% load static %}
-{% block content %}
+{% extends 'layout.html' %} {% block title %}Step 1: IDENTIFY {%endblock %} {% load static %} {% block content %}
 <!-- second header  -->
 <nav class="navbars">
   <div class="container-fluid-nav text-center">
     <h5>STEP 4- OVER TO THE DRAWING BOARD</h5>
   </div>
 </nav>
+
 <!-- second header ends  -->
 <!-- Question Answeer Box -->
 <div class="QA_container mb-1 p-5">
-  <form method="post" enctype="multipart/form-data">
+  <form method="post">
     {% csrf_token %}
     <div class="form-group">
-      <label for="formFileMultiple" class="form-label">4.1 In as much detail as possible, draw a blue print/ model of
-        how
-        your solution will (a) look; (b) what parts/ components/ elements it
-        will involve; (c) how it will work. If possible, show or list all
-        its functions</label>
-      <input class="form-control form-control-lg" id="imageInput" name="blueprint" accept="image/*" onchange="showImage()" type="file"
-        value="{{step4.blueprint}}" />
-        {% if step4.imageURL %}
-        <div class="container" id="imageContainer">
-          <img id="submittedImage" src="{{step4.imageURL}}" alt="" style="width: 100%; height: 100%;">
-        </div>
-        {% else %}
-        <div class="container" id="imageContainer" style="display: none;">
-          <img id="submittedImage" src="{{step4.imageURL}}" alt="" style="width: 100%; height: 100%;">
-        </div>
-        {% endif %}
-    </div><br>
-      <div class="container p-3 bg-light">
-        <center>
-          <h2 style="
-                      color: darkgreen;
-                      font-family: 'Times New Roman', Times, serif;
-                    ">
-            Mentor/Teacher Solution Sign-Off
-          </h2>
-        </center>
-        <hr />
-        <p>
-          I,<input type="text" value="{{step4.teacher_name}}" name="teacher_name" style="border: 1px solid gray;" />, am aware of the guidelines for the invention process and approve the solution each of my
-          students/team wants to pursue. This
-          solution and the process of developing it is within the guidelines and meets safety requirements. I will guide
-          them through this process.
- </p>
-<div class="row">  
-  <div class="col-md-6">
-    <!-- signature Field -->
-    <div class="mb-3">
-      <label for="nameField" class="form-label">Teacher’s Signature:</label>
-      <input type="text" value="{{step4.teacher_sign}}" class="form-control" id="nameField" name="teacher_sign">
+      <label
+        class="form-label"
+        for="inputlg"
+        style="font-family: 'Times New Roman', Times, serif; font-size: 19px"
+      >
+        4.1 In as much detail as possible, draw a blue print/ model of how your
+        solution will (a) look; (b) what parts/ components/ elements it will
+        involve; (c) how it will work. If possible, show or list all its
+        functions.</label
+      >
+      <textarea
+        class="form-control"
+        rows="10"
+        style="
+          height: 100%;
+          font-family: 'Times New Roman', Times, serif;
+          font-size: 19px;
+        "
+        placeholder="Your Answer"
+        name="difference"
+      >
+{{step3.difference}}</textarea
+      >
     </div>
-  </div>
-  <div class="col-md-6">
-    <!-- Date Field -->
-    <div class="mb-3">
-      <label for="dateField" class="form-label">Date:</label>
-      <input type="date" value="{{step4.date}}" class="form-control" id="dateField" name="date">
-    </div>
-  </div>
-</div>
-      </div>
-
-    <br>
-    <div class="form-group">
-      <label class="form-label" for="inputlg">4.2 Talk to experts and potential users of your solution about the obstacles/ problems you are likely to face in making
-      a real model of your design. Note those problems and how you identified them. Note what the experts and users said,
-      their experience in this area, and why you chose to talk to them. Along with the observations of others, also note what
-      problems you think you will face in making a model. Note the credentials of the experts here.
-
-      </label>
-<div class="accordion" id="accordionPanelsStayOpenExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse"
-        data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-        Issue 1:
-      </button>
-    </h2>
-    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-      <div class="accordion-body">
-        <div class="mb-3">
-          <label for="userName" class="form-label">User/Expert Name:</label>
-          <input type="text" value="{{issues.0.expert}}" class="form-control" id="userName" name="i1expert">
-        </div>
-        <div class="mb-3">
-          <label for="credentials" class="form-label">Credentials of the experts:</label>
-          <textarea class="form-control" id="credentials" name="i1credentials" rows="4">{{issues.0.credentials}}</textarea>
-        </div>
-        <div class="mb-3">
-          <label for="problemIdentified" class="form-label">Problem user/expert identified:</label>
-          <textarea class="form-control" id="credentials" name="i1identified" rows="4">{{issues.0.identified}}</textarea>
-        </div>
-        <div class="mb-3">
-          <label for="problemYouWillFace" class="form-label">Problem you think you will face:</label>
-          <textarea class="form-control" id="credentials" name="i1problemface" rows="4">{{issues.0.problemface}}</textarea>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-        data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-        Issue 2:
-      </button>
-    </h2>
-    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
-      <div class="accordion-body">
-        <div class="mb-3">
-          <label for="userName" class="form-label">User/Expert Name:</label>
-          <input type="text" value="{{issues.1.expert}}" class="form-control" id="userName" name="i2expert">
-        </div>
-        <div class="mb-3">
-          <label for="credentials" class="form-label">Credentials of the experts:</label>
-          <textarea class="form-control" id="credentials" name="i2credentials" rows="4">{{issues.1.credentials}}</textarea>
-        </div>
-        <div class="mb-3">
-          <label for="problemIdentified" class="form-label">Problem user/expert identified:</label>
-          <textarea class="form-control" id="credentials" name="i2identified" rows="4">{{issues.1.identified}}</textarea>
-        </div>
-        <div class="mb-3">
-          <label for="problemYouWillFace" class="form-label">Problem you think you will face:</label>
-          <textarea class="form-control" id="credentials" name="i2problemface" rows="4">{{issues.1.problemface}}</textarea>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-        data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
-        aria-controls="panelsStayOpen-collapseThree">
-        Issue 3:
-      </button>
-    </h2>
-    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
-      <div class="accordion-body">
-        <div class="mb-3">
-          <label for="userName" class="form-label">User/Expert Name:</label>
-          <input type="text" value="{{issues.2.expert}}" class="form-control" id="userName" name="i3expert">
-        </div>
-        <div class="mb-3">
-          <label for="credentials" class="form-label">Credentials of the experts:</label>
-          <textarea class="form-control" id="credentials" name="i3credentials" rows="4">{{issues.2.credentials}}</textarea>
-        </div>
-        <div class="mb-3">
-          <label for="problemIdentified" class="form-label">Problem user/expert identified:</label>
-          <textarea class="form-control" id="credentials" name="i3identified" rows="4">{{issues.2.identified}}</textarea>
-        </div>
-        <div class="mb-3">
-          <label for="problemYouWillFace" class="form-label">Problem you think you will face:</label>
-          <textarea class="form-control" id="credentials" name="i3problemface" rows="4">{{issues.2.problemface}}</textarea>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-    </div><br>
-    <div class="form-group">
-      <label class="form-label" for="inputlg">4.3 How will you overcome these issues? As you record how you will
-        overcome these issues, if the changes are minor, revise the existing
-        model iteration. If you make major changes to your model, add more
-        iterations to your first model (Model i1….Model i2)</label>
-      <textarea class="form-control" rows="10" placeholder="Your Answer"
-        name="sol_design_problem">{{step4.sol_design_problem}}</textarea>
-    </div>
-    <div class="form-group">
-      <label class="form-label" for="inputlg">4.4 There is a great emphasis needed on making green solutions.
-        This means whatever solution you arrive at, try to make it as
-        sustainable as possible. Note here how your design can be more
-        sustainable. If it uses less of the natural resources, or does not
-        damage the environment, it is a sustainable solution?</label>
-      <textarea class="form-control" rows="10" placeholder="Your Answer"
-        name="green_sol">{{step4.green_sol}}</textarea>
-    </div>
-
-    <!-- Buttons-->
-
-    <div class="container">
-      <div class="row">
-        <div class="col-6 d-flex align-items-center justify-content-start">
-          <button class="btn btn-success mr-1" type="button">
-            <a href="{% url 'step_3' pk sk %}">Back</a>
-          </button>
-          {% include 'website/buttons.html' %}
-        
+    {% include 'buttons.html' %}
   </form>
 </div>
 <!-- Question Answeer Box  Ends-->
-<script>
-  function showImage() {
-  const input = document.getElementById('imageInput');
-  const container = document.getElementById('imageContainer');
-  const image = document.getElementById('submittedImage');
-  if (input.files.length > 0) {
-    const file = input.files[0];
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      container.style.display = 'block';
-      image.src = e.target.result;
-    }; 
-
-    reader.readAsDataURL(file);
-  } else {
-    alert('Please select an image.');
-  }
-}
-</script>
-
 {% endblock %}

@@ -1,7 +1,5 @@
-{% extends 'website/sidenavbar.html' %} 
-{% block title %}Step 8: PREPARE TO MARKET{% endblock %} 
-{% load static %} 
-{% block content %}
+{% extends 'website/sidenavbar.html' %} {% block title %}Step 8: PREPARE TO
+MARKET{% endblock %} {% load static %} {% block content %}
 <!-- second header  -->
 <nav class="navbars">
   <div class="container-fluid-nav text-center">
@@ -39,7 +37,9 @@
         "
         placeholder="Your Answer"
         name="nameinvention"
-      >{{step8.nameinvention}}</textarea>
+      >
+{{step8.nameinvention}}</textarea
+      >
     </div>
     <div class="form-group">
       <label class="form-label" for="inputlg">
@@ -57,7 +57,9 @@
         "
         placeholder="Your Answer"
         name="benefits"
-      >{{step8.benefits}}</textarea>
+      >
+{{step8.benefits}}</textarea
+      >
     </div>
     <div class="form-group">
       <label class="form-label" for="inputlg"
@@ -75,7 +77,9 @@
         "
         placeholder="Your Answer"
         name="price"
-      >{{step8.price}}</textarea>
+      >
+{{step8.price}}</textarea
+      >
     </div>
     <div class="form-group">
       <label class="form-label" for="inputlg"
@@ -91,64 +95,66 @@
         "
         placeholder="Your Answer"
         name="buy"
-      >{{step8.buy}}</textarea>
+      >
+{{step8.buy}}</textarea
+      >
     </div>
     <div class="form-group">
-        <label class="form-label" for="inputlg"
-          >8.5 Describe your typical customer. What is their :</label
-        >
-        <div class="row mt-3">
-          <div class="col-md-12">
-            <label class="labels">Age:</label
-            ><input
-              type="text"
-              class="form-control"
-              placeholder="Enter age"
-              value="{{step8.customer_age}}"
-              name="customer_age"
-            />
-          </div>
-          <div class="col-md-12">
-            <label class="labels">Gender</label
-            ><input
-              type="text"
-              class="form-control"
-              placeholder="Enter gender"
-              value="{{step8.customer_gender}}"
-              name="customer_gender"
-            />
-          </div>
-          <div class="col-md-12">
-            <label class="labels">Education Level:</label
-            ><input
-              type="text"
-              class="form-control"
-              placeholder="Enter education level:"
-              value="{{step8.customer_education}}"
-              name="customer_education"
-            />
-          </div>
-          <div class="col-md-12">
-            <label class="labels">Household Size:</label
-            ><input
-              type="text"
-              class="form-control"
-              placeholder="Enter household size:"
-              value="{{step8.customer_house}}"
-              name="customer_house"
-            />
-          </div>
-          <div class="col-md-12">
-            <label class="labels">Marital Status:</label
-            ><input
-              type="text"
-              class="form-control"
-              placeholder="Enter marital status:"
-              value="{{step8.customer_marital}}"
-              name="customer_marital"
-            />
-          </div>
+      <label class="form-label" for="inputlg"
+        >8.5 Describe your typical customer. What is their :</label
+      >
+      <div class="row mt-3">
+        <div class="col-md-12">
+          <label class="labels">Age:</label
+          ><input
+            type="text"
+            class="form-control"
+            placeholder="Enter age"
+            value="{{step8.customer_age}}"
+            name="customer_age"
+          />
         </div>
+        <div class="col-md-12">
+          <label class="labels">Gender</label
+          ><input
+            type="text"
+            class="form-control"
+            placeholder="Enter gender"
+            value="{{step8.customer_gender}}"
+            name="customer_gender"
+          />
+        </div>
+        <div class="col-md-12">
+          <label class="labels">Education Level:</label
+          ><input
+            type="text"
+            class="form-control"
+            placeholder="Enter education level:"
+            value="{{step8.customer_education}}"
+            name="customer_education"
+          />
+        </div>
+        <div class="col-md-12">
+          <label class="labels">Household Size:</label
+          ><input
+            type="text"
+            class="form-control"
+            placeholder="Enter household size:"
+            value="{{step8.customer_house}}"
+            name="customer_house"
+          />
+        </div>
+        <div class="col-md-12">
+          <label class="labels">Marital Status:</label
+          ><input
+            type="text"
+            class="form-control"
+            placeholder="Enter marital status:"
+            value="{{step8.customer_marital}}"
+            name="customer_marital"
+          />
+        </div>
+      </div>
     </div>
     <div class="form-group">
       <label class="form-label" for="inputlg">Other Notes</label>
@@ -157,18 +163,13 @@
         rows="3"
         placeholder="Write here"
         name="other_notes"
-      >{{step8.other_notes}}</textarea>
+      >
+{{step8.other_notes}}</textarea
+      >
     </div>
     <!-- Buttons-->
-
-<div class="container">
-  <div class="row">
-    <div class="col-6 d-flex align-items-center justify-content-start">
-      <button class="btn btn-success mr-1" type="button">
-        <a href="{% url 'step_7' pk sk %}">Back</a>
-      </button>
-      {% include 'website/buttons.html' %}
-<!-- Buttons ends-->
+    {% include 'buttons.html' %}
+    <!-- Buttons ends-->
   </form>
 </div>
 <!-- Question Answeer Box  Ends-->

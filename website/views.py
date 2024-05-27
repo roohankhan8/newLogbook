@@ -2,7 +2,10 @@ from django.db import connections
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib import messages
+
+from website.utils import has_data_changed
 from .forms import *
+from .models import *
 
 # Create your views here.
 
@@ -98,7 +101,6 @@ def statementOfOriginality(request, pk, sk):
         .first()
     )
     if request.method == "POST":
-        # Changes done
         action = request.POST.get("action")
         inventor1 = request.POST.get("inventor1")
         schoolnamegrade1 = request.POST.get("schoolnamegrade1")
@@ -160,24 +162,18 @@ def statementOfOriginality(request, pk, sk):
 
 def stepOne(request, pk, sk):
     step1 = StepOne.objects.filter(teamId=sk).order_by("-date_updated").first()
+    if not step1:
+        step1 = StepOne.objects.create(userId=pk, teamId=sk)
     if request.method == "POST":
         action = request.POST.get("action")
-        if action == "save" or action == "next":
-            identify_problems = request.POST.get("initial_problem")
-            if step1 == None:
-                StepOne.objects.create(
-                    userId=pk,
-                    teamId=sk,
-                    identify_problems=identify_problems,
-                )
-                return redirect("stepTwo", pk, sk)
-            elif identify_problems != step1.identify_problems:
-                StepOne.objects.create(
-                    userId=pk,
-                    teamId=sk,
-                    identify_problems=identify_problems,
-                )
-                return redirect("stepOne", pk, sk)
+        if action in ("save", "next"):
+            identify_problems = request.POST.get("identify_problems")
+            data_changed = has_data_changed(step1, request.POST)
+            if step1 and not data_changed:
+                pass
+            else:
+                step1.problem_title = identify_problems
+                step1.save()
             if action == "save":
                 return HttpResponseRedirect(request.path_info)
             elif action == "next":
@@ -188,26 +184,8 @@ def stepOne(request, pk, sk):
     return render(request, "stepOne.html", context)
 
 
-def has_data_changed(existing_step, submitted_data):
-    if not existing_step:
-        return True
-    for field_name, field_value in submitted_data.items():
-        if field_name in [
-            "csrfmiddlewaretoken",
-            "problem_1",
-            "p1name1",
-            "p1age1",
-            "p1comment1",
-            "action",
-        ]:
-            continue
-        existing_field = getattr(existing_step, field_name)
-        if existing_field != field_value:
-            return True
-    return False
-
-
 def stepTwoOne(request, pk, sk):
+    step1 = StepOne.objects.filter(teamId=sk).order_by("-date_updated").first()
     step2 = StepTwo.objects.filter(teamId=sk).order_by("-date_updated").first()
     if not step2:
         step2 = StepTwo.objects.create(userId=pk, teamId=sk)
@@ -244,7 +222,7 @@ def stepTwoOne(request, pk, sk):
                 return redirect("stepTwoTwo", pk, sk)
         elif action == "back":
             return redirect("flowchart", pk, sk)
-    context = {"pk": pk, "sk": sk, "step2": step2}
+    context = {"pk": pk, "sk": sk, "step1": step1, "step2": step2}
     return render(request, "stepTwoOne.html", context)
 
 
@@ -252,7 +230,7 @@ def stepTwoTwo(request, pk, sk):
     step2 = StepTwo.objects.filter(teamId=sk).order_by("-date_updated").first()
     if request.method == "POST":
         action = request.POST.get("action")
-        if action == "save" or action == "next":
+        if action in ("save", "next"):
             selected_problem = request.POST.get("selected_problem")
             step2.selected_problem = selected_problem
             step2.save()
@@ -270,7 +248,7 @@ def stepTwoThree(request, pk, sk):
     step2 = StepTwo.objects.filter(teamId=sk).order_by("-date_updated").first()
     if request.method == "POST":
         action = request.POST.get("action")
-        if action == "save" or action == "next":
+        if action in ("save", "next"):
             define_problem = request.POST.get("define_problem")
             step2.define_problem = define_problem
             step2.save()
@@ -288,7 +266,7 @@ def stepTwoFour(request, pk, sk):
     step2 = StepTwo.objects.filter(teamId=sk).order_by("-date_updated").first()
     if request.method == "POST":
         action = request.POST.get("action")
-        if action == "save" or action == "next":
+        if action in ("save", "next"):
             desired_solution = request.POST.get("desired_solution")
             step2.desired_solution = desired_solution
             step2.save()
@@ -304,9 +282,11 @@ def stepTwoFour(request, pk, sk):
 
 def stepThreeOne(request, pk, sk):
     step3 = StepThree.objects.filter(teamId=sk).order_by("-date_updated").first()
+    if not step3:
+        step3 = StepThree.objects.create(userId=pk, teamId=sk)
     if request.method == "POST":
         action = request.POST.get("action")
-        if action == "save" or action == "next":
+        if action in ("save", "next"):
             research = request.POST.get("research")
             step3.research = research
             step3.save()
@@ -324,33 +304,149 @@ def stepThreeTwo(request, pk, sk):
     step3 = StepThree.objects.filter(teamId=sk).order_by("-date_updated").first()
     if request.method == "POST":
         action = request.POST.get("action")
-        if action == "save" or action == "next":
-            research = request.POST.get("research")
-            step3.research = research
+        if action in ("save", "next"):
+            sources = request.POST.get("sources")
+            step3.sources = sources
             step3.save()
             if action == "save":
                 return HttpResponseRedirect(request.path_info)
             elif action == "next":
-                return redirect("stepThreeTwo", pk, sk)
+                return redirect("stepThreeThree", pk, sk)
         elif action == "back":
-            return redirect("stepTwoFour", pk, sk)
+            return redirect("stepThreeOne", pk, sk)
     context = {"pk": pk, "sk": sk, "step3": step3}
-    return render(request, "stepThreeOne.html", context)
+    return render(request, "stepThreeTwo.html", context)
 
 
 def stepThreeThree(request, pk, sk):
     step3 = StepThree.objects.filter(teamId=sk).order_by("-date_updated").first()
     if request.method == "POST":
         action = request.POST.get("action")
-        if action == "save" or action == "next":
-            research = request.POST.get("research")
-            step3.research = research
+        if action in ("save", "next"):
+            difference = request.POST.get("difference")
+            step3.difference = difference
             step3.save()
             if action == "save":
                 return HttpResponseRedirect(request.path_info)
             elif action == "next":
-                return redirect("stepThreeTwo", pk, sk)
+                return redirect("stepFourOne", pk, sk)
         elif action == "back":
-            return redirect("stepTwoFour", pk, sk)
+            return redirect("stepThreeTwo", pk, sk)
     context = {"pk": pk, "sk": sk, "step3": step3}
-    return render(request, "stepThreeOne.html", context)
+    return render(request, "stepThreeThree.html", context)
+
+
+def stepFourOne(request, pk, sk):
+    step4 = StepFour.objects.filter(teamId=sk).order_by("-date_updated").first()
+    if not step4:
+        step4 = StepFour.objects.create(userId=pk, teamId=sk)
+    if request.method == "POST":
+        action = request.POST.get("action")
+        if action in ("save", "next"):
+            difference = request.POST.get("difference")
+            step4.difference = difference
+            step4.save()
+            if action == "save":
+                return HttpResponseRedirect(request.path_info)
+            elif action == "next":
+                return redirect("stepFourTwo", pk, sk)
+        elif action == "back":
+            return redirect("stepThreeThree", pk, sk)
+    context = {"pk": pk, "sk": sk, "step4": step4}
+    return render(request, "stepFourTwo.html", context)
+
+
+def stepFourTwo(request, pk, sk):
+    step4 = StepFour.objects.filter(teamId=sk).order_by("-date_updated").first()
+    if request.method == "POST":
+        action = request.POST.get("action")
+        if action in ("save", "next"):
+            difference = request.POST.get("difference")
+            step4.difference = difference
+            step4.save()
+            if action == "save":
+                return HttpResponseRedirect(request.path_info)
+            elif action == "next":
+                return redirect("stepFiveOne", pk, sk)
+        elif action == "back":
+            return redirect("stepFourOne", pk, sk)
+    context = {"pk": pk, "sk": sk, "step4": step4}
+    return render(request, "stepFourTwo.html", context)
+
+
+def stepFiveOne(request, pk, sk):
+    step5 = StepFive.objects.filter(teamId=sk).order_by("-date_updated").first()
+    if not step5:
+        step5 = StepFour.objects.create(userId=pk, teamId=sk)
+    if request.method == "POST":
+        action = request.POST.get("action")
+        if action in ("save", "next"):
+            difference = request.POST.get("difference")
+            step5.difference = difference
+            step5.save()
+            if action == "save":
+                return HttpResponseRedirect(request.path_info)
+            elif action == "next":
+                return redirect("stepFiveTwo", pk, sk)
+        elif action == "back":
+            return redirect("stepFourTwo", pk, sk)
+    context = {"pk": pk, "sk": sk, "step5": step5}
+    return render(request, "stepFiveOne.html", context)
+
+
+def stepFiveTwo(request, pk, sk):
+    step5 = StepFive.objects.filter(teamId=sk).order_by("-date_updated").first()
+    if request.method == "POST":
+        action = request.POST.get("action")
+        if action in ("save", "next"):
+            difference = request.POST.get("difference")
+            step5.difference = difference
+            step5.save()
+            if action == "save":
+                return HttpResponseRedirect(request.path_info)
+            elif action == "next":
+                return redirect("stepSix", pk, sk)
+        elif action == "back":
+            return redirect("stepFiveOne", pk, sk)
+    context = {"pk": pk, "sk": sk, "step5": step5}
+    return render(request, "stepFiveTwo.html", context)
+
+
+def stepSix(request):
+    if request.method == "POST":
+        prototype = request.FILES.get("prototype")
+        image_data = prototype.read()
+        my_model = StepSix(prototype=image_data)
+        my_model.save()
+    return render(request, "stepSix.html")
+
+
+def stepSeven(request):
+    if request.method == "POST":
+        prototype = request.FILES.get("prototype")
+        image_data = prototype.read()
+        my_model = StepSeven(prototype=image_data)
+        my_model.save()
+    return render(request, "stepSeven.html")
+
+
+def guidelines(request):
+    return render(request, "guidelines.html")
+
+
+def stepEightOne(request, pk, sk):
+    step8 = StepEight.objects.filter(teamId=sk).order_by("-date_updated").first()
+    context = {"pk": pk, "sk": sk, "step8": step8}
+    return render(request, "stepEightOne.html", context)
+
+
+def stepEightTwo(request, pk, sk):
+    step8 = StepEight.objects.filter(teamId=sk).order_by("-date_updated").first()
+    context = {"pk": pk, "sk": sk, "step8": step8}
+    return render(request, "stepEightTwo.html", context)
+
+
+def stepEightThree(request, pk, sk):
+    step8 = StepEight.objects.filter(teamId=sk).order_by("-date_updated").first()
+    context = {"pk": pk, "sk": sk, "step8": step8}
+    return render(request, "stepEightThree.html", context)

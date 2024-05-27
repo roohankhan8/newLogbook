@@ -40,7 +40,7 @@ SENSE{%endblock %} {% load static %} {% block content %}
                 placeholder=""
                 name="problem_1"
               >
-{{members.0.problem}}</textarea
+{{step1.identify_problems}}</textarea
               >
             </button>
           </h2>
@@ -129,45 +129,6 @@ SENSE{%endblock %} {% load static %} {% block content %}
         name="problem_description"
       >
 {{step2.problem_description}}</textarea
-      >
-    </div>
-    <div class="form-group">
-      <label class="form-label" for="inputlg">
-        2.2 Define and describe the problem in great detail so it captures all
-        aspects and conveys the same extent and nature of the problem when
-        someone else reads it. Share how you came up with the problem. .
-      </label>
-      <textarea
-        class="form-control"
-        rows="5"
-        style="
-          height: 100%;
-          font-family: 'Times New Roman', Times, serif;
-          font-size: 19px;
-        "
-        placeholder="Your Answer"
-        name="describe_problem"
-      >
-{{step2.describe_problem}}</textarea
-      >
-    </div>
-    <div class="form-group">
-      <label class="form-label" for="inputlg"
-        >2.3 Very specifically, list what do you want your solution to achieve?
-        .</label
-      >
-      <textarea
-        class="form-control"
-        rows="5"
-        style="
-          height: 100%;
-          font-family: 'Times New Roman', Times, serif;
-          font-size: 19px;
-        "
-        placeholder="Your Answer"
-        name="specific_solution"
-      >
-{{step2.specific_solution}}</textarea
       >
     </div>
     {% include 'buttons.html' %}

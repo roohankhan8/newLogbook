@@ -1,0 +1,47 @@
+{% extends 'layout.html' %} {% block title %}Step 1: IDENTIFY {%endblock %} {% load static %} {% block content %}
+<!-- second header  -->
+<nav class="navbars">
+  <div class="container-fluid-nav text-center">
+    <h5>STEP 4- OVER TO THE DRAWING BOARD</h5>
+  </div>
+</nav>
+
+<!-- second header ends  -->
+<!-- Question Answeer Box -->
+<div class="QA_container mb-1 p-5">
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label
+        class="form-label"
+        for="inputlg"
+        style="font-family: 'Times New Roman', Times, serif; font-size: 19px"
+      >
+      4.2 Talk to experts and potential users of your solution about the
+      obstacles/ problems you are likely to face in making a real model of your
+      design. Note those problems and how you identified them. Note what the
+      experts and users said, their experience in this area, and why you chose
+      to talk to them. Along with the observations of others, also note what
+      problems you think you will face in making a model. Note the credentials
+      of the experts here.
+      </label
+      >
+      <textarea
+        class="form-control"
+        rows="10"
+        style="
+          height: 100%;
+          font-family: 'Times New Roman', Times, serif;
+          font-size: 19px;
+        "
+        placeholder="Your Answer"
+        name="difference"
+      >
+{{step3.difference}}</textarea
+      >
+    </div>
+    {% include 'buttons.html' %}
+  </form>
+</div>
+<!-- Question Answeer Box  Ends-->
+{% endblock %}

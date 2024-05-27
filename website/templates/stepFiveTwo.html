@@ -1,0 +1,44 @@
+{% extends 'layout.html' %} {% block title %}Step 1: IDENTIFY {%endblock %} {% load static %} {% block content %}
+<!-- second header  -->
+<nav class="navbars">
+  <div class="container-fluid-nav text-center">
+    <h5>STEP 5- PLAN FOR PROTOTYPING</h5>
+  </div>
+</nav>
+
+<!-- second header ends  -->
+<!-- Question Answeer Box -->
+<div class="QA_container mb-1 p-5">
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label
+        class="form-label"
+        for="inputlg"
+        style="font-family: 'Times New Roman', Times, serif; font-size: 19px"
+      >
+        5.2 Read research articles and other published information to: (a)
+        better understand the parts and materials you plan to use; (b) the
+        skills needed to make the model into a real invention; (c) explore if
+        you need any additional skills to make your invention. Note your
+        findings here.
+      </label>
+      <textarea
+        class="form-control"
+        rows="10"
+        style="
+          height: 100%;
+          font-family: 'Times New Roman', Times, serif;
+          font-size: 19px;
+        "
+        placeholder="Your Answer"
+        name="difference"
+      >
+{{step3.difference}}</textarea
+      >
+    </div>
+    {% include 'buttons.html' %}
+  </form>
+</div>
+<!-- Question Answeer Box  Ends-->
+{% endblock %}

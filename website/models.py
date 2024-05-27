@@ -64,8 +64,6 @@ class StepTwo(models.Model):
     #2.1
     problem_title = models.TextField()
     problem_description = models.TextField()
-    describe_problem = models.TextField()
-    specific_solution = models.TextField()
     #2.2
     selected_problem=models.TextField(null=True, blank=True)
     #2.2.1
@@ -93,4 +91,48 @@ class StepFour(models.Model):
     teamId = models.IntegerField()
     date_updated = models.DateTimeField(auto_now_add=True)
     
+    def __str__(self):
+        return str(self.teamId)
     
+class StepFive(models.Model):
+    userId = models.IntegerField()
+    teamId = models.IntegerField()
+    date_updated = models.DateTimeField(auto_now_add=True)
+    
+    talk_to_expert=models.TextField(null=True, blank=True)
+    other_information=models.TextField(null=True, blank=True)
+    
+    def __str__(self):
+        return str(self.teamId)
+
+class StepSix(models.Model):
+    userId = models.IntegerField()
+    teamId = models.IntegerField()
+    date_updated = models.DateTimeField(auto_now_add=True)
+    
+    arrange_material=models.TextField(null=True, blank=True)
+    prototype=models.BinaryField(blank=True) 
+    
+    def __str__(self):
+        return str(self.teamId)
+
+class StepSeven(models.Model):
+    userId = models.IntegerField()
+    teamId = models.IntegerField()
+    date_updated = models.DateTimeField(auto_now_add=True)
+    
+    testing=models.TextField(null=True, blank=True)
+    
+    def __str__(self):
+        return str(self.teamId)
+
+class StepEight(models.Model):
+    userId = models.IntegerField()
+    teamId = models.IntegerField()
+    date_updated = models.DateTimeField(auto_now_add=True)
+    
+    naming=models.TextField(null=True, blank=True)
+    where_to_buy=models.TextField(null=True, blank=True)
+    
+    def __str__(self):
+        return str(self.teamId)
