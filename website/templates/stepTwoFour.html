@@ -1,0 +1,44 @@
+{% extends 'layout.html' %} {% block title %}Step 1: IDENTIFY {%endblock %} {%
+load static %} {% block content %}
+<!-- second header  -->
+<nav class="navbars">
+  <div class="container-fluid-nav text-center">
+    <h5>STEP 2- DEFINE AND MAKE SENSE OF THE PROBLEM</h5>
+  </div>
+</nav>
+
+<!-- second header ends  -->
+<!-- Question Answeer Box -->
+<div class="QA_container mb-1 p-5">
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label
+        class="form-label"
+        for="inputlg"
+        style="font-family: 'Times New Roman', Times, serif; font-size: 19px"
+      >
+        Q2.3 Very specifically, list what do you want your solution to achieve?
+        (For example: My problem is that I can't keep dry when I wash dishes.
+        Now the solution I would like to achieve is to stay dry while I wash
+        dishes.)</label
+      >
+      <textarea
+        class="form-control"
+        rows="10"
+        style="
+          height: 100%;
+          font-family: 'Times New Roman', Times, serif;
+          font-size: 19px;
+        "
+        placeholder="Your Answer"
+        name="desired_solution"
+      >
+{{step2.desired_solution}}</textarea
+      >
+    </div>
+    {% include 'buttons.html' %}
+  </form>
+</div>
+<!-- Question Answeer Box  Ends-->
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'website/sidenavbar.html' %} 
+{% block title %}Step 6: LABORATORY{% endblock %} 
+{% load static %} 
+{% block content %}
+    <!-- second header  -->
+    <nav class="navbars">
+      <div class="container-fluid-nav text-center">
+        <h5>STEP 6 - OVER TO THE LABORATORY</h5>
+      </div>
+    </nav>
+    <!-- second header ends  -->
+    <!-- Question Answeer Box -->
+    <div class="QA_container mb-1 p-5">
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+          <label class="form-label" for="inputlg"
+            >6.1 Arrange the materials, tools and machinery you'll use to build
+            your prototype. Do not hesitate to ask for help from others where
+            you need it. <br><br> Prototype1-Build: Note any and all observations you have
+            while building. Attach pictures of the process as you build.</label
+          >
+          <textarea
+            class="form-control"
+            rows="5"
+            placeholder="Write notes"
+            name="notes"
+          >{{step6.notes}}</textarea>
+        </div><br>
+        <div class="form-group">
+          <label for="formFileMultiple" class="form-label"
+            >Upload Picture</label
+          >
+          <input class="form-control form-control-lg" id="imageInput" name="prototype_pic" accept="image/*" onchange="showImage()" type="file"
+        value="{{step6.prototype_pic}}" />
+        {% if step6.imageURL %}
+        <div class="container" id="imageContainer">
+          <img id="submittedImage" src="{{step6.imageURL}}" alt="" style="width: 100%; height: 100%;">
+        </div>
+        {% else %}
+        <div class="container" id="imageContainer" style="display: none;">
+          <img id="submittedImage" src="{{step6.imageURL}}" alt="" style="width: 100%; height: 100%;">
+        </div>
+        {% endif %}
+    <div class="container">
+      <div class="row">
+        <div class="col-6 d-flex align-items-center justify-content-start">
+          <button class="btn btn-success mr-1" type="button">
+            <a href="{% url 'step_5' pk sk %}">Back</a>
+          </button>
+          {% include 'website/buttons.html' %}
+    <!-- Buttons ends-->
+      </form>
+
+    </div>
+    <!-- Question Answeer Box  Ends-->
+    <script>
+      function showImage() {
+      const input = document.getElementById('imageInput');
+      const container = document.getElementById('imageContainer');
+      const image = document.getElementById('submittedImage');
+      if (input.files.length > 0) {
+        const file = input.files[0];
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          container.style.display = 'block';
+          image.src = e.target.result;
+        }; 
+    
+        reader.readAsDataURL(file);
+      } else {
+        alert('Please select an image.');
+      }
+    }
+    </script>
+    {% endblock %}

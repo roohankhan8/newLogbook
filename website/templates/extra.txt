@@ -1,0 +1,7 @@
+{% if field.name == "date" %}
+            <div class="form-group">
+              <label for="{{ field.id_for_label }}">{{ field.label }}</label> {{ field
+              }}
+            </div>
+        {% else %} 
+        {% endif %} 

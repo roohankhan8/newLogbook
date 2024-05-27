@@ -1,0 +1,178 @@
+{% extends 'layout.html' %} {% block title %}Step 2: DEFINE AND MAKE
+SENSE{%endblock %} {% load static %} {% block content %}
+<!-- second header  -->
+<nav class="navbars">
+  <div class="container-fluid-nav text-center">
+    <h5>STEP 2- DEFINE AND MAKE SENSE OF THE PROBLEM</h5>
+  </div>
+</nav>
+<!-- second header ends  -->
+<!-- Question Answeer Box -->
+<div class="QA_container mb-1 p-5">
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label class="form-label" for="inputlg"
+        >2.1 Talk to others and understand all aspects of the problems. Now,
+        pick one problem you want to move forward with and take the next
+        step.</label
+      >
+      <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseOne"
+              aria-expanded="true"
+              aria-controls="panelsStayOpen-collapseOne"
+            >
+              <h6>Problem 1:&nbsp;&nbsp;&nbsp;</h6>
+              <textarea
+                class="form-control"
+                rows="1"
+                style="
+                  width: 88%;
+                  font-family: 'Times New Roman', Times, serif;
+                  font-size: 19px;
+                "
+                placeholder=""
+                name="problem_1"
+              >
+{{members.0.problem}}</textarea
+              >
+            </button>
+          </h2>
+          <div
+            id="panelsStayOpen-collapseOne"
+            class="accordion-collapse collapse show"
+          >
+            <div class="accordion-body">
+              <div class="container">
+                <div class="row">
+                  <!-- First Column -->
+                  <div class="col-md-4 column">
+                    <h3>Person Name</h3>
+                    <div class="mb-3">
+                      <input
+                        type="text"
+                        value="{{members.0.name1}}"
+                        class="form-control"
+                        placeholder="Person name 1"
+                        id="name1"
+                        name="p1name1"
+                      />
+                    </div>
+                  </div>
+
+                  <!-- Second Column -->
+                  <div class="col-md-4 column">
+                    <h3>Age</h3>
+                    <div class="mb-3">
+                      <input
+                        type="number"
+                        value="{{members.0.age1}}"
+                        class="form-control"
+                        placeholder="Select age"
+                        id="age1"
+                        name="p1age1"
+                      />
+                    </div>
+                  </div>
+
+                  <!-- Third Column -->
+                  <div class="col-md-4 column">
+                    <h3>Comments</h3>
+                    <div class="mb-3">
+                      <textarea
+                        class="form-control"
+                        placeholder="Write comments"
+                        id="comment1"
+                        name="p1comment1"
+                        rows="1"
+                      >
+{{members.0.comment1}}</textarea
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- added problem title new text field -->
+      <br />
+      <label for="">Problem title</label>
+      <textarea
+        class="form-control"
+        rows="1"
+        style="font-family: 'Times New Roman', Times, serif; font-size: 19px"
+        placeholder="write problem title here"
+        name="problem_title"
+      >
+{{step2.problem_title}}</textarea
+      >
+
+      <br />
+      <label for="">Problem description</label>
+      <textarea
+        class="form-control"
+        rows="5"
+        style="
+          height: 100%;
+          font-family: 'Times New Roman', Times, serif;
+          font-size: 19px;
+        "
+        placeholder="Write problem description here"
+        name="problem_description"
+      >
+{{step2.problem_description}}</textarea
+      >
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="inputlg">
+        2.2 Define and describe the problem in great detail so it captures all
+        aspects and conveys the same extent and nature of the problem when
+        someone else reads it. Share how you came up with the problem. .
+      </label>
+      <textarea
+        class="form-control"
+        rows="5"
+        style="
+          height: 100%;
+          font-family: 'Times New Roman', Times, serif;
+          font-size: 19px;
+        "
+        placeholder="Your Answer"
+        name="describe_problem"
+      >
+{{step2.describe_problem}}</textarea
+      >
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="inputlg"
+        >2.3 Very specifically, list what do you want your solution to achieve?
+        .</label
+      >
+      <textarea
+        class="form-control"
+        rows="5"
+        style="
+          height: 100%;
+          font-family: 'Times New Roman', Times, serif;
+          font-size: 19px;
+        "
+        placeholder="Your Answer"
+        name="specific_solution"
+      >
+{{step2.specific_solution}}</textarea
+      >
+    </div>
+    {% include 'buttons.html' %}
+  </form>
+</div>
+<!-- Question Answeer Box  Ends-->
+
+{% endblock %}

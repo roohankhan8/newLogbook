@@ -1,0 +1,146 @@
+{% extends 'website/sidenavbar.html' %} {% block title %}Course Outline{% endblock%} {% load static %} {% block content %}
+<!-- second header  -->
+<nav class="navbars">
+  <div class="container-fluid-nav text-center">
+    <h5>COURSE OUTLINE</h5>
+    <h5><small>User: </small>{{user.3}} {{user.4}} <br><small>Team: </small>{{team.1}}</h5>
+  </div>
+</nav>
+<!-- second header ends  -->
+<!-- COURSE OUTLINE BOX -->
+<div class="pt-5 text-center">
+  <div class="container">
+    <div class="row">
+      <div class="mx-auto col-md-10" style="padding: 1px">
+        <a href="{% url 'record_of_invention' pk sk %}">
+          <button
+            style="border-radius: 20px; border-color: gray; color: darkgreen"
+            class="btn btn-lg btn-light w-100 fs-6"
+          >
+            <small>Record of Invention (ROI)</small>
+          </button>
+        </a>
+        <br /><br />
+        <a href="{% url 'statement_of_originality' pk sk %}">
+          <!-- Add link of statemnt of originality-->
+          <button
+            style="border-radius: 20px; border-color: gray; color: darkgreen"
+            class="btn btn-lg btn-light w-100 fs-6"
+          >
+            <small>Statement of Originality</small>
+          </button>
+        </a>
+        <br /><br />
+        <a href="{% url 'flowchart' pk sk %}">
+          <button
+            style="border-radius: 20px; border-color: gray; color: darkgreen"
+            class="btn btn-lg btn-light w-100 fs-6"
+          >
+            <small>Flowchart</small>
+          </button>
+        </a>
+        <br /><br />
+        <a href="{% url 'step_1' pk sk %}">
+          <button
+            style="border-radius: 20px; border-color: gray; color: darkgreen"
+            class="btn btn-lg btn-light w-100 fs-6"
+          >
+            <small>Step 1: Identify the Problem</small>
+          </button>
+        </a>
+        <br /><br />
+        <a href="{% url 'step_2' pk sk %}">
+          <button
+            style="border-radius: 20px; border-color: gray; color: darkgreen"
+            class="btn btn-lg btn-light w-100 fs-6"
+          >
+            <small>Step 2 : Define and make sense of the problem</small>
+          </button>
+        </a>
+        <br /><br />
+        <a href="{% url 'step_3' pk sk %}">
+          <button
+            style="border-radius: 20px; border-color: gray; color: darkgreen"
+            class="btn btn-lg btn-light w-100 fs-6"
+          >
+            <small>Step 3 : Develop ideas and draft alternate solutions</small>
+          </button>
+        </a>
+        <br /><br />
+        <a href="{% url 'step_4' pk sk %}">
+          <button
+            style="border-radius: 20px; border-color: gray; color: darkgreen"
+            class="btn btn-lg btn-light w-100 fs-6"
+          >
+            <small>Step 4 : Over to the drawing board</small>
+          </button>
+        </a>
+        <br /><br />
+        <a href="{% url 'step_5' pk sk %}">
+          <button
+            style="border-radius: 20px; border-color: gray; color: darkgreen"
+            class="btn btn-lg btn-light w-100 fs-6"
+          >
+            <small>Step 5 : Plan for prototyping</small>
+          </button>
+        </a>
+        <br /><br />
+        <a href="{% url 'step_6' pk sk %}">
+          <button
+            style="border-radius: 20px; border-color: gray; color: darkgreen"
+            class="btn btn-lg btn-light w-100 fs-6"
+          >
+            <small>Step 6 : Over to the laboratory</small>
+          </button>
+        </a>
+        <br /><br />
+        <a href="{% url 'step_7' pk sk %}">
+          <button
+            style="border-radius: 20px; border-color: gray; color: darkgreen"
+            class="btn btn-lg btn-light w-100 fs-6"
+          >
+            <small>Step 7 : Test your prototype</small>
+          </button>
+        </a>
+        <br />
+        <br />
+        <a href="{% url 'step_8' pk sk %}">
+          <button
+            style="border-radius: 20px; border-color: gray; color: darkgreen"
+            class="btn btn-lg btn-light w-100 fs-6"
+          >
+            <small>Step 8 : Prepare to market</small>
+          </button>
+        </a>
+        <br /><br />
+        <a href="{% url 'survey' pk sk %}">
+          <button
+            style="border-radius: 20px; border-color: gray; color: darkgreen"
+            class="btn btn-lg btn-light w-100 fs-6"
+          >
+            <small>Survey for Students</small>
+          </button>
+        </a>
+        <br /><br />
+        <a href="{% url 'notes' pk sk %}">
+          <button
+            style="border-radius: 20px; border-color: gray; color: darkgreen"
+            class="btn btn-lg btn-light w-100 fs-6"
+          >
+            <small>Notes</small>
+          </button>
+        </a>
+      </div>
+    </div>
+    <!-- Question Answeer Box  Ends-->
+    <!-- Buttons-->
+    <div class="container">
+      <button class="btn btn-success mt-2" type="button">
+        <a href="{% url 'record_of_invention' pk sk %}">Next</a>
+      </button>
+    </div>
+    <!-- Buttons ends-->
+    {% include 'website/chat.html' %} 
+    {% endblock %}
+  </div>
+</div>

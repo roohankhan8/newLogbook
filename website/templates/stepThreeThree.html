@@ -1,0 +1,43 @@
+{% extends 'layout.html' %} {% block title %}Step 1: IDENTIFY {%endblock %} {%
+    load static %} {% block content %}
+    <!-- second header  -->
+    <nav class="navbars">
+      <div class="container-fluid-nav text-center">
+        <h5>STEP 3 : DEVELOP IDEAS AND DRAFT ALTERNATE SOLUTIONS</h5>
+      </div>
+    </nav>
+    
+    <!-- second header ends  -->
+    <!-- Question Answeer Box -->
+    <div class="QA_container mb-1 p-5">
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label
+            class="form-label"
+            for="inputlg"
+            style="font-family: 'Times New Roman', Times, serif; font-size: 19px"
+          >
+          Q3.1 Research and record the most important factors in solving this 
+          problem.</label
+          >
+          <textarea
+            class="form-control"
+            rows="10"
+            style="
+              height: 100%;
+              font-family: 'Times New Roman', Times, serif;
+              font-size: 19px;
+            "
+            placeholder="Your Answer"
+            name="difference"
+          >
+    {{step3.difference}}</textarea
+          >
+        </div>
+        {% include 'buttons.html' %}
+      </form>
+    </div>
+    <!-- Question Answeer Box  Ends-->
+    {% endblock %}
+    

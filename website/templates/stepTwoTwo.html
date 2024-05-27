@@ -1,0 +1,42 @@
+{% extends 'layout.html' %} {% block title %}Step 1: IDENTIFY {%endblock %} {%
+load static %} {% block content %}
+<!-- second header  -->
+<nav class="navbars">
+  <div class="container-fluid-nav text-center">
+    <h5>STEP 2- DEFINE AND MAKE SENSE OF THE PROBLEM</h5>
+  </div>
+</nav>
+
+<!-- second header ends  -->
+<!-- Question Answeer Box -->
+<div class="QA_container mb-1 p-5">
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label
+        class="form-label"
+        for="inputlg"
+        style="font-family: 'Times New Roman', Times, serif; font-size: 19px"
+      >
+      Q2.2 Select one problem from your list. This will be the one that many people 
+      your surveyed agrees upon and you would also like to work on it.</label
+      >
+      <textarea
+        class="form-control"
+        rows="10"
+        style="
+          height: 100%;
+          font-family: 'Times New Roman', Times, serif;
+          font-size: 19px;
+        "
+        placeholder="Your Answer"
+        name="selected_problem"
+      >
+{{step2.selected_problem}}</textarea
+      >
+    </div>
+    {% include 'buttons.html' %}
+  </form>
+</div>
+<!-- Question Answeer Box  Ends-->
+{% endblock %}

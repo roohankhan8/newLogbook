@@ -1,0 +1,82 @@
+{% extends 'website/sidenavbar.html' %} 
+{% block title %}Step 7: TEST YOUR PROTOTYPE{% endblock %} 
+{% load static %} 
+{% block content %}
+<!-- second header  -->
+<nav class="navbars">
+  <div class="container-fluid-nav text-center">
+    <h5>STEP 7 - TEST YOUR PROTOTYPE</h5>
+  </div>
+</nav>
+<!-- second header ends  -->
+<!-- Question Answeer Box -->
+<div class="QA_container mb-1 p-5">
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label class="form-label" for="inputlg">
+        7.1 Describe how you will test your prototype
+      </label>
+      <textarea
+        class="form-control"
+        rows="8"
+        placeholder="Your Answer"
+        name="testing"
+      >{{step7.testing}}</textarea>
+    </div><br>
+    <h1>Now, test your prototype</h1>
+    <br>
+    <div class="form-group">
+      <label class="form-label" for="inputlg"
+        >7.2 Identify and record all positive and negative observations you have each time you test your prototype.
+      </label>
+
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="inputlg" style="color: green"
+        ><h5>Positive</h5></label
+      >
+      <textarea
+        class="form-control"
+        rows="5"
+        placeholder="Write here"
+        name="positive"
+      >{{step7.positive}}</textarea>
+    </div>
+    <div>
+      <div class="form-group">
+        <label class="form-label" for="inputlg" style="color: green"
+          ><h5>Negative</h5></label
+        >
+        <textarea
+          class="form-control"
+          rows="5"
+          placeholder="Write here"
+          name="negative"
+        >{{step7.negative}}</textarea>
+      </div>
+    </div><br>
+          <label class="form-label" for="inputlg">
+                  At this point, consider if you need to go back
+                  <a href="{% url 'step_4' pk sk %}">TO THE DRAWING BOARD (Step 4)</a> or
+                  <a href="{% url 'step_6' pk sk %}">OVER TO THE LAB(Step 6)</a> for some revisions to
+                  the prototype. Keep creating new versions of Model prototype as needed
+                  so you can record all the iterations you did. Keep making changes to
+                  your prototype and try new iterations until your invention works as
+                  planned.
+                </label>
+    <!-- Buttons-->
+
+<div class="container">
+  <div class="row">
+    <div class="col-6 d-flex align-items-center justify-content-start">
+      <button class="btn btn-success mr-1" type="button">
+        <a href="{% url 'step_6' pk sk %}">Back</a>
+      </button>
+      {% include 'website/buttons.html' %}
+<!-- Buttons ends-->
+  </form>
+</div>
+<!-- Question Answeer Box  Ends-->
+
+{% endblock %}
