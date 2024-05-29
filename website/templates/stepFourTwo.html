@@ -1,47 +1,77 @@
-{% extends 'layout.html' %} {% block title %}Step 1: IDENTIFY {%endblock %} {% load static %} {% block content %}
-<!-- second header  -->
+{% extends 'layout.html' %}
+{% block title %}Step 4: OVER TO THE DRAWING BOARD{% endblock %}
+{% load static %}
+{% block content %}
+<!-- second header -->
 <nav class="navbars">
   <div class="container-fluid-nav text-center">
     <h5>STEP 4- OVER TO THE DRAWING BOARD</h5>
   </div>
 </nav>
-
-<!-- second header ends  -->
-<!-- Question Answeer Box -->
+<!-- second header ends -->
+<!-- Question Answer Box -->
 <div class="QA_container mb-1 p-5">
   <form method="post">
     {% csrf_token %}
     <div class="form-group">
-      <label
-        class="form-label"
-        for="inputlg"
-        style="font-family: 'Times New Roman', Times, serif; font-size: 19px"
-      >
-      4.2 Talk to experts and potential users of your solution about the
-      obstacles/ problems you are likely to face in making a real model of your
-      design. Note those problems and how you identified them. Note what the
-      experts and users said, their experience in this area, and why you chose
-      to talk to them. Along with the observations of others, also note what
-      problems you think you will face in making a model. Note the credentials
-      of the experts here.
-      </label
-      >
-      <textarea
-        class="form-control"
-        rows="10"
-        style="
-          height: 100%;
-          font-family: 'Times New Roman', Times, serif;
-          font-size: 19px;
-        "
-        placeholder="Your Answer"
-        name="difference"
-      >
-{{step3.difference}}</textarea
-      >
+      <label class="form-label" for="inputlg" style="font-family: 'Times New Roman', Times, serif; font-size: 19px">
+        4.2 Talk to experts and potential users of your solution about the obstacles/problems you are likely to face in making a real model of your design. Note those problems and how you identified them. Note what the experts and users said, their experience in this area, and why you chose to talk to them. Along with the observations of others, also note what problems you think you will face in making a model. Note the credentials of the experts here.
+      </label>
+     
+      <div class="accordion" id="accordionExample">
+        <div class="accordion-item mb-3">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Issue 1
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <div class="row mb-3">
+                <div class="col-md-3 d-flex align-items-center">
+                  <label for="userName" class="form-label mb-0 me-2">User/Expert Name:</label>
+                </div>
+                <div class="col-md-4">
+                  <input type="text" class="form-control" id="userName" name="userName1">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-3 d-flex align-items-center">
+                  <label for="expertCredentials" class="form-label mb-0 me-2">Credentials of the Expert:</label>
+                </div>
+                <div class="col-md-4">
+                  <input type="text" class="form-control" id="expertCredentials" name="expertCredentials1">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-3 d-flex align-items-center">
+                  <label for="problemIdentified" class="form-label mb-0 me-2">Problem User/Expert Identified:</label>
+                </div>
+                <div class="col-md-5">
+                  <input type="text" class="form-control" id="problemIdentified" name="problemIdentified1">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-3 d-flex align-items-center">
+                  <label for="problemsFaced" class="form-label mb-0 me-2">Problem You Think You Will Face:</label>
+                </div>
+                <div class="col-md-5">
+                  <input type="text" class="form-control" id="problemsFaced" name="problemsFaced1">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
     </div>
-    {% include 'buttons.html' %}
+    <div class="d-flex justify-content-between align-items-center mt-3">
+      <button type="button" class="btn btn-success" id="add-issue-button">Add Another Issue</button>
+      {% include 'buttons.html' %}
+  </div>
+   
   </form>
 </div>
-<!-- Question Answeer Box  Ends-->
+<!-- Question Answer Box Ends-->
+<script src="{% static 'js/stepFourTwo.js' %}"></script>
 {% endblock %}

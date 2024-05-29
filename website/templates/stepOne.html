@@ -1,16 +1,21 @@
-{% extends 'layout.html' %} {% block title %}Step 1: IDENTIFY {%endblock %} {%
-load static %} {% block content %}
-<!-- second header  -->
+{% extends 'layout.html' %}
+
+{% block title %}Step 1: IDENTIFY{% endblock %}
+
+{% load static %}
+
+{% block content %}
+<!-- second header -->
 <nav class="navbars">
   <div class="container-fluid-nav text-center">
     <h5>STEP 1- IDENTIFY THE PROBLEM</h5>
   </div>
 </nav>
 
-<!-- second header ends  -->
-<!-- Question Answeer Box -->
+<!-- second header ends -->
+<!-- Question Answer Box -->
 <div class="QA_container mb-1 p-5">
-  <form method="post">
+  <form method="post" id="problemForm">
     {% csrf_token %}
     <div class="form-group">
       <label
@@ -18,24 +23,42 @@ load static %} {% block content %}
         for="inputlg"
         style="font-family: 'Times New Roman', Times, serif; font-size: 19px"
       >
-        Q1.Identify problems you or your friends and family relate with.</label
-      >
-      <textarea
-        class="form-control"
-        rows="10"
-        style="
-          height: 100%;
-          font-family: 'Times New Roman', Times, serif;
-          font-size: 19px;
-        "
-        placeholder="Your Answer"
-        name="identify_problems"
-      >
-{{step1.identify_problems}}</textarea
-      >
+        Q1. Identify problems you or your friends and family relate with.
+      </label>
     </div>
-    {% include 'buttons.html' %}
+    <div class="form-group" id="problem-container">
+      <div class="problem-input">
+        <label for="problem_1">Problem 1</label>
+        <textarea
+          class="form-control"
+          rows="3"
+          style="font-family: 'Times New Roman', Times, serif; font-size: 19px;"
+          name="new_problem"
+          id="problem_1"
+        ></textarea>
+      </div>
+      {% for problem in problems %}
+      <div class="problem-input">
+        <label for="problem_{{ forloop.counter }}">Problem {{ forloop.counter }}</label>
+        <textarea
+          class="form-control"
+          rows="3"
+          style="font-family: 'Times New Roman', Times, serif; font-size: 19px;"
+          name="problems"
+          id="problem_{{ forloop.counter }}"
+          readonly
+        >{{ problem }}</textarea>
+      </div>
+      {% endfor %}
+    </div>
+    <input type="hidden" name="new_problem" id="new_problem">
+  <div class="d-flex justify-content-between align-items-center mt-3">
+        <button type="button" class="btn btn-success" id="addProblemBtn">Add Problem</button>
+        {% include 'buttons.html' %}
+      </div>
   </form>
 </div>
-<!-- Question Answeer Box  Ends-->
+<!-- Question Answer Box Ends -->
+
+<script src="{% static 'js/stepOne.js' %}"></script>
 {% endblock %}
