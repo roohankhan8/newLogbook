@@ -164,31 +164,45 @@ def stepOne(request, pk, sk):
     step1 = StepOne.objects.filter(teamId=sk).order_by("-date_updated").first()
     if not step1:
         step1 = StepOne.objects.create(userId=pk, teamId=sk)
+
     if request.method == "POST":
         action = request.POST.get("action")
-        if action in ("save", "next"):
+        if action == "save":
             identify_problems = request.POST.get("identify_problems")
-            data_changed = has_data_changed(step1, request.POST)
-            if step1 and not data_changed:
-                pass
-            else:
-                step1.problem_title = identify_problems
-                step1.save()
-            if action == "save":
-                return HttpResponseRedirect(request.path_info)
-            elif action == "next":
-                return redirect("stepTwoOne", pk, sk)
+           
+            step1.problem_title = identify_problems
+            step1.save()
+            messages.success(request, "Step One data saved successfully.")
+            return HttpResponseRedirect(request.path_info)
+        elif action == "next":
+         
+            return redirect("stepTwoOne", pk=pk, sk=sk)
         elif action == "back":
-            return redirect("flowchart", pk, sk)
-    context = {"pk": pk, "sk": sk, "step1": step1}
-    return render(request, "stepOne.html", context)
+         
+            return redirect("flowchart", pk=pk, sk=sk)
+        elif action == "add_on":
+          
+            new_problem = request.POST.get("new_problem")
+            if new_problem:
+               
+                step1.problems.create(description=new_problem)
+                messages.success(request, "New problem added successfully.")
+            else:
+                messages.error(request, "Please enter a problem to add.")
+            return HttpResponseRedirect(request.path_info)
 
+    context = {
+        "pk": pk,
+        "sk": sk,
+        "step1": step1,
+        "show_add_problem": True,  
+    }
+    return render(request, "stepOne.html", context)
 
 def stepTwoOne(request, pk, sk):
     step1 = StepOne.objects.filter(teamId=sk).order_by("-date_updated").first()
     step2 = StepTwo.objects.filter(teamId=sk).order_by("-date_updated").first()
-    if not step2:
-        step2 = StepTwo.objects.create(userId=pk, teamId=sk)
+
     if request.method == "POST":
         action = request.POST.get("action")
         if action in ("save", "next"):
@@ -206,26 +220,41 @@ def stepTwoOne(request, pk, sk):
                 age1=p1age1,
                 comment1=p1comment1,
             )
-            data_changed = has_data_changed(step2, request.POST)
-            if step2 and not data_changed:
-                pass
+
+            if step2:
+                data_changed = has_data_changed(step2, request.POST)
             else:
+                data_changed = True
+
+            if not step2 or data_changed:
+                step2 = StepTwo.objects.create(userId=pk, teamId=sk)
                 step2.problem_title = problem_title
                 step2.problem_description = problem_description
                 step2.describe_problem = describe_problem
                 step2.specific_solution = specific_solution
                 step2.problems.add(member1)
                 step2.save()
+
             if action == "save":
-                return HttpResponseRedirect(request.path_info)
+                return redirect("stepTwoOne", pk=pk, sk=sk)
             elif action == "next":
-                return redirect("stepTwoTwo", pk, sk)
+                return redirect("stepTwoTwo", pk=pk, sk=sk)
+
         elif action == "back":
-            return redirect("flowchart", pk, sk)
-    context = {"pk": pk, "sk": sk, "step1": step1, "step2": step2}
+            return redirect("flowchart", pk=pk, sk=sk)
+        elif action == "add_on":
+            new_problem = request.POST.get("new_problem")
+            if new_problem:
+                if not step1:
+                    step1 = StepOne.objects.create(userId=pk, teamId=sk)
+                step1.problems.create(description=new_problem)
+                messages.success(request, "New problem added successfully.")
+            else:
+                messages.error(request, "Please enter a problem to add.")
+            return redirect("stepTwoOne", pk=pk, sk=sk)
+
+    context = {"pk": pk, "sk": sk, "step1": step1, "step2": step2, "show_add_problem": True}
     return render(request, "stepTwoOne.html", context)
-
-
 def stepTwoTwo(request, pk, sk):
     step2 = StepTwo.objects.filter(teamId=sk).order_by("-date_updated").first()
     if request.method == "POST":
