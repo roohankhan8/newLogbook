@@ -91,6 +91,8 @@ class StepFour(models.Model):
     teamId = models.IntegerField()
     date_updated = models.DateTimeField(auto_now_add=True)
     
+    details=models.TextField(null=True, blank=True)
+    
     def __str__(self):
         return str(self.teamId)
     
