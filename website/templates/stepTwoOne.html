@@ -29,19 +29,6 @@ SENSE{%endblock %} {% load static %} {% block content %}
               aria-controls="panelsStayOpen-collapseOne"
             >
               <h6>Problem 1:&nbsp;&nbsp;&nbsp;</h6>
-              <textarea
-                class="form-control"
-                rows="1"
-                style="
-                  width: 88%;
-                  font-family: 'Times New Roman', Times, serif;
-                  font-size: 19px;
-                "
-                placeholder=""
-                name="problem_1"
-              >
-{{step1.identify_problems}}</textarea
-              >
             </button>
           </h2>
           <div
@@ -53,30 +40,27 @@ SENSE{%endblock %} {% load static %} {% block content %}
                 <div class="row">
                   <!-- First Column -->
                   <div class="col-md-4 column">
-                    <h3>Person Name</h3>
+                    <h3>Name</h3>
                     <div class="mb-3">
                       <input
                         type="text"
-                        value="{{members.0.name1}}"
                         class="form-control"
                         placeholder="Person name 1"
-                        id="name1"
-                        name="p1name1"
+                        id="name"
+                        name="name"
                       />
                     </div>
                   </div>
-
                   <!-- Second Column -->
                   <div class="col-md-4 column">
                     <h3>Age</h3>
                     <div class="mb-3">
                       <input
                         type="number"
-                        value="{{members.0.age1}}"
                         class="form-control"
                         placeholder="Select age"
-                        id="age1"
-                        name="p1age1"
+                        id="age"
+                        name="age"
                       />
                     </div>
                   </div>
@@ -85,14 +69,11 @@ SENSE{%endblock %} {% load static %} {% block content %}
                   <div class="col-md-4 column">
                     <h3>Comments</h3>
                     <div class="mb-3">
-                      <textarea
+                      <input
                         class="form-control"
                         placeholder="Write comments"
-                        id="comment1"
-                        name="p1comment1"
-                        rows="1"
-                      >
-{{members.0.comment1}}</textarea
+                        id="comment"
+                        name="comment"
                       >
                     </div>
                   </div>
@@ -102,38 +83,33 @@ SENSE{%endblock %} {% load static %} {% block content %}
           </div>
         </div>
       </div>
-      <!-- added problem title new text field -->
-      <br />
-      <label for="">Problem title</label>
-      <textarea
-        class="form-control"
-        rows="1"
-        style="font-family: 'Times New Roman', Times, serif; font-size: 19px"
-        placeholder="write problem title here"
-        name="problem_title"
-      >
-{{step2.problem_title}}</textarea
-      >
-
-      <br />
-      <label for="">Problem description</label>
-      <textarea
-        class="form-control"
-        rows="5"
-        style="
-          height: 100%;
-          font-family: 'Times New Roman', Times, serif;
-          font-size: 19px;
-        "
-        placeholder="Write problem description here"
-        name="problem_description"
-      >
-{{step2.problem_description}}</textarea
-      >
-    </div>
-    {% include 'buttons.html' %}
+    {% include 'table_buttons.html' %}
   </form>
 </div>
 <!-- Question Answeer Box  Ends-->
+  <div class="table border text-center">
+    <table class="">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Comment</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for info in persons %}
+        <tr class="border">
+          <td>{{ info.userId }}</td>
+          <td>{{ info.name }}</td>
+          <td>{{ info.age }}</td>
+          <td>{{ info.comment }}</td>
+          <td>{{ info.date }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 
 {% endblock %}

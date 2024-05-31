@@ -34,36 +34,27 @@ class StepOne(models.Model):
     teamId = models.IntegerField()
     date_updated = models.DateTimeField(auto_now_add=True)
 
-    identify_problems = models.TextField()
+    identify_problems = models.CharField(max_length=255)
 
     def __str__(self):
         return str(self.teamId)
 
-class Problem(models.Model):
-    problem=models.TextField()
-    name1=models.TextField()
-    name2=models.TextField()
-    name3=models.TextField()
-    name4=models.TextField()
-    age1=models.TextField()
-    age2=models.TextField()
-    age3=models.TextField()
-    age4=models.TextField()
-    comment1=models.TextField()
-    comment2=models.TextField()
-    comment3=models.TextField()
-    comment4=models.TextField()
-
-
+class Person(models.Model):
+    userId = models.IntegerField()
+    teamId = models.IntegerField()
+    date_updated = models.DateTimeField(auto_now_add=True)
+    
+    name = models.CharField(max_length=30)
+    age = models.IntegerField(blank=True, null=True)
+    comment = models.CharField(max_length=30)
+    
+    def __str__(self):
+        return str(self.teamId)
 class StepTwo(models.Model):
     userId = models.IntegerField()
     teamId = models.IntegerField()
     date_updated = models.DateTimeField(auto_now_add=True)
     
-    problems=models.ManyToManyField(Problem, related_name='step_two')
-    #2.1
-    problem_title = models.TextField()
-    problem_description = models.TextField()
     #2.2
     selected_problem=models.TextField(null=True, blank=True)
     #2.2.1
@@ -74,12 +65,20 @@ class StepTwo(models.Model):
     def __str__(self):
         return str(self.teamId)
 
-class StepThree(models.Model):
+class Research(models.Model):
     userId = models.IntegerField()
     teamId = models.IntegerField()
     date_updated = models.DateTimeField(auto_now_add=True)
     
     research=models.TextField(null=True, blank=True)
+    
+    def __str__(self):
+        return str(self.teamId)
+class StepThree(models.Model):
+    userId = models.IntegerField()
+    teamId = models.IntegerField()
+    date_updated = models.DateTimeField(auto_now_add=True)
+    
     sources=models.TextField(null=True, blank=True)
     difference=models.TextField(null=True, blank=True)
     

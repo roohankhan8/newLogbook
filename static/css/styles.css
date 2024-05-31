@@ -6,10 +6,12 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
+
 body {
   font-family: "Poppins", sans-serif;
   background: #ececec;
 }
+
 .header {
   background-color: ghostwhite;
   padding: 4px;
@@ -20,6 +22,7 @@ body {
   justify-content: space-between;
   align-items: center;
 }
+
 /*------------ Login container ------------*/
 
 .box-area {
@@ -31,30 +34,36 @@ body {
 .right-box {
   padding: 40px 30px 40px 40px;
 }
+
 .right-box b {
   color: darkgreen;
 }
+
 .right-box a {
   color: darkgreen;
   text-decoration: none;
 }
+
 .input-group button {
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   border-radius: 10px;
 }
+
 .input-group input {
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   border-radius: 10px;
   border-color: darkgreen;
 }
+
 .right-box h1 {
   color: darkgreen;
   font-weight: bold;
   font-size: 35px;
   font-family: "Times New Roman", Times, serif;
 }
+
 /*------------ Custom Placeholder ------------*/
 
 ::placeholder {
@@ -64,9 +73,11 @@ body {
 .rounded-4 {
   border-radius: 20px;
 }
+
 .rounded-5 {
   border-radius: 30px;
 }
+
 .btns {
   border-radius: 30px;
   background-color: darkgreen;
@@ -79,16 +90,20 @@ body {
   .box-area {
     margin: 0 10px;
   }
+
   .left-box {
     height: 0px;
   }
+
   .right-box {
     padding: 20px;
   }
 }
+
 .signup {
   background-color: whitesmoke;
 }
+
 .navbars {
   background-attachment: fixed;
   background-color: darkgreen;
@@ -218,6 +233,7 @@ a {
   right: 10px;
   top: 10px;
 }
+
 .navbars {
   background-attachment: fixed;
   background-color: darkgreen;
@@ -237,6 +253,7 @@ body {
   font-family: "Poppins", sans-serif;
   background: #ececec;
 }
+
 .header {
   background-color: ghostwhite;
   padding: 4px;
@@ -247,6 +264,7 @@ body {
   justify-content: space-between;
   align-items: center;
 }
+
 /*------------ Login container ------------*/
 
 .box-area {
@@ -258,30 +276,36 @@ body {
 .right-box {
   padding: 40px 30px 40px 40px;
 }
+
 .right-box b {
   color: darkgreen;
 }
+
 .right-box a {
   color: darkgreen;
   text-decoration: none;
 }
+
 .input-group button {
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   border-radius: 10px;
 }
+
 .input-group input {
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   border-radius: 10px;
   border-color: darkgreen;
 }
+
 .right-box h1 {
   color: darkgreen;
   font-weight: bold;
   font-size: 35px;
   font-family: "Times New Roman", Times, serif;
 }
+
 /*------------ Custom Placeholder ------------*/
 
 ::placeholder {
@@ -291,9 +315,11 @@ body {
 .rounded-4 {
   border-radius: 20px;
 }
+
 .rounded-5 {
   border-radius: 30px;
 }
+
 .btns {
   border-radius: 30px;
   background-color: darkgreen;
@@ -306,20 +332,25 @@ body {
   .box-area {
     margin: 0 10px;
   }
+
   .left-box {
     height: 0px;
     overflow: hidden;
   }
+
   .right-box {
     padding: 20px;
   }
 }
+
 a {
   cursor: pointer;
 }
+
 .signup {
   background-color: whitesmoke;
 }
+
 .navbars {
   background-attachment: fixed;
   background-color: darkgreen;
@@ -454,11 +485,13 @@ body {
   height: 100vh;
   width: 100%;
 }
+
 h1 {
   font-family: sans-serif;
   text-align: center;
   font-size: 30px;
 }
+
 .profile-pic-div {
   height: 200px;
   width: 200px;
@@ -470,13 +503,16 @@ h1 {
   overflow: hidden;
   border: 1px;
 }
+
 #photo {
   height: 100%;
   width: 100%;
 }
+
 #file {
   display: none;
 }
+
 #uploadBtn {
   height: 40px;
   width: 100%;
@@ -497,6 +533,7 @@ h1 {
   color: black;
   text-decoration: none;
 }
+
 .main-header {
   background-color: green;
   display: flex;
@@ -505,12 +542,14 @@ h1 {
   padding: 10px;
   color: white;
 }
+
 .main-header img,
 .footer img {
   width: 5rem;
   height: auto;
   border-radius: 3px;
 }
+
 .footer {
   background-color: green;
   display: flex;
@@ -520,6 +559,7 @@ h1 {
   padding: 10px;
   color: white;
 }
+
 .upper {
   width: 100%;
   display: flex;
@@ -535,3 +575,7 @@ h1 {
   border: 5px solid black;
   height: max-content;
 } */
+
+.table{
+  width: 100%;
+}

@@ -9,7 +9,6 @@ from .models import *
 
 # Create your views here.
 
-
 def index(request):
     return render(request, "index.html")
 
@@ -161,68 +160,50 @@ def statementOfOriginality(request, pk, sk):
 
 
 def stepOne(request, pk, sk):
-    step1 = StepOne.objects.filter(teamId=sk).order_by("-date_updated").first()
-    if not step1:
-        step1 = StepOne.objects.create(userId=pk, teamId=sk)
+    step1 = StepOne.objects.filter(teamId=sk).order_by("-date_updated").all()
     if request.method == "POST":
         action = request.POST.get("action")
-        if action in ("save", "next"):
-            identify_problems = request.POST.get("identify_problems")
-            data_changed = has_data_changed(step1, request.POST)
-            if step1 and not data_changed:
-                pass
-            else:
-                step1.problem_title = identify_problems
-                step1.save()
-            if action == "save":
-                return HttpResponseRedirect(request.path_info)
+        identify_problems = request.POST.get("identify_problems")
+        if action in ('next', 'add') and identify_problems!='':
+            new_problem = StepOne.objects.create(userId=pk, teamId=sk)
+            new_problem.identify_problems = identify_problems
+            new_problem.save()
+            if action == 'add':
+                return HttpResponseRedirect(request.path_info)        
             elif action == "next":
+                return redirect("stepTwoOne", pk, sk)
+        elif action == 'next' and identify_problems == '':
                 return redirect("stepTwoOne", pk, sk)
         elif action == "back":
             return redirect("flowchart", pk, sk)
-    context = {"pk": pk, "sk": sk, "step1": step1}
+    if step1: context = {"pk": pk, "sk": sk, "step1": step1}
+    else: context = {"pk": pk, "sk": sk}
     return render(request, "stepOne.html", context)
 
 
 def stepTwoOne(request, pk, sk):
-    step1 = StepOne.objects.filter(teamId=sk).order_by("-date_updated").first()
-    step2 = StepTwo.objects.filter(teamId=sk).order_by("-date_updated").first()
-    if not step2:
-        step2 = StepTwo.objects.create(userId=pk, teamId=sk)
+    persons = Person.objects.filter(teamId=sk).order_by("-date_updated").all()
     if request.method == "POST":
         action = request.POST.get("action")
-        if action in ("save", "next"):
-            problem_1 = request.POST.get("problem_1")
-            p1name1 = request.POST.get("p1name1")
-            p1age1 = request.POST.get("p1age1")
-            p1comment1 = request.POST.get("p1comment1")
-            problem_title = request.POST.get("problem_title")
-            problem_description = request.POST.get("problem_description")
-            describe_problem = request.POST.get("describe_problem")
-            specific_solution = request.POST.get("specific_solution")
-            member1 = Problem.objects.create(
-                problem=problem_1,
-                name1=p1name1,
-                age1=p1age1,
-                comment1=p1comment1,
-            )
-            data_changed = has_data_changed(step2, request.POST)
-            if step2 and not data_changed:
-                pass
-            else:
-                step2.problem_title = problem_title
-                step2.problem_description = problem_description
-                step2.describe_problem = describe_problem
-                step2.specific_solution = specific_solution
-                step2.problems.add(member1)
-                step2.save()
-            if action == "save":
-                return HttpResponseRedirect(request.path_info)
+        name = request.POST.get("name")
+        age = request.POST.get("age")
+        comment = request.POST.get("comment")
+        if action in ('next', 'add') and name!='':
+            new_person = Person.objects.create(userId=pk, teamId=sk)
+            new_person.name=name
+            new_person.age=age
+            new_person.comment=comment
+            new_person.save()
+            if action == 'add':
+                return HttpResponseRedirect(request.path_info) 
             elif action == "next":
                 return redirect("stepTwoTwo", pk, sk)
+        elif action == 'next' and name == '':
+                return redirect("stepTwoTwo", pk, sk)
         elif action == "back":
-            return redirect("flowchart", pk, sk)
-    context = {"pk": pk, "sk": sk, "step1": step1, "step2": step2}
+            return redirect("stepOne", pk, sk)
+    if persons: context = {"pk": pk, "sk": sk, "persons": persons}
+    else: context = {"pk": pk, "sk": sk}
     return render(request, "stepTwoOne.html", context)
 
 
@@ -281,22 +262,24 @@ def stepTwoFour(request, pk, sk):
 
 
 def stepThreeOne(request, pk, sk):
-    step3 = StepThree.objects.filter(teamId=sk).order_by("-date_updated").first()
-    if not step3:
-        step3 = StepThree.objects.create(userId=pk, teamId=sk)
+    researches = Research.objects.filter(teamId=sk).order_by("-date_updated").all()
     if request.method == "POST":
         action = request.POST.get("action")
-        if action in ("save", "next"):
-            research = request.POST.get("research")
-            step3.research = research
-            step3.save()
-            if action == "save":
+        research = request.POST.get("research")
+        if action in ('next', 'add') and research!='':
+            new_research=Research.objects.create(userId=pk, teamId=sk)
+            new_research.research=research
+            new_research.save()
+            if action == "add":
                 return HttpResponseRedirect(request.path_info)
             elif action == "next":
                 return redirect("stepThreeTwo", pk, sk)
+        elif action == 'next' and research == '':
+                return redirect("stepThreeTwo", pk, sk)
         elif action == "back":
             return redirect("stepTwoFour", pk, sk)
-    context = {"pk": pk, "sk": sk, "step3": step3}
+    if researches: context = {"pk": pk, "sk": sk, "researches": researches}
+    else: context = {"pk": pk, "sk": sk}
     return render(request, "stepThreeOne.html", context)
 
 

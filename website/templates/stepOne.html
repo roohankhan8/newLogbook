@@ -1,5 +1,4 @@
-{% extends 'layout.html' %} {% block title %}Step 1: IDENTIFY {%endblock %} {%
-load static %} {% block content %}
+{% extends 'layout.html' %} {% block title %}Step 1: IDENTIFY {%endblock %} {% load static %} {% block content %}
 <!-- second header  -->
 <nav class="navbars">
   <div class="container-fluid-nav text-center">
@@ -20,9 +19,8 @@ load static %} {% block content %}
       >
         Q1.Identify problems you or your friends and family relate with.</label
       >
-      <textarea
+      <input
         class="form-control"
-        rows="10"
         style="
           height: 100%;
           font-family: 'Times New Roman', Times, serif;
@@ -30,12 +28,30 @@ load static %} {% block content %}
         "
         placeholder="Your Answer"
         name="identify_problems"
-      >
-{{step1.identify_problems}}</textarea
-      >
+      />
     </div>
-    {% include 'buttons.html' %}
+    {% include 'table_buttons.html' %}
   </form>
+  <div class="table border text-center">
+    <table class="">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Problem</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for problem in step1 %}
+        <tr class="border">
+          <td>{{ problem.userId }}</td>
+          <td>{{ problem.identify_problems }}</td>
+          <td>{{ problem.date_updated }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
 <!-- Question Answeer Box  Ends-->
 {% endblock %}
