@@ -1,0 +1,1292 @@
+{% extends 'sidenavbar.html' %}
+{% block title %}Preview Logbook{% endblock %}
+{% load static %}
+{% block content %}
+  <!-- second header  -->
+    <nav class="navbars">
+      <div class="container-fluid-nav text-center py-2">
+        <h5>Preview Logbook</h5>
+      </div>
+    </nav>
+    <br>
+    <nav class="navbars">
+      <div class="container-fluid-nav text-center py-2">
+        <h5>Record of Invention (ROI) Log The Invention Journey</h5>
+      </div>
+    </nav>
+    <!-- second header ends  -->
+    <!-- Question Answeer Box -->
+    <div class="QA_container mb-1 p-5 bg-light">
+      <div class="container">
+        <center>
+          <h2
+            style="
+              color: darkgreen;
+              font-family: 'Times New Roman', Times, serif;
+            "
+          >
+            Log The Invention Journey
+          </h2>
+        </center>
+        <hr />
+        <h5>Invention or Innovation. What’s the difference?</h5>
+        <p>
+          The invention involves engineering and developing a new solution,
+          product, or process. When you improve upon an existing solution,
+          product, or process to solve a problem (for example make it more
+          convenient to increase its uses) it becomes an innovation. An
+          invention is an entirely new solution to a problem, a radically
+          different breakthrough that achieves a unique function. Innovation is
+          an improvement over the existing solution
+        </p>
+        <h5>Why do inventors record their invention process?</h5>
+        <p>
+          All inventions have a purpose and use. An invention is complete when a
+          successful prototype is ready and the inventor is confident that s/he
+          can make exact copies of it. However, a prototype results from many
+          steps.Inventors record every detail of these steps for many reasons,
+          for example, to be able to replicate the prototype with accuracy; to
+          prove that they went through those steps and so they are the legal
+          inventor of the prototype and to record all learnings that happen in
+          the process. This log is the recorder of your invention. Record each
+          step you did, why you did what you did, how you did it, in whose
+          presence you did it. Tomorrow if this invention becomes BIG, you will
+          be able to use this log to prove you are the inventor. Invention log
+          is also part of the patenting process.
+        </p>
+        <h5>How to Use this Record of Invention (ROI)?</h5>
+        <p>
+          The sections of this ROI follow the process of invention. As you move
+          further in the process, keep recording everything, what, why, how, and
+          also who and where, when applicable. One way to figure you are doing
+          everything right is by making sure that you are following the sections
+          in the given sequence and completing a section before moving to the
+          next one. Each team/ project needs to complete one invention log.
+        </p>
+      </div>
+<br>
+<div class="row">
+  <div class="col-md-6">
+    <div class="mb-3">
+      <label for="nameField" class="form-label">The name of the invention:</label>
+      <p style="text-align: left;">{{record.name_of_invention}}</p>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="mb-3">
+      <label for="dateField" class="form-label">The problem that it solves</label>
+      <p style="text-align: left;">{{record.problem_it_solves}}</p>
+    </div>
+  </div>
+
+</div>
+<br></div><br>
+<!-- second header  -->
+<nav class="navbars">
+  <div class="container-fluid-nav text-center">
+    <h5>STATEMENT OF ORIGINALITY</h5>
+  </div>
+</nav>
+<!-- Question Answeer Box -->
+<div class="QA_container mb-1 p-5">
+  <h1 class="mb-3" style="
+      color: green;
+      text-align: justify;
+      font-size: 1em;
+    ">
+    <i>We certify that to the best of our knowledge, the ideas and the work
+      described in this log have resulted from the work of the team signing
+      off from here.</i>
+  </h1>
+  <br />
+  <br /><br>
+  <!-- 1 -->
+  <div class="row">
+    <!-- First Row -->
+    <div class="col-md-6">
+      <label class="labels">
+        <h1 class="mb-3" style="
+            font-family: 'Times New Roman', Times, serif;
+            color: dark green;
+            text-align: center;
+            font-size: 1.4em;
+          ">
+          <b>Inventor Name</b>
+        </h1>
+      </label>
+<p style="text-align: left;">{{inventors.0.inventor}}</p>
+    </div>
+    <div class="col-md-6">
+      <label class="labels">
+        <h1 class="mb-3" style="
+            font-family: 'Times New Roman', Times, serif;
+            color: dark green;
+            text-align: center;
+            font-size: 1.4em;
+          ">
+          <b>School Name & Grade</b>
+        </h1>
+      </label>
+<p style="text-align: left">{{inventors.0.schoolnamegrade}}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Second Row -->
+    <div class="col-md-6">
+      <!-- Signature Field -->
+      <div class="mb-3">
+        <label class="labels">
+          <h1 class="mb-3" style="
+            font-family: 'Times New Roman', Times, serif;
+            color: dark green;
+            text-align: center;
+            font-size: 1.4em;
+          ">
+            <b>Signature</b>
+          </h1>
+        </label>
+        <p style="text-align: left">{{inventors.0.sig}}</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <!-- Date Field -->
+      <div class="mb-3">
+        <label class="labels">
+          <h1 class="mb-3" style="
+            font-family: 'Times New Roman', Times, serif;
+            color: dark green;
+            text-align: center;
+            font-size: 1.4em;
+          ">
+            <b>Date</b>
+          </h1>
+        </label>
+        <p style="text-align: left">{{inventors.0.date}}</p>
+      </div>
+    </div>
+  </div>
+  <br>
+  <!-- 2 -->
+  <div class="row">
+    <!-- First Row -->
+    <div class="col-md-6">
+      <label class="labels">
+        <h1 class="mb-3" style="
+              font-family: 'Times New Roman', Times, serif;
+              color: dark green;
+              text-align: center;
+              font-size: 1.4em;
+            ">
+          <b>Inventor Name</b>
+        </h1>
+      </label>
+      <p style="text-align: left">{{inventors.1.inventor}}</p>
+    </div>
+    <div class="col-md-6">
+      <label class="labels">
+        <h1 class="mb-3" style="
+              font-family: 'Times New Roman', Times, serif;
+              color: dark green;
+              text-align: center;
+              font-size: 1.4em;
+            ">
+          <b>School Name & Grade</b>
+        </h1>
+      </label>
+      <p style="text-align: left">{{inventors.1.schoolnamegrade}}</p>
+     
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Second Row -->
+    <div class="col-md-6">
+      <!-- Signature Field -->
+      <div class="mb-3">
+        <label class="labels">
+          <h1 class="mb-3" style="
+              font-family: 'Times New Roman', Times, serif;
+              color: dark green;
+              text-align: center;
+              font-size: 1.4em;
+            ">
+            <b>Signature</b>
+          </h1>
+        </label>
+<p style="text-align: left">{{inventors.1.sig}}</p>      </div>
+    </div>
+    <div class="col-md-6">
+      <!-- Date Field -->
+      <div class="mb-3">
+        <label class="labels">
+          <h1 class="mb-3" style="
+              font-family: 'Times New Roman', Times, serif;
+              color: dark green;
+              text-align: center;
+              font-size: 1.4em;
+            ">
+            <b>Date</b>
+          </h1>
+        </label>
+        <p style="text-align: left">{{inventors.1.date}}</p>
+      </div>
+    </div>
+  </div>
+  <br>
+  <!-- 3 -->
+  <div class="row">
+    <!-- First Row -->
+    <div class="col-md-6">
+      <label class="labels">
+        <h1 class="mb-3" style="
+              font-family: 'Times New Roman', Times, serif;
+              color: dark green;
+              text-align: center;
+              font-size: 1.4em;
+            ">
+          <b>Inventor Name</b>
+        </h1>
+      </label>
+      <p style="text-align: left">{{inventors.2.inventor}}</p>
+    </div>
+    <div class="col-md-6">
+      <label class="labels">
+        <h1 class="mb-3" style="
+              font-family: 'Times New Roman', Times, serif;
+              color: dark green;
+              text-align: center;
+              font-size: 1.4em;
+            ">
+          <b>School Name & Grade</b>
+        </h1>
+      </label>
+      <p style="text-align: left">{{inventors.2.schoolnamegrade}}</p>
+    
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Second Row -->
+    <div class="col-md-6">
+      <!-- Signature Field -->
+      <div class="mb-3">
+        <label class="labels">
+          <h1 class="mb-3" style="
+              font-family: 'Times New Roman', Times, serif;
+              color: dark green;
+              text-align: center;
+              font-size: 1.4em;
+            ">
+            <b>Signature</b>
+          </h1>
+        </label>
+        <p style="text-align: left">{{inventors.2.sig}}</p>
+       
+      </div>
+    </div>
+    <div class="col-md-6">
+      <!-- Date Field -->
+      <div class="mb-3">
+        <label class="labels">
+          <h1 class="mb-3" style="
+              font-family: 'Times New Roman', Times, serif;
+              color: dark green;
+              text-align: center;
+              font-size: 1.4em;
+            ">
+            <b>Date</b>
+          </h1>
+        </label>
+        <p style="text-align: left">{{inventors.2.date}}</p>
+      </div>
+    </div>
+  </div>
+  <br>
+  <!-- 4 -->
+  <div class="row">
+    <!-- First Row -->
+    <div class="col-md-6">
+      <label class="labels">
+        <h1 class="mb-3" style="
+                font-family: 'Times New Roman', Times, serif;
+                color: dark green;
+                text-align: center;
+                font-size: 1.4em;
+              ">
+          <b>Inventor Name</b>
+        </h1>
+      </label>
+      <p style="text-align: left">{{inventors.3.inventor}}</p>
+    </div>
+    <div class="col-md-6">
+      <label class="labels">
+        <h1 class="mb-3" style="
+                font-family: 'Times New Roman', Times, serif;
+                color: dark green;
+                text-align: center;
+                font-size: 1.4em;
+              ">
+          <b>School Name & Grade</b>
+        </h1>
+      </label>
+      <p style="text-align: left">{{inventors.3.schoolnamegrade}}</p>
+   
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Second Row -->
+    <div class="col-md-6">
+      <!-- Signature Field -->
+      <div class="mb-3">
+        <label class="labels">
+          <h1 class="mb-3" style="
+                font-family: 'Times New Roman', Times, serif;
+                color: dark green;
+                text-align: center;
+                font-size: 1.4em;
+              ">
+            <b>Signature</b>
+          </h1>
+        </label>
+        <p style="text-align: left">{{inventors.3.sig}}</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <!-- Date Field -->
+      <div class="mb-3">
+        <label class="labels">
+          <h1 class="mb-3" style="
+                font-family: 'Times New Roman', Times, serif;
+                color: dark green;
+                text-align: center;
+                font-size: 1.4em;
+              ">
+            <b>Date</b>
+          </h1>
+        </label>
+        <p style="text-align: left">{{inventors.3.date}}</p>
+      </div>
+    </div>
+  </div>
+  <br>
+  <!-- 5 -->
+  <div class="row">
+    <!-- First Row -->
+    <div class="col-md-6">
+      <label class="labels">
+        <h1 class="mb-3" style="
+                font-family: 'Times New Roman', Times, serif;
+                color: dark green;
+                text-align: center;
+                font-size: 1.4em;
+              ">
+          <b>Inventor Name</b>
+        </h1>
+      </label>
+      <p style="text-align: left">{{inventors.4.inventor}}</p>
+      
+    </div>
+    <div class="col-md-6">
+      <label class="labels">
+        <h1 class="mb-3" style="
+                font-family: 'Times New Roman', Times, serif;
+                color: dark green;
+                text-align: center;
+                font-size: 1.4em;
+              ">
+          <b>School Name & Grade</b>
+        </h1>
+      </label>
+      <p style="text-align: left">{{inventors.4.schoolnamegrade}}</p>
+      
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Second Row -->
+    <div class="col-md-6">
+      <!-- Signature Field -->
+      <div class="mb-3">
+        <label class="labels">
+          <h1 class="mb-3" style="
+                font-family: 'Times New Roman', Times, serif;
+                color: dark green;
+                text-align: center;
+                font-size: 1.4em;
+              ">
+            <b>Signature</b>
+          </h1>
+        </label>
+        <p style="text-align: left">{{inventors.4.sig}}</p>
+       
+      </div>
+    </div>
+    <div class="col-md-6">
+      <!-- Date Field -->
+      <div class="mb-3">
+        <label class="labels">
+          <h1 class="mb-3" style="
+                font-family: 'Times New Roman', Times, serif;
+                color: dark green;
+                text-align: center;
+                font-size: 1.4em;
+              ">
+            <b>Date</b>
+          </h1>
+        </label>
+        <p style="text-align: left">{{inventors.4.date}}</p>
+      </div>
+    </div>
+  </div><br>
+  <div class="row">
+    <!-- First Row -->
+    <div class="col-md-6">
+      <label class="labels">
+        <h1 class="mb-3" style="
+              font-family: 'Times New Roman', Times, serif;
+              color: dark green;
+              text-align: center;
+              font-size: 1.4em;
+            ">
+          <b>Inventor Name</b>
+        </h1>
+      </label>
+      <p style="text-align: left">{{inventors.5.inventor}}</p>
+      
+    </div>
+    <div class="col-md-6">
+      <label class="labels">
+        <h1 class="mb-3" style="
+              font-family: 'Times New Roman', Times, serif;
+              color: dark green;
+              text-align: center;
+              font-size: 1.4em;
+            ">
+          <b>School Name & Grade</b>
+        </h1>
+      </label>
+      <p style="text-align: left">{{inventors.5.schoolnamegrade}}</p>
+    </div>
+  </div>
+</div>
+
+<!-- step2 -->
+<br />
+<nav class="navbars">
+  <div class="container-fluid-nav text-center">
+    <h5>STEP 1- IDENTIFY THE PROBLEM</h5>
+  </div>
+</nav>
+<!-- Question Answeer Box -->
+<div class="QA_container mb-1 p-4">
+  <form>
+    <div class="form-group">
+      <label class="form-label" for="inputlg">
+        <b>Q1.Identify a few problems you or your friends and family relate
+          with</b>
+      </label>
+      <p style="text-align: left">{{step1.identify_problems}}
+      </p>
+    </div>
+  </form>
+</div>
+<!-- step2 -->
+<!-- second header  -->
+<br />
+<nav class="navbars">
+  <div class="container-fluid-nav text-center">
+    <h5>STEP 2- DEFINE AND MAKE SENSE OF THE PROBLEM</h5>
+  </div>
+</nav>
+<!-- Question Answeer Box -->
+<div class="QA_container mb-1 p-4">
+  <form>
+    <div class="form-group">
+      <label class="form-label" for="inputlg">
+        <b>2.1 Talk to others and understand all aspects of the problems.
+          Now, pick one problem you want to move forward with and take the
+          next step.</b>
+      </label>
+      <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+              aria-controls="panelsStayOpen-collapseOne">
+              Problem 1:&nbsp;&nbsp;&nbsp;{{members.0.problem}}
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+            <div class="accordion-body">
+              <div class="container">
+                <div class="row">
+                  <!-- First Column -->
+                  <div class="col-md-4 column">
+                    <h3>Person Name</h3>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.0.name1}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.0.name2}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.0.name3}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.0.name4}}</p>
+                    </div>
+                  </div>
+
+                  <!-- Second Column -->
+                  <div class="col-md-4 column">
+                    <h3>Age</h3>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.0.age1}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.0.age2}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.0.age3}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.0.age4}}</p>
+                    </div>
+                  </div>
+
+                  <!-- Third Column -->
+                  <div class="col-md-4 column">
+                    <h3>Comments</h3>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.0.comment1}}</p>
+                    </div>
+                    <div class="mb-3">
+
+                      <p style="text-align: left">{{members.0.comment2}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.0.comment3}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.0.comment4}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+              aria-controls="panelsStayOpen-collapseTwo">
+              Problem 2:&nbsp;&nbsp;&nbsp;{{members.1.problem}}
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+            <div class="accordion-body">
+              <div class="container">
+                <div class="row">
+                  <!-- First Column -->
+                  <div class="col-md-4 column">
+                    <h3>Person Name</h3>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.1.name1}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.1.name2}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.1.name3}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.1.name4}}</p>
+                    </div>
+                  </div>
+
+                  <!-- Second Column -->
+                  <div class="col-md-4 column">
+                    <h3>Age</h3>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.1.age1}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.1.age2}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.1.age3}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.1.age4}}</p>
+                    </div>
+                  </div>
+
+                  <!-- Third Column -->
+                  <div class="col-md-4 column">
+                    <h3>Comments</h3>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.1.comment1}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.1.comment2}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.1.comment3}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.1.comment4}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+              aria-controls="panelsStayOpen-collapseThree">
+              Problem 3:&nbsp;&nbsp;&nbsp;{{members.2.problem}}
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+            <div class="accordion-body">
+              <div class="container">
+                <div class="row">
+                  <!-- First Column -->
+                  <div class="col-md-4 column">
+                    <h3>Person Name</h3>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.2.name1}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.2.name2}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.2.name3}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.2.name4}}</p>
+                    </div>
+                  </div>
+
+                  <!-- Second Column -->
+                  <div class="col-md-4 column">
+                    <h3>Age</h3>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.2.age1}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.2.age2}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.2.age3}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.2.age4}}</p>
+                    </div>
+                  </div>
+
+                  <!-- Third Column -->
+                  <div class="col-md-4 column">
+                    <h3>Comments</h3>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.2.comment1}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.2.comment2}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.2.comment3}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.2.comment4}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fourth accordion item -->
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false"
+              aria-controls="panelsStayOpen-collapseFour">
+              Problem 4:&nbsp;&nbsp;&nbsp;{{step2.problem_4}}
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse">
+            <div class="accordion-body">
+              <div class="container">
+                <div class="row">
+                  <!-- First Column -->
+                  <div class="col-md-4 column">
+                    <h3>Person Name</h3>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.3.name1}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.3.name2}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.3.name3}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.3.name4}}</p>
+                    </div>
+                  </div>
+
+                  <!-- Second Column -->
+                  <div class="col-md-4 column">
+                    <h3>Age</h3>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.3.age1}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.3.age2}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.3.age3}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.3.age4}}</p>
+                    </div>
+                  </div>
+
+                  <!-- Third Column -->
+                  <div class="col-md-4 column">
+                    <h3>Comments</h3>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.3.comment1}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.3.comment2}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.3.comment3}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <p style="text-align: left">{{members.3.comment4}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><br>
+        <p style="text-align: left">{{step2.problem_title}}
+            </p>
+      <p style="text-align: left">{{step2.problem_description}}
+      </p>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="inputlg">
+        <b>2.2 Define and describe the problem in great detail so it
+          captures all aspects and conveys the same extent and nature of the
+          problem when someone else reads it. Share how you came up with the
+          problem.</b>
+      </label>
+      <p style="text-align: left">{{step2.describe_problem}}
+      </p>
+    </div>
+  </form>
+  <div class="form-group">
+    <label class="form-label" for="inputlg">
+      <b>2.3 Very specifically, list what do you want your solution to
+        achieve?</b>
+    </label>
+    <p style="text-align: left">{{step2.specific_solution}}
+    </p>
+  </div>
+  <div></div>
+</div>
+<!-- step3 -->
+<!-- second header  -->
+<nav class="navbars">
+  <div class="container-fluid-nav text-center">
+    <h6>STEP 3- DEVELOP IDEAS AND DRAFT ALTERNATE SOLUTIONS</h6>
+  </div>
+</nav>
+<!-- Question Answeer Box -->
+<div class="QA_container mb-1 p-4">
+  <form>
+    <div class="form-group">
+      <label class="form-label" for="inputlg">
+        <b>3.1 List the most important factors in solving this problem?</b>
+      </label>
+      <p style="text-align: left">{{step3.factors}}
+      </p>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="inputlg">
+        <b>3.1.1 what are some different ways you can solve this problem?</b>
+      </label>
+      <p style="text-align: left">{{step3.ways_to_solve}}
+      </p>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="inputlg">
+        <b>3.2 Research different sources to find any similar solutions
+          already available to use. How are they different from what you are
+          trying to do?</b>
+      </label>
+      <p style="text-align: left">{{step3.research}}
+      </p>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="inputlg">
+        <b>3.2.1 How are they different from what you are trying to do?</b>
+      </label>
+      <p style="text-align: left">{{step3.difference}}
+      </p>
+    </div>
+  </form>
+  <div></div>
+</div>
+<!-- step4 -->
+<!-- second header  -->
+<nav class="navbars">
+  <div class="container-fluid-nav text-center">
+    <h5>STEP 4- OVER TO THE DRAWING BOARD</h5>
+  </div>
+</nav>
+<!-- Question Answeer Box -->
+<div class="QA_container mb-1 p-4">
+  <form>
+    <div class="form-group">
+      <label for="formFileMultiple" class="form-label">
+        <b>
+          4.1 In as much detail as possible, draw a blue print/ model of how
+          your solution will (a) look; (b) what parts/ components/ elements
+          it will involve; (c) how it will work. If possible, show or list
+          all its functions
+        </b>
+      </label>
+      <div class="container">
+        <img src="{{step4.imageURL}}" alt="" style="width: 100%; height: 100%;">
+      </div>
+    </div>
+    <br>
+    <div class="container p-3 bg-light">
+      <center>
+        <h2 style="color: darkgreen; font-family: 'Times New Roman', Times, serif;">
+          Mentor/Teacher Solution Sign-Off
+        </h2>
+      </center>
+      <hr />
+      <p>
+        I, {{step4.teacher_name}}, am aware of the guidelines for the invention process and approve the solution each of my
+        students/team wants to pursue. This
+        solution and the process of developing it is within the guidelines and meets safety requirements. I will guide
+        them through this process.
+      </p>
+      <div class="row">
+        <div class="col-md-6">
+          <!-- signature Field -->
+          <div class="mb-3">
+            <label for="nameField" class="form-label">Teacher’s Signature:</label>
+            <p style="background-color: rgb(255, 255, 255);">{{step4.teacher_sign}}</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!-- Date Field -->
+          <div class="mb-3">
+            <label for="dateField" class="form-label">Date:</label>
+            <p style="background-color: rgb(255, 255, 255);">{{step4.date}}</p>
+          </div>
+        </div>
+
+      </div>
+    </div><br>
+    <div class="form-group">
+      <label class="form-label" for="inputlg">
+        <b>
+          4.2 Talk to experts and potential users of your solution about the obstacles/ problems you are likely to face
+          in making
+          a real model of your design. Note those problems and how you identified them. Note what the experts and users
+          said,
+          their experience in this area, and why you chose to talk to them. Along with the observations of others, also
+          note what
+          problems you think you will face in making a model. Note the credentials of the experts here.
+
+        </b>
+      </label>
+      <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+              aria-controls="panelsStayOpen-collapseOne">
+              Issue 1:
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+            <div class="accordion-body">
+              <form>issues.0.expert
+                <div class="mb-3">
+                  <label for="userName" class="form-label">User/Expert Name:</label>
+                  <p style="text-align: left; ">{{issues.0.expert}}</p>
+                </div>
+                <div class="mb-3">
+                  <label for="credentials" class="form-label">Credentials of the experts:</label>
+                  <p style="text-align: left; ">{{issues.0.credentials}}</p>
+                </div>
+                <div class="mb-3">
+                  <label for="problemIdentified" class="form-label">Problem user/expert identified:</label>
+                  <p style="text-align: left; ">{{issues.0.identified}}</p>
+                </div>
+                <div class="mb-3">
+                  <label for="problemYouWillFace" class="form-label">Problem you think you will face:</label>
+                  <p style="text-align: left; ">{{issues.0.problemface}}</p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+              aria-controls="panelsStayOpen-collapseTwo">
+              Issue 2:
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+            <div class="accordion-body">
+              <form>
+                <div class="mb-3">
+                  <label for="userName" class="form-label">User/Expert Name:</label>
+                  <p style="text-align: left; ">{{issues.1.expert}}</p>
+                </div>
+                <div class="mb-3">
+                  <label for="credentials" class="form-label">Credentials of the experts:</label>
+                  <p style="text-align: left; ">{{issues.1.credentials}}</p>
+                </div>
+                <div class="mb-3">
+                  <label for="problemIdentified" class="form-label">Problem user/expert identified:</label>
+                  <p style="text-align: left; ">{{issues.1.identified}}</p>
+                </div>
+                <div class="mb-3">
+                  <label for="problemYouWillFace" class="form-label">Problem you think you will face:</label>
+                  <p style="text-align: left; ">{{issues.1.problemface}}</p>
+                </div>
+              </form>.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+              aria-controls="panelsStayOpen-collapseThree">
+              Issue 3:
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+            <div class="accordion-body">
+              <form>
+                <div class="mb-3">
+                  <label for="userName" class="form-label">User/Expert Name:</label>
+                  <p style="text-align: left; ">{{issues.2.expert}}</p>
+                </div>
+                <div class="mb-3">
+                  <label for="credentials" class="form-label">Credentials of the experts:</label>
+                  <p style="text-align: left; ">{{issues.2.credentials}}</p>
+                </div>
+                <div class="mb-3">
+                  <label for="problemIdentified" class="form-label">Problem user/expert identified:</label>
+                  <p style="text-align: left; ">{{issues.2.identified}}</p>
+                </div>
+                <div class="mb-3">
+                  <label for="problemYouWillFace" class="form-label">Problem you think you will face:</label>
+                  <p style="text-align: left; ">{{issues.2.problemface}}</p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><br>
+    <div class="form-group">
+      <label class="form-label" for="inputlg">
+        <b>
+          4.3 How will you overcome these issues? As you record how you will
+          overcome these issues, if the changes are minor, revise the
+          existing model iteration. If you make major changes to your model,
+          add more iterations to your first model (Model i1….Model i2)
+        </b>
+      </label>
+      <p style="text-align: left">{{step4.sol_design_problem}}
+      </p>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="inputlg">
+        <b>
+          4.4 There is a great emphasis needed on making green solutions.
+          This means whatever solution you arrive at, try to make it as
+          sustainable as possible. Note here how your design can be more
+          sustainable. If it uses less of the natural resources, or does not
+          damage the environment, it is a sustainable solution?
+        </b>
+      </label>
+      <p style="text-align: left">{{step4.green_sol}}
+      </p>
+    </div>
+  </form>
+  <div></div>
+</div>
+<!-- step5 -->
+<nav class="navbars">
+  <div class="container-fluid-nav text-center">
+    <h5>STEP 5- PLAN FOR PROTOTYPING</h5>
+  </div>
+</nav>
+<!-- Question Answeer Box -->
+<div class="QA_container mb-1 p-4">
+  <form>
+    <div class="form-group">
+      <label class="form-label" for="inputlg">
+        <b>
+          5.1 Talk to experts (engineers, scientists, entrepreneurs) to: (a)
+          figure out the best materials, parts and components to use; (b)
+          and where to find them. Record here the materials, parts and
+          components you will use and where you will get them from.
+        </b>
+      </label>
+      <p style="text-align: left">{{step5.materials}}
+      </p>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="inputlg">
+        <b>
+          5.2 Read research articles and other published information to: (a)
+          better understand the parts and materials you plan to use; (b) the
+          skills needed to make the model into a real invention; (c) explore
+          if you need any additional skills to make your invention. Note
+          your findings here.
+        </b>
+      </label>
+      <p style="text-align: left">{{step5.findings}}
+      </p>
+    </div>
+  </form>
+  <div class="form-group">
+    <label class="form-label" for="inputlg">
+      <b>5.3 Connect with experts who can help you make the prototype. Note
+        the credentials of the experts here.</b>
+    </label>
+    <p style="text-align: left">{{step5.credit}}
+    </p>
+  </div>
+  <div></div>
+</div>
+<!-- step6 -->
+<!-- second header  -->
+<nav class="navbars">
+  <div class="container-fluid-nav text-center">
+    <h5>STEP 6 - OVER TO THE LABORATORY</h5>
+  </div>
+</nav>
+<!-- Question Answeer Box -->
+<div class="QA_container mb-1 p-4">
+  <form>
+    <div class="form-group">
+      <label class="form-label" for="inputlg">
+        <b>
+          6.1 Arrange the materials, tools and machinery you'll use to build
+          your prototype. Do not hesitate to ask for help from others where
+          you need it. <br>Proto1-Build: Note any and all observations you have
+          while building. Attach pictures of the process as you build.
+        </b>
+      </label>
+    </div> 
+       <div class="form-group">
+      <label class="form-label" for="inputlg"> Notes </label>
+      <p style="text-align: left">{{step6.notes}}
+      </p>
+    </div>
+    <div class="form-group">
+      <label for="formFileMultiple" class="form-label">
+        Upload Picture
+      </label>
+      <div class="container">
+        <img src="{{step6.imageURL}}" alt="" style="width: 100%; height: 100%;">
+      </div>
+    </div>
+
+  </form>
+  <div></div>
+</div>
+<!-- step7 -->
+<!-- second header  -->
+<nav class="navbars">
+  <div class="container-fluid-nav text-center">
+    <h5>STEP 7 - TEST YOUR PROTOTYPE</h5>
+  </div>
+</nav>
+<!-- Question Answeer Box -->
+<div class="QA_container mb-1 p-4">
+  <form>
+    <div class="form-group">
+      <label class="form-label" for="inputlg">
+        <b>7.1 Test your prototype on different parameters and note the
+          extent to which it satisfies the requirements you had set.
+          Identify any problems you see. Describe how you tested your
+          prototype.</b>
+      </label>
+      <p style="text-align: left">{{step7.testing}}
+      </p>
+    </div><h1>Now, test your prototype
+</h1>
+    <div class="form-group">
+      <label class="form-label" for="inputlg">
+        <b>7.2 Identify and record all positive and negative observations
+          you have each time you test your prototype.</b>
+      </label>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="inputlg" style="color: green">
+        Positive
+      </label>
+      <p style="text-align: left">{{step7.positive}}
+      </p>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="inputlg" style="color: green">
+       Negative
+      </label>
+      <p style="text-align: left">{{step7.negative}}
+      </p>
+    </div>
+          <label class="form-label" for="inputlg">
+              At this point, consider if you need to go back
+              <a href="{% url 'step_4' pk sk %}">TO THE DRAWING BOARD (Step 4)</a> or
+              <a href="{% url 'step_6' pk sk %}">OVER TO THE LAB(Step 6)</a> for some
+              revisions to the prototype. Keep creating new versions of
+              ModelI1…, ProtoI as needed so you can record all the iterations
+              you did. Keep making changes to your prototype and try new
+              iterations until your invention works as planned.
+          </label>
+  </form>
+  <div></div>
+</div>
+<!-- step8 -->
+<!-- second header  -->
+<br />
+<nav class="navbars">
+  <div class="container-fluid-nav text-center">
+    <h5>STEP 8- PREPARE TO MARKET</h5>
+  </div>
+</nav>
+<!-- Question Answeer Box -->
+<div class="QA_container mb-1 p-4">
+  <form>
+    <div class="form-group">
+      <label class="form-label" for="inputlg">
+        <b>Instructions</b>
+      </label>
+      <label class="form-label" for="inputlg" style="color: green">
+        Once the prototype of the product is ready, there are four decisions
+        you need to make to see how you can effectively market this product.
+        These are price, branding, value and how you will sell the product.
+        <br />
+        Decide on a catchy name for the product that will appeal to most
+        people and also convey the purpose of the product. Think about words
+        and word combinations that describe your product and the solution it
+        provides. Then use them to decide on a name.
+        <br />
+      </label>
+      <label class="form-label" for="inputlg">
+        <b>8.1 What possible words, word combinations and names can you
+          think of?</b>
+      </label>
+      <p style="text-align: left">{{step8.nameinvention}}
+      </p>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="inputlg">
+        <b>8.2 Now think of the value your product offers. List the
+          functions and benefits it offers to the user. How is it better
+          and/ or different than the products already available in the
+          market?</b>
+      </label>
+      <p style="text-align: left">{{step8.benefits}}
+      </p>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="inputlg">
+        <b>8.3 Determine the price at which you will sell it. What it cost
+          you to build the product? What it will cost you to sell it? What
+          will people be willing to pay for it?</b>
+      </label>
+      <p style="text-align: left">{{step8.price}}
+      </p>
+    </div>
+    <div>
+      <div class="form-group">
+        <label class="form-label" for="inputlg">
+          <b>8.4 Finally, decide where will customers be able to buy it.</b>
+        </label>
+        <p style="text-align: left">{{step8.buy}}
+        </p>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="inputlg">
+          <b>8.5 Describe your typical customer. What is their :</b>
+        </label>
+        <div class="row mt-3">
+          <div class="col-md-12">
+            <label class="labels"> Age: </label>
+            <p style="text-align: left">{{step8.customer_age}}</p>
+          </div>
+          <div class="col-md-12">
+            <label class="labels"> Gender </label>
+            <p style="text-align: left">{{step8.customer_gender}}</p>
+          </div>
+          <div class="col-md-12">
+            <label class="labels"> Education Level: </label>
+            <p style="text-align: left">{{step8.customer_education}}</p>
+          </div>
+          <div class="col-md-12">
+            <label class="labels"> Household Size: </label>
+            <p style="text-align: left">{{step8.customer_house}}</p>
+          </div>
+          <div class="col-md-12">
+            <label class="labels"> Marital Status: </label>
+            <p style="text-align: left">{{step8.customer_marital}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="inputlg">
+        <small>Other Notes</small>
+      </label>
+      <p style="text-align: left">{{step8.other_notes}}
+      </p>
+    </div>
+  </form>
+</div>
+<!-- BUTTON -->
+<div class="container">
+  <div class="row">
+    <div class="col-12 d-flex align-items-center justify-content-center">
+      <!-- Modified -->
+      <a href="{% url 'course_outline' pk sk %}"><button class="btn btn-success mr-1"
+          type="button">Back</button></a>
+      <a href="{% url 'pdf' pk sk %}"><button class="btn btn-success mr-1"
+          type="button">Download</button></a>
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -38,7 +38,7 @@
         <!-- option 1: Course outline dropdown menu -->
         <li>
           <div class="iocn-link">
-            <a href="{% url 'course_outline' pk sk %}">
+            <a href="{% url 'courseOutline' pk sk %}">
               <i class="bx bx-book"></i>
               <span class="link_name">Course Outline</span>
             </a>
@@ -46,37 +46,37 @@
           </div>
           <ul class="sub-menu">
             <li>
-              <a class="link_name" href="{% url 'course_outline' pk sk %}"
+              <a class="link_name" href="{% url 'courseOutline' pk sk %}"
                 >Course Outline</a
               >
             </li>
             <li>
-              <a href="{% url 'record_of_invention' pk sk %}"
+              <a href="{% url 'recordOfInvention' pk sk %}"
                 >Record of invention</a
               >
             </li>
             <li>
-              <a href="{% url 'statement_of_originality' pk sk %}"
+              <a href="{% url 'statementOfOriginality' pk sk %}"
                 >Statment of orignality</a
               >
             </li>
-            <li><a href="{% url 'step_1' pk sk %}">Recognize</a></li>
+            <li><a href="{% url 'stepOne' pk sk %}">Recognize</a></li>
             <li>
-              <a href="{% url 'step_2' pk sk %}">Define & make sense </a>
+              <a href="{% url 'stepTwoOne' pk sk %}">Define & make sense </a>
             </li>
-            <li><a href="{% url 'step_3' pk sk %}">Develop ideas</a></li>
+            <li><a href="{% url 'stepThreeOne' pk sk %}">Develop ideas</a></li>
             <li>
-              <a href="{% url 'step_4' pk sk %}">Go to drawing board</a>
-            </li>
-            <li>
-              <a href="{% url 'step_5' pk sk %}">Plan for prototyping</a>
+              <a href="{% url 'stepFourOne' pk sk %}">Go to drawing board</a>
             </li>
             <li>
-              <a href="{% url 'step_6' pk sk %}">Over to the lab</a>
+              <a href="{% url 'stepFiveOne' pk sk %}">Plan for prototyping</a>
             </li>
-            <li><a href="{% url 'step_7' pk sk %}">Test</a></li>
             <li>
-              <a href="{% url 'step_8' pk sk %}">Prepare to market</a>
+              <a href="{% url 'stepSix' pk sk %}">Over to the lab</a>
+            </li>
+            <li><a href="{% url 'stepSeven' pk sk %}">Test</a></li>
+            <li>
+              <a href="{% url 'stepEightOne' pk sk %}">Prepare to market</a>
             </li>
           </ul>
         </li>
@@ -110,13 +110,13 @@
 
         <!-- option 4: Preview Logbook -->
         <li>
-          <a href="{% url 'preview_logbook' pk sk %}">
+          <a href="{% url 'previewLogbook' pk sk %}">
             <i class="bx bx-book-open"></i>
             <span class="link_name">Preview Logbook</span>
           </a>
           <ul class="sub-menu blank">
             <li>
-              <a class="link_name" href="{% url 'preview_logbook' pk sk %}"
+              <a class="link_name" href="{% url 'previewLogbook' pk sk %}"
                 >Preview Logbook</a
               >
             </li>
@@ -151,7 +151,7 @@
           <img src="{%static 'images/pic1.jpeg' %}" alt="" class="img1" />
         </div>
         <h1 class="" style="text-align: center">Logbook</h1>
-        <a href="{% url 'index' %}">
+        <a href="{% url 'login' %}">
           <button class="btn btn-success mr-1" type="button">Logout</button>
         </a>
       </div>

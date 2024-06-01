@@ -1,4 +1,4 @@
-{% extends 'layout.html' %} {% block title %}Step 1: IDENTIFY {%endblock %} {% load static %} {% block content %}
+{% extends 'sidenavbar.html' %} {% block title %}Step 1: IDENTIFY {%endblock %} {% load static %} {% block content %}
 <!-- second header  -->
 <nav class="navbars">
   <div class="container-fluid-nav text-center">
@@ -32,6 +32,7 @@
     </div>
     {% include 'table_buttons.html' %}
   </form>
+  {% if step1 %}
   <div class="table border text-center">
     <table class="">
       <thead>
@@ -51,6 +52,7 @@
         {% endfor %}
       </tbody>
     </table>
+    {% endif %}
   </div>
 </div>
 <!-- Question Answeer Box  Ends-->

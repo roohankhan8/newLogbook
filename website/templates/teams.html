@@ -1,0 +1,43 @@
+{% extends 'sidenavbar.html' %} {% block title %}Record
+OfInvention{%endblock %} {% load static %} {% block content %}
+<style>
+  .code {
+    font-size: 0.5em;
+  }
+  #logbooks {
+    color: rgb(32, 170, 99);
+    text-decoration: none;
+  }
+  #main-div {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+</style>
+<div style="padding: 2em;">
+  <h1>{{user.0.3}} {{user.0.4}}</h1>
+  <p>
+    <small>You are participating in this following group</small>
+  </p>
+  <div id="main-div" class="items-center py-5">
+    <ul>
+      {% for team in teams.items %}
+      <div class="shadow p-1 mb-4 bg-body-tertiary rounded">
+        <li class="p-2 d-flex justify-content-between">
+          <a id="logbooks" href="{% url 'courseOutline' pk team.0 %}">
+            <h4 class="title">
+              {{team.1}}
+              <div class="code">{{team.0}}</div>
+            </h4>
+          </a>
+        </li>
+      </div>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{%endblock %}

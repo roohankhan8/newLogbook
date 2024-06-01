@@ -1,4 +1,4 @@
-{% extends 'layout.html' %} {% block title %}Record Of Invention{%endblock %} {%load static %} {% block content %}
+{% extends 'sidenavbar.html' %} {% block title %}Record Of Invention{%endblock %} {%load static %} {% block content %}
 <!-- second header  -->
 <nav class="navbars">
   <div class="container-fluid-nav text-center py-2">
@@ -48,7 +48,7 @@
     </p>
   </div>
   <br />
-  <form method="post" action="{% url 'recordOfInvention' 1 2 %}">
+  <form method="post" action="{% url 'recordOfInvention' pk sk %}">
     {% csrf_token %}
     <div class="row">
       {% for field in form %}

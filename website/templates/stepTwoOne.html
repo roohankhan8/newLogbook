@@ -1,4 +1,4 @@
-{% extends 'layout.html' %} {% block title %}Step 2: DEFINE AND MAKE
+{% extends 'sidenavbar.html' %} {% block title %}Step 2: DEFINE AND MAKE
 SENSE{%endblock %} {% load static %} {% block content %}
 <!-- second header  -->
 <nav class="navbars">
@@ -86,6 +86,7 @@ SENSE{%endblock %} {% load static %} {% block content %}
     {% include 'table_buttons.html' %}
   </form>
 </div>
+  {% if persons %}
 <!-- Question Answeer Box  Ends-->
   <div class="table border text-center">
     <table class="">
@@ -111,5 +112,6 @@ SENSE{%endblock %} {% load static %} {% block content %}
       </tbody>
     </table>
   </div>
+    {% endif %}
 
 {% endblock %}

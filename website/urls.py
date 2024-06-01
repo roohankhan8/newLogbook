@@ -2,8 +2,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    # path("", views.index, name="home"),
-    path("login/", views.login, name="login"),
+    # path("", views.index, name="index"),
+    path("", views.login, name="login"),
     path("teams/<str:pk>/", views.teams, name="teams"),
     path(
         "courseOutline/<str:pk>/<str:sk>/", views.courseOutline, name="courseOutline"
@@ -32,11 +32,13 @@ urlpatterns = [
     path("stepFiveOne/<str:pk>/<str:sk>/", views.stepFiveOne, name="stepFiveOne"),
     path("stepFiveTwo/<str:pk>/<str:sk>/", views.stepFiveTwo, name="stepFiveTwo"),
     path("stepSix/<str:pk>/<str:sk>/", views.stepSix, name="stepSix"),
-    path('view/<int:pk>/', views.view_image, name='view_image'),
+    path('viewImage/<int:pk>/', views.viewImage, name='viewImage'),
     path("stepSeven/<str:pk>/<str:sk>/", views.stepSeven, name="stepSeven"),
     path("guidelines/<str:pk>/<str:sk>/", views.guidelines, name="guidelines"),
     path("stepEightOne/<str:pk>/<str:sk>/", views.stepEightOne, name="stepEightOne"),
     path("stepEightTwo/<str:pk>/<str:sk>/", views.stepEightTwo, name="stepEightTwo"),
     path("stepEightThree/<str:pk>/<str:sk>/", views.stepEightThree, name="stepEightThree"),
-    
+    path("notes/<str:pk>/<str:sk>/", views.notes, name="notes"),
+    path("previewLogbook/<str:pk>/<str:sk>/", views.previewLogbook, name="previewLogbook"),
+    path("survey/<str:pk>/<str:sk>/", views.survey, name="survey"),
 ]

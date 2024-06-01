@@ -1,4 +1,4 @@
-{% extends 'layout.html' %} {% block title %}Step 1: IDENTIFY {%endblock %} {%
+{% extends 'sidenavbar.html' %} {% block title %}Step 1: IDENTIFY {%endblock %} {%
 load static %} {% block content %}
 <!-- second header  -->
 <nav class="navbars">
@@ -37,6 +37,7 @@ load static %} {% block content %}
   </form>
 </div>
 <!-- Question Answeer Box Ends-->
+{% if customers %}
 <div class="table border text-center">
   <table class="">
     <thead>
@@ -65,4 +66,5 @@ load static %} {% block content %}
     </tbody>
   </table>
 </div>
+{% endif %}
 {% endblock %}

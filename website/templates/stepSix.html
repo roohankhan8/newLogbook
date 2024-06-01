@@ -1,5 +1,5 @@
-{% extends 'layout.html' %} {% block title %}Step 1: IDENTIFY {%endblock %} {%
-load static %} {% block content %}
+{% extends 'sidenavbar.html' %} {% block title %}Step 1: IDENTIFY {%endblock %}
+{% load static %} {% block content %}
 <!-- second header  -->
 <nav class="navbars">
   <div class="container-fluid-nav text-center">
@@ -38,6 +38,7 @@ load static %} {% block content %}
     {% include 'table_buttons.html' %}
   </form>
 </div>
+{% if step6 %}
 <div class="table border text-center">
   <table class="">
     <thead>
@@ -53,12 +54,17 @@ load static %} {% block content %}
       <tr class="border">
         <td>{{ info.userId }}</td>
         <td>{{ info.arrange_material }}</td>
-        <td><img src="{% url 'view_image' info.userId %}" alt="{{ image.title }}" width="200">View</td>
+        <td>
+          <a href="{% url 'viewImage' info.id  %}"
+            ><button type="button">View</button></a
+          >
+        </td>
         <td>{{ info.date_updated }}</td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
 </div>
+{% endif %}
 <!-- Question Answeer Box  Ends-->
 {% endblock %}

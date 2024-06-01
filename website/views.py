@@ -9,6 +9,7 @@ from .models import *
 
 # Create your views here.
 
+
 def index(request):
     return render(request, "index.html")
 
@@ -89,7 +90,7 @@ def recordOfInvention(request, pk, sk):
             new_record = RecordOfInvention(userId=pk, teamId=sk, **form.cleaned_data)
             new_record.save()
             return redirect("statementOfOriginality", pk, sk)
-    context = {"form": form}
+    context = {"form": form, "pk": pk, "sk": sk}
     return render(request, "recordOfInvention.html", context)
 
 
@@ -164,20 +165,22 @@ def stepOne(request, pk, sk):
     if request.method == "POST":
         action = request.POST.get("action")
         identify_problems = request.POST.get("identify_problems")
-        if action in ('next', 'add') and identify_problems!='':
+        if action in ("next", "add") and identify_problems != "":
             new_problem = StepOne.objects.create(userId=pk, teamId=sk)
             new_problem.identify_problems = identify_problems
             new_problem.save()
-            if action == 'add':
-                return HttpResponseRedirect(request.path_info)        
+            if action == "add":
+                return HttpResponseRedirect(request.path_info)
             elif action == "next":
                 return redirect("stepTwoOne", pk, sk)
-        elif action == 'next' and identify_problems == '':
-                return redirect("stepTwoOne", pk, sk)
+        elif action == "next" and identify_problems == "":
+            return redirect("stepTwoOne", pk, sk)
         elif action == "back":
             return redirect("flowchart", pk, sk)
-    if step1: context = {"pk": pk, "sk": sk, "step1": step1}
-    else: context = {"pk": pk, "sk": sk}
+    if step1:
+        context = {"pk": pk, "sk": sk, "step1": step1}
+    else:
+        context = {"pk": pk, "sk": sk}
     return render(request, "stepOne.html", context)
 
 
@@ -188,22 +191,24 @@ def stepTwoOne(request, pk, sk):
         name = request.POST.get("name")
         age = request.POST.get("age")
         comment = request.POST.get("comment")
-        if action in ('next', 'add') and name!='':
+        if action in ("next", "add") and name != "":
             new_person = Person.objects.create(userId=pk, teamId=sk)
-            new_person.name=name
-            new_person.age=age
-            new_person.comment=comment
+            new_person.name = name
+            new_person.age = age
+            new_person.comment = comment
             new_person.save()
-            if action == 'add':
-                return HttpResponseRedirect(request.path_info) 
+            if action == "add":
+                return HttpResponseRedirect(request.path_info)
             elif action == "next":
                 return redirect("stepTwoTwo", pk, sk)
-        elif action == 'next' and name == '':
-                return redirect("stepTwoTwo", pk, sk)
+        elif action == "next" and name == "":
+            return redirect("stepTwoTwo", pk, sk)
         elif action == "back":
             return redirect("stepOne", pk, sk)
-    if persons: context = {"pk": pk, "sk": sk, "persons": persons}
-    else: context = {"pk": pk, "sk": sk}
+    if persons:
+        context = {"pk": pk, "sk": sk, "persons": persons}
+    else:
+        context = {"pk": pk, "sk": sk}
     return render(request, "stepTwoOne.html", context)
 
 
@@ -211,14 +216,16 @@ def stepTwoTwo(request, pk, sk):
     step2 = StepTwo.objects.filter(teamId=sk).order_by("-date_updated").first()
     if request.method == "POST":
         action = request.POST.get("action")
-        if action in ("save", "next"):
-            selected_problem = request.POST.get("selected_problem")
+        selected_problem = request.POST.get("selected_problem")
+        if action in ("save", "next") and selected_problem != "":
             step2.selected_problem = selected_problem
             step2.save()
             if action == "save":
                 return HttpResponseRedirect(request.path_info)
             elif action == "next":
                 return redirect("stepTwoThree", pk, sk)
+        elif action == "next" and selected_problem == "":
+            return redirect("stepTwoThree", pk, sk)
         elif action == "back":
             return redirect("stepTwoOne", pk, sk)
     context = {"pk": pk, "sk": sk, "step2": step2}
@@ -229,14 +236,16 @@ def stepTwoThree(request, pk, sk):
     step2 = StepTwo.objects.filter(teamId=sk).order_by("-date_updated").first()
     if request.method == "POST":
         action = request.POST.get("action")
-        if action in ("save", "next"):
-            define_problem = request.POST.get("define_problem")
+        define_problem = request.POST.get("define_problem")
+        if action in ("save", "next") and define_problem != "":
             step2.define_problem = define_problem
             step2.save()
             if action == "save":
                 return HttpResponseRedirect(request.path_info)
             elif action == "next":
                 return redirect("stepTwoFour", pk, sk)
+        elif action == "next" and define_problem == "":
+            return redirect("stepTwoFour", pk, sk)
         elif action == "back":
             return redirect("stepTwoTwo", pk, sk)
     context = {"pk": pk, "sk": sk, "step2": step2}
@@ -247,14 +256,16 @@ def stepTwoFour(request, pk, sk):
     step2 = StepTwo.objects.filter(teamId=sk).order_by("-date_updated").first()
     if request.method == "POST":
         action = request.POST.get("action")
-        if action in ("save", "next"):
-            desired_solution = request.POST.get("desired_solution")
+        desired_solution = request.POST.get("desired_solution")
+        if action in ("save", "next") and desired_solution != "":
             step2.desired_solution = desired_solution
             step2.save()
             if action == "save":
                 return HttpResponseRedirect(request.path_info)
             elif action == "next":
                 return redirect("stepThreeOne", pk, sk)
+        elif action == "next" and desired_solution == "":
+            return redirect("stepThreeOne", pk, sk)
         elif action == "back":
             return redirect("stepTwoThree", pk, sk)
     context = {"pk": pk, "sk": sk, "step2": step2}
@@ -266,34 +277,40 @@ def stepThreeOne(request, pk, sk):
     if request.method == "POST":
         action = request.POST.get("action")
         research = request.POST.get("research")
-        if action in ('next', 'add') and research!='':
-            new_research=Research.objects.create(userId=pk, teamId=sk)
-            new_research.research=research
+        if action in ("next", "add") and research != "":
+            new_research = Research.objects.create(userId=pk, teamId=sk)
+            new_research.research = research
             new_research.save()
             if action == "add":
                 return HttpResponseRedirect(request.path_info)
             elif action == "next":
                 return redirect("stepThreeTwo", pk, sk)
-        elif action == 'next' and research == '':
-                return redirect("stepThreeTwo", pk, sk)
+        elif action == "next" and research == "":
+            return redirect("stepThreeTwo", pk, sk)
         elif action == "back":
             return redirect("stepTwoFour", pk, sk)
-    if researches: context = {"pk": pk, "sk": sk, "researches": researches}
-    else: context = {"pk": pk, "sk": sk}
+    if researches:
+        context = {"pk": pk, "sk": sk, "researches": researches}
+    else:
+        context = {"pk": pk, "sk": sk}
     return render(request, "stepThreeOne.html", context)
 
 
 def stepThreeTwo(request, pk, sk):
     step3 = StepThree.objects.filter(teamId=sk).order_by("-date_updated").first()
+    if not step3:
+        step3 = StepThree.objects.create(userId=pk, teamId=sk)
     if request.method == "POST":
         action = request.POST.get("action")
-        if action in ("save", "next"):
-            sources = request.POST.get("sources")
+        sources = request.POST.get("sources")
+        if action in ("save", "next") and sources!='':
             step3.sources = sources
             step3.save()
             if action == "save":
                 return HttpResponseRedirect(request.path_info)
             elif action == "next":
+                return redirect("stepThreeThree", pk, sk)
+        elif action == "next" and sources=='':
                 return redirect("stepThreeThree", pk, sk)
         elif action == "back":
             return redirect("stepThreeOne", pk, sk)
@@ -305,13 +322,15 @@ def stepThreeThree(request, pk, sk):
     step3 = StepThree.objects.filter(teamId=sk).order_by("-date_updated").first()
     if request.method == "POST":
         action = request.POST.get("action")
-        if action in ("save", "next"):
-            difference = request.POST.get("difference")
+        difference = request.POST.get("difference")
+        if action in ("save", "next") and difference!='':
             step3.difference = difference
             step3.save()
             if action == "save":
                 return HttpResponseRedirect(request.path_info)
             elif action == "next":
+                return redirect("stepFourOne", pk, sk)
+        elif action == "next" and difference=='':
                 return redirect("stepFourOne", pk, sk)
         elif action == "back":
             return redirect("stepThreeTwo", pk, sk)
@@ -321,20 +340,26 @@ def stepThreeThree(request, pk, sk):
 
 def stepFourOne(request, pk, sk):
     step4 = StepFour.objects.filter(teamId=sk).order_by("-date_updated").first()
+    if not step4:
+        step4 = StepFour.objects.create(userId=pk, teamId=sk)
     if request.method == "POST":
         action = request.POST.get("action")
-        if action in ("save", "next"):
-            details = request.POST.get("details")
+        details = request.POST.get("details")
+        if action in ("save", "next") and details!='':
             step4.details = details
             step4.save()
             if action == "save":
                 return HttpResponseRedirect(request.path_info)
             elif action == "next":
                 return redirect("stepFourTwo", pk, sk)
+        elif action == "next" and details=='':
+                return redirect("stepFourTwo", pk, sk)
         elif action == "back":
             return redirect("stepThreeThree", pk, sk)
-    if step4: context = {"pk": pk, "sk": sk, "step4": step4}
-    else: context = {"pk": pk, "sk": sk}
+    if step4:
+        context = {"pk": pk, "sk": sk, "step4": step4}
+    else:
+        context = {"pk": pk, "sk": sk}
     return render(request, "stepFourOne.html", context)
 
 
@@ -346,8 +371,8 @@ def stepFourTwo(request, pk, sk):
         expert_credentials = request.POST.get("expert_credentials")
         problem_identified = request.POST.get("problem_identified")
         problem_faced = request.POST.get("problem_faced")
-        if action in ('next', 'add') and expert_name!='':
-            new_issue=Issue.objects.create(userId=pk, teamId=sk)
+        if action in ("next", "add") and expert_name != "":
+            new_issue = Issue.objects.create(userId=pk, teamId=sk)
             new_issue.expert_name = expert_name
             new_issue.expert_credentials = expert_credentials
             new_issue.problem_identified = problem_identified
@@ -357,12 +382,14 @@ def stepFourTwo(request, pk, sk):
                 return HttpResponseRedirect(request.path_info)
             elif action == "next":
                 return redirect("stepFiveOne", pk, sk)
-        elif action == 'next' and expert_name == '':
-                return redirect("stepFiveOne", pk, sk)
+        elif action == "next" and expert_name == "":
+            return redirect("stepFiveOne", pk, sk)
         elif action == "back":
             return redirect("stepThreeThree", pk, sk)
-    if issues: context = {"pk": pk, "sk": sk, "issues": issues}
-    else: context = {"pk": pk, "sk": sk}
+    if issues:
+        context = {"pk": pk, "sk": sk, "issues": issues}
+    else:
+        context = {"pk": pk, "sk": sk}
     return render(request, "stepFourTwo.html", context)
 
 
@@ -403,9 +430,11 @@ def stepFiveTwo(request, pk, sk):
     context = {"pk": pk, "sk": sk, "step5": step5}
     return render(request, "stepFiveTwo.html", context)
 
-def view_image(request, pk):
-    image = StepSix.objects.get(userId=pk)
+
+def viewImage(request, pk):
+    image = StepSix.objects.get(id=pk)
     return HttpResponse(image.prototype, content_type="image/jpeg")
+
 
 def stepSix(request, pk, sk):
     step6 = StepSix.objects.filter(teamId=sk).order_by("-date_updated").all()
@@ -413,9 +442,9 @@ def stepSix(request, pk, sk):
         action = request.POST.get("action")
         arrange_material = request.POST.get("arrange_material")
         prototype = request.FILES.get("prototype")
-        if action in ('next', 'add') and arrange_material!='':
+        if action in ("next", "add") and arrange_material and prototype:
             image_data = prototype.read()
-            new_prototype=StepSix.objects.create(userId=pk, teamId=sk)
+            new_prototype = StepSix.objects.create(userId=pk, teamId=sk)
             new_prototype.arrange_material = arrange_material
             new_prototype.prototype = image_data
             new_prototype.save()
@@ -423,12 +452,14 @@ def stepSix(request, pk, sk):
                 return HttpResponseRedirect(request.path_info)
             elif action == "next":
                 return redirect("stepSeven", pk, sk)
-        elif action == 'next' and arrange_material == '':
-                return redirect("stepSeven", pk, sk)
+        elif action == "next" and arrange_material == "":
+            return redirect("stepSeven", pk, sk)
         elif action == "back":
             return redirect("stepFiveTwo", pk, sk)
-    if step6: context = {"pk": pk, "sk": sk, "step6": step6}
-    else: context = {"pk": pk, "sk": sk}
+    if step6:
+        context = {"pk": pk, "sk": sk, "step6": step6}
+    else:
+        context = {"pk": pk, "sk": sk}
     return render(request, "stepSix.html", context)
 
 
@@ -438,13 +469,15 @@ def stepSeven(request, pk, sk):
         step7 = StepFive.objects.create(userId=pk, teamId=sk)
     if request.method == "POST":
         action = request.POST.get("action")
-        if action in ("save", "next"):
-            testing = request.POST.get("testing")
+        testing = request.POST.get("testing")
+        if action in ("save", "next") and testing:
             step7.testing = testing
             step7.save()
             if action == "save":
                 return HttpResponseRedirect(request.path_info)
             elif action == "next":
+                return redirect("guidelines", pk, sk)
+        elif action == "next" and not testing:
                 return redirect("guidelines", pk, sk)
         elif action == "back":
             return redirect("stepSix", pk, sk)
@@ -512,8 +545,8 @@ def stepEightThree(request, pk, sk):
         education = request.POST.get("education")
         household = request.POST.get("household")
         marital_status = request.POST.get("marital_status")
-        if action in ('next', 'add') and age!='':
-            new_customer=Customer.objects.create(userId=pk, teamId=sk)
+        if action in ("next", "add") and age != "":
+            new_customer = Customer.objects.create(userId=pk, teamId=sk)
             new_customer.age = age
             new_customer.gender = gender
             new_customer.education = education
@@ -524,10 +557,25 @@ def stepEightThree(request, pk, sk):
                 return HttpResponseRedirect(request.path_info)
             elif action == "next":
                 return redirect("notes", pk, sk)
-        elif action == 'next' and age == '':
-                return redirect("notes", pk, sk)
+        elif action == "next" and age == "":
+            return redirect("notes", pk, sk)
         elif action == "back":
             return redirect("stepEightTwo", pk, sk)
-    if customers: context = {"pk": pk, "sk": sk, "customers": customers}
-    else: context = {"pk": pk, "sk": sk}
+    if customers:
+        context = {"pk": pk, "sk": sk, "customers": customers}
+    else:
+        context = {"pk": pk, "sk": sk}
     return render(request, "stepEightThree.html", context)
+
+
+def notes(request, pk, sk):
+    context = {"pk": pk, "sk": sk}
+    return render(request, "notes.html", context)
+
+
+def previewLogbook(request, pk, sk):
+    return render(request, "previewLogbook.html")
+
+
+def survey(request, pk, sk):
+    return render(request, "survey.html")
