@@ -32,11 +32,11 @@ urlpatterns = [
     path("stepFiveOne/<str:pk>/<str:sk>/", views.stepFiveOne, name="stepFiveOne"),
     path("stepFiveTwo/<str:pk>/<str:sk>/", views.stepFiveTwo, name="stepFiveTwo"),
     path("stepSix/<str:pk>/<str:sk>/", views.stepSix, name="stepSix"),
+    path('view/<int:pk>/', views.view_image, name='view_image'),
     path("stepSeven/<str:pk>/<str:sk>/", views.stepSeven, name="stepSeven"),
     path("guidelines/<str:pk>/<str:sk>/", views.guidelines, name="guidelines"),
     path("stepEightOne/<str:pk>/<str:sk>/", views.stepEightOne, name="stepEightOne"),
     path("stepEightTwo/<str:pk>/<str:sk>/", views.stepEightTwo, name="stepEightTwo"),
     path("stepEightThree/<str:pk>/<str:sk>/", views.stepEightThree, name="stepEightThree"),
     
-    path('', views.billing_info_list, name='billing_info_list'),
 ]

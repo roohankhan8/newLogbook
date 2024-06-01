@@ -17,11 +17,3 @@ class StepOneForm(forms.ModelForm):
   model = StepOne
   fields = "__all__"
   exclude = ['userId', 'teamId', ...]
-
-from django import forms
-from .models import BillingInfo
-
-class BillingInfoForm(forms.ModelForm):
-    class Meta:
-        model = BillingInfo
-        fields = ['date', 'description', 'amount', 'acknowledge', 'file']

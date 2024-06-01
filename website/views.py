@@ -1,5 +1,5 @@
 from django.db import connections
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
@@ -321,8 +321,6 @@ def stepThreeThree(request, pk, sk):
 
 def stepFourOne(request, pk, sk):
     step4 = StepFour.objects.filter(teamId=sk).order_by("-date_updated").first()
-    if not step4:
-        step4 = StepFour.objects.create(userId=pk, teamId=sk)
     if request.method == "POST":
         action = request.POST.get("action")
         if action in ("save", "next"):
@@ -335,25 +333,36 @@ def stepFourOne(request, pk, sk):
                 return redirect("stepFourTwo", pk, sk)
         elif action == "back":
             return redirect("stepThreeThree", pk, sk)
-    context = {"pk": pk, "sk": sk, "step4": step4}
+    if step4: context = {"pk": pk, "sk": sk, "step4": step4}
+    else: context = {"pk": pk, "sk": sk}
     return render(request, "stepFourOne.html", context)
 
 
 def stepFourTwo(request, pk, sk):
-    step4 = StepFour.objects.filter(teamId=sk).order_by("-date_updated").first()
+    issues = Issue.objects.filter(teamId=sk).order_by("-date_updated").all()
     if request.method == "POST":
         action = request.POST.get("action")
-        if action in ("save", "next"):
-            difference = request.POST.get("difference")
-            step4.difference = difference
-            step4.save()
-            if action == "save":
+        expert_name = request.POST.get("expert_name")
+        expert_credentials = request.POST.get("expert_credentials")
+        problem_identified = request.POST.get("problem_identified")
+        problem_faced = request.POST.get("problem_faced")
+        if action in ('next', 'add') and expert_name!='':
+            new_issue=Issue.objects.create(userId=pk, teamId=sk)
+            new_issue.expert_name = expert_name
+            new_issue.expert_credentials = expert_credentials
+            new_issue.problem_identified = problem_identified
+            new_issue.problem_faced = problem_faced
+            new_issue.save()
+            if action == "add":
                 return HttpResponseRedirect(request.path_info)
             elif action == "next":
                 return redirect("stepFiveOne", pk, sk)
+        elif action == 'next' and expert_name == '':
+                return redirect("stepFiveOne", pk, sk)
         elif action == "back":
-            return redirect("stepFourOne", pk, sk)
-    context = {"pk": pk, "sk": sk, "step4": step4}
+            return redirect("stepThreeThree", pk, sk)
+    if issues: context = {"pk": pk, "sk": sk, "issues": issues}
+    else: context = {"pk": pk, "sk": sk}
     return render(request, "stepFourTwo.html", context)
 
 
@@ -394,14 +403,33 @@ def stepFiveTwo(request, pk, sk):
     context = {"pk": pk, "sk": sk, "step5": step5}
     return render(request, "stepFiveTwo.html", context)
 
+def view_image(request, pk):
+    image = StepSix.objects.get(userId=pk)
+    return HttpResponse(image.prototype, content_type="image/jpeg")
 
 def stepSix(request, pk, sk):
+    step6 = StepSix.objects.filter(teamId=sk).order_by("-date_updated").all()
     if request.method == "POST":
+        action = request.POST.get("action")
+        arrange_material = request.POST.get("arrange_material")
         prototype = request.FILES.get("prototype")
-        image_data = prototype.read()
-        my_model = StepSix(prototype=image_data)
-        my_model.save()
-    return render(request, "stepSix.html")
+        if action in ('next', 'add') and arrange_material!='':
+            image_data = prototype.read()
+            new_prototype=StepSix.objects.create(userId=pk, teamId=sk)
+            new_prototype.arrange_material = arrange_material
+            new_prototype.prototype = image_data
+            new_prototype.save()
+            if action == "add":
+                return HttpResponseRedirect(request.path_info)
+            elif action == "next":
+                return redirect("stepSeven", pk, sk)
+        elif action == 'next' and arrange_material == '':
+                return redirect("stepSeven", pk, sk)
+        elif action == "back":
+            return redirect("stepFiveTwo", pk, sk)
+    if step6: context = {"pk": pk, "sk": sk, "step6": step6}
+    else: context = {"pk": pk, "sk": sk}
+    return render(request, "stepSix.html", context)
 
 
 def stepSeven(request, pk, sk):
@@ -476,18 +504,30 @@ def stepEightTwo(request, pk, sk):
 
 
 def stepEightThree(request, pk, sk):
-    step8 = StepEight.objects.filter(teamId=sk).order_by("-date_updated").first()
+    customers = Customer.objects.filter(teamId=sk).order_by("-date_updated").all()
     if request.method == "POST":
         action = request.POST.get("action")
-        if action in ("save", "next"):
-            where_to_buy = request.POST.get("where_to_buy")
-            step8.where_to_buy = where_to_buy
-            step8.save()
-            if action == "save":
+        age = request.POST.get("age")
+        gender = request.POST.get("gender")
+        education = request.POST.get("education")
+        household = request.POST.get("household")
+        marital_status = request.POST.get("marital_status")
+        if action in ('next', 'add') and age!='':
+            new_customer=Customer.objects.create(userId=pk, teamId=sk)
+            new_customer.age = age
+            new_customer.gender = gender
+            new_customer.education = education
+            new_customer.household = household
+            new_customer.marital_status = marital_status
+            new_customer.save()
+            if action == "add":
                 return HttpResponseRedirect(request.path_info)
             elif action == "next":
                 return redirect("notes", pk, sk)
+        elif action == 'next' and age == '':
+                return redirect("notes", pk, sk)
         elif action == "back":
             return redirect("stepEightTwo", pk, sk)
-    context = {"pk": pk, "sk": sk, "step8": step8}
+    if customers: context = {"pk": pk, "sk": sk, "customers": customers}
+    else: context = {"pk": pk, "sk": sk}
     return render(request, "stepEightThree.html", context)

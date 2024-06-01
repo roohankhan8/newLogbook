@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 
+
 class RecordOfInvention(models.Model):
     userId = models.IntegerField()
     teamId = models.IntegerField()
@@ -13,21 +14,26 @@ class RecordOfInvention(models.Model):
     def __str__(self):
         return str(self.teamId)
 
+
 class Inventor(models.Model):
     inventor = models.TextField()
     schoolnamegrade = models.TextField()
     sig = models.TextField()
     date = models.TextField()
 
+
 class StatementOfOriginality(models.Model):
     userId = models.IntegerField()
     teamId = models.IntegerField()
     date_updated = models.DateTimeField(auto_now_add=True)
 
-    inventors=models.ManyToManyField(Inventor, related_name='statement_of_originality')
+    inventors = models.ManyToManyField(
+        Inventor, related_name="statement_of_originality"
+    )
 
     def __str__(self):
         return str(self.teamId)
+
 
 class StepOne(models.Model):
     userId = models.IntegerField()
@@ -39,101 +45,138 @@ class StepOne(models.Model):
     def __str__(self):
         return str(self.teamId)
 
+
 class Person(models.Model):
     userId = models.IntegerField()
     teamId = models.IntegerField()
     date_updated = models.DateTimeField(auto_now_add=True)
-    
+
     name = models.CharField(max_length=30)
     age = models.IntegerField(blank=True, null=True)
     comment = models.CharField(max_length=30)
-    
+
     def __str__(self):
         return str(self.teamId)
+
+
 class StepTwo(models.Model):
     userId = models.IntegerField()
     teamId = models.IntegerField()
     date_updated = models.DateTimeField(auto_now_add=True)
-    
-    #2.2
-    selected_problem=models.TextField(null=True, blank=True)
-    #2.2.1
-    define_problem=models.TextField(null=True, blank=True)
-    #2.3
-    desired_solution=models.TextField(null=True, blank=True)
-    
+
+    # 2.2
+    selected_problem = models.TextField(null=True, blank=True)
+    # 2.2.1
+    define_problem = models.TextField(null=True, blank=True)
+    # 2.3
+    desired_solution = models.TextField(null=True, blank=True)
+
     def __str__(self):
         return str(self.teamId)
+
 
 class Research(models.Model):
     userId = models.IntegerField()
     teamId = models.IntegerField()
     date_updated = models.DateTimeField(auto_now_add=True)
-    
-    research=models.TextField(null=True, blank=True)
-    
+
+    research = models.TextField(null=True, blank=True)
+
     def __str__(self):
         return str(self.teamId)
+
+
 class StepThree(models.Model):
     userId = models.IntegerField()
     teamId = models.IntegerField()
     date_updated = models.DateTimeField(auto_now_add=True)
-    
-    sources=models.TextField(null=True, blank=True)
-    difference=models.TextField(null=True, blank=True)
-    
+
+    sources = models.TextField(null=True, blank=True)
+    difference = models.TextField(null=True, blank=True)
+
     def __str__(self):
         return str(self.teamId)
+
+
+class Issue(models.Model):
+    userId = models.IntegerField()
+    teamId = models.IntegerField()
+    date_updated = models.DateTimeField(auto_now_add=True)
+
+    expert_name = models.TextField(null=True, blank=True)
+    expert_credentials = models.TextField(null=True, blank=True)
+    problem_identified = models.TextField(null=True, blank=True)
+    problem_faced = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return str(self.teamId)
+
 
 class StepFour(models.Model):
     userId = models.IntegerField()
     teamId = models.IntegerField()
     date_updated = models.DateTimeField(auto_now_add=True)
-    
-    details=models.TextField(null=True, blank=True)
-    
+
+    details = models.TextField(null=True, blank=True)
+
     def __str__(self):
         return str(self.teamId)
-    
+
+
 class StepFive(models.Model):
     userId = models.IntegerField()
     teamId = models.IntegerField()
     date_updated = models.DateTimeField(auto_now_add=True)
-    
-    talk_to_expert=models.TextField(null=True, blank=True)
-    other_information=models.TextField(null=True, blank=True)
-    
+
+    talk_to_expert = models.TextField(null=True, blank=True)
+    other_information = models.TextField(null=True, blank=True)
+
     def __str__(self):
         return str(self.teamId)
+
 
 class StepSix(models.Model):
     userId = models.IntegerField()
     teamId = models.IntegerField()
     date_updated = models.DateTimeField(auto_now_add=True)
-    
-    arrange_material=models.TextField(null=True, blank=True)
-    prototype=models.BinaryField(blank=True) 
-    
+
+    arrange_material = models.TextField(null=True, blank=True)
+    prototype = models.BinaryField(blank=True)
+
     def __str__(self):
         return str(self.teamId)
+
 
 class StepSeven(models.Model):
     userId = models.IntegerField()
     teamId = models.IntegerField()
     date_updated = models.DateTimeField(auto_now_add=True)
-    
-    testing=models.TextField(null=True, blank=True)
-    
+
+    testing = models.TextField(null=True, blank=True)
+
     def __str__(self):
         return str(self.teamId)
 
-class StepEight(models.Model):
+class Customer(models.Model):
     userId = models.IntegerField()
     teamId = models.IntegerField()
     date_updated = models.DateTimeField(auto_now_add=True)
     
-    naming=models.TextField(null=True, blank=True)
-    where_to_buy=models.TextField(null=True, blank=True)
+    age=models.IntegerField(null=True, blank=True)
+    gender=models.CharField(max_length=255, null=True, blank=True)
+    education=models.CharField(max_length=255, null=True, blank=True)
+    household=models.CharField(max_length=255, null=True, blank=True)
+    marital_status=models.CharField(max_length=255, null=True, blank=True)
     
+    def __str__(self):
+        return str(self.teamId)
+class StepEight(models.Model):
+    userId = models.IntegerField()
+    teamId = models.IntegerField()
+    date_updated = models.DateTimeField(auto_now_add=True)
+
+    naming = models.TextField(null=True, blank=True)
+    where_to_buy = models.TextField(null=True, blank=True)
+
     def __str__(self):
         return str(self.teamId)

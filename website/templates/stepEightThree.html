@@ -18,24 +18,51 @@ load static %} {% block content %}
         for="inputlg"
         style="font-family: 'Times New Roman', Times, serif; font-size: 19px"
       >
-        8.2Finally, decide where will customers be able to buy it.
+        8.3 Describe your typical customer. What is their
       </label>
-      <textarea
-        class="form-control"
-        rows="10"
-        style="
-          height: 100%;
-          font-family: 'Times New Roman', Times, serif;
-          font-size: 19px;
-        "
-        placeholder="Your Answer"
-        name="naming"
-      >
-{{step8.naming}}</textarea
-      >
+      <div class="d-flex flex-column">
+        <label for="expert_name">Age: </label>
+        <input type="number" name="age" id="age" placeholder="Enter here" />
+        <label for="gender">Gender: </label>
+        <input type="text" name="gender" id="gender" placeholder="Enter here" />
+        <label for="education">Education Level: </label>
+        <input type="text" name="education" rows="5" id="education" placeholder="Enter here">
+        <label for="household">Household Size: </label>
+        <input type="text" name="household" rows="5" id="household" placeholder="Enter here">
+        <label for="marital">Marital Size: </label>
+        <input type="text" name="marital" rows="5" id="marital" placeholder="Enter here">
+      </div>
     </div>
-    {% include 'buttons.html' %}
+    {% include 'table_buttons.html' %}
   </form>
 </div>
-<!-- Question Answeer Box  Ends-->
+<!-- Question Answeer Box Ends-->
+<div class="table border text-center">
+  <table class="">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Education Level</th>
+        <th>Household Size</th>
+        <th>Marital Status</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for info in customers %}
+      <tr class="border">
+        <td>{{ info.userId }}</td>
+        <td>{{ info.age }}</td>
+        <td>{{ info.gender }}</td>
+        <td>{{ info.education }}</td>
+        <td>{{ info.household }}</td>
+        <td>{{ info.marital_status }}</td>
+        <td>{{ info.date_updated }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 {% endblock %}
