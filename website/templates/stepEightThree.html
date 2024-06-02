@@ -1,12 +1,11 @@
-{% extends 'sidenavbar.html' %} {% block title %}Step 1: IDENTIFY {%endblock %}
-{% load static %} {% block content %}
+{% extends 'sidenavbar.html' %} {% block title %}Step 8: PREPARE TO
+MARKET{%endblock %} {% load static %} {% block content %}
 <!-- second header  -->
 <nav class="navbars">
   <div class="container-fluid-nav text-center">
     <h5>STEP 8- PREPARE TO MARKET</h5>
   </div>
 </nav>
-
 <!-- second header ends  -->
 <!-- Question Answeer Box -->
 <div class="QA_container mb-1 p-5">
@@ -18,55 +17,95 @@
         for="inputlg"
         style="font-family: 'Times New Roman', Times, serif; font-size: 19px"
       >
-        8.3 Describe your typical customer. What is their
+        8.3 Describe your typical customer. What is their:
       </label>
-      <div class="d-flex flex-column">
-        <label for="expert_name"
-          >Age:
-          <input type="number" name="age" id="age" placeholder="Enter here" />
-        </label>
-        <label for="gender"
-          >Gender:
-          <input
-            type="text"
-            name="gender"
-            id="gender"
-            placeholder="Enter here"
-          />
-        </label>
-        <label for="education"
-          >Education Level:
-          <input
-            type="text"
-            name="education"
-            rows="5"
-            id="education"
-            placeholder="Enter here"
-          />
-        </label>
-        <label for="household"
-          >Household Size:
-          <input
-            type="text"
-            name="household"
-            rows="5"
-            id="household"
-            placeholder="Enter here"
-          />
-        </label>
-        <label for="marital"
-          >Marital Size:
-          <input
-            type="text"
-            name="marital"
-            rows="5"
-            id="marital"
-            placeholder="Enter here"
-          />
-        </label>
+      <div class="form-group">
+        <label for="age">Age:</label>
+        <input
+          type="number"
+          class="form-control"
+          id="age"
+          name="age"
+          placeholder="Enter here"
+        />
+      </div>
+      <div class="form-group">
+        <label for="gender">Gender:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="gender"
+          name="gender"
+          placeholder="Enter here"
+        />
+      </div>
+      <div class="form-group">
+        <label for="education">Education Level:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="education"
+          name="education"
+          placeholder="Enter here"
+        />
+      </div>
+      <div class="form-group">
+        <label for="household">Household Size:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="household"
+          name="household"
+          placeholder="Enter here"
+        />
+      </div>
+      <div class="form-group">
+        <label for="marital">Marital Status:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="marital"
+          name="marital_status"
+          placeholder="Enter here"
+        />
       </div>
     </div>
-    {% include 'table_buttons.html' %}
+    <!-- Buttons-->
+    <div class="container">
+      <div class="row">
+        <div class="col-6 d-flex align-items-center justify-content-start">
+          <button
+            class="btn btn-success mr-1"
+            type="submit"
+            name="action"
+            value="back"
+          >
+            Back
+          </button>
+        </div>
+        <div class="col-6 d-flex align-items-center justify-content-end">
+          <div class="col-6 d-flex align-items-center justify-content-end">
+            <button
+              class="btn btn-success mx-1"
+              type="submit"
+              name="action"
+              value="add"
+            >
+              Add
+            </button>
+            <button
+              class="btn btn-success mx-1"
+              type="submit"
+              name="action"
+              value="next"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Buttons ends-->
   </form>
   <!-- Question Answeer Box Ends-->
   {% if customers %}
@@ -96,7 +135,14 @@
           <td>{{ info.marital_status }}</td>
           <td>{{ info.date_updated }}</td>
           <td>
-            <button class="btn btn-danger" type="button">Delete</button>
+            <form
+              action="{% url 'deleteInfo' 7 info.id pk sk %}"
+              method="post"
+              style="display: inline"
+            >
+              {% csrf_token %}
+              <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
           </td>
         </tr>
         {% endfor %}

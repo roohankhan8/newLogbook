@@ -12,6 +12,12 @@ body {
   background: #ececec;
 }
 
+.table td {
+  word-wrap: break-word;
+  white-space: normal;
+  word-break: break-all;
+}
+
 .header {
   background-color: ghostwhite;
   padding: 4px;

@@ -59,7 +59,7 @@ Originality{%endblock%} {% load static %} {% block content %}
         <input
           type="text"
           class="form-control"
-          placeholder="Saline High School(11)"
+          placeholder="Saline High School (11)"
           name="schoolnamegrade"
         />
       </div>
@@ -82,7 +82,7 @@ Originality{%endblock%} {% load static %} {% block content %}
               <b>Signature</b>
             </h1>
           </label>
-          <input type="text" class="form-control" name="sign" />
+          <input type="text" class="form-control" name="sign" placeholder="sohani018" />
         </div>
       </div>
       <div class="col-md-6">
@@ -131,7 +131,10 @@ Originality{%endblock%} {% load static %} {% block content %}
           <td>{{ info.sign }}</td>
           <td>{{ info.date }}</td>
           <td>
-            <button class="btn btn-danger" type="button">Delete</button>
+            <form action="{% url 'deleteInfo' 1 info.id pk sk %}" method="post" style="display:inline;">
+              {% csrf_token %}
+              <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
           </td>
         </tr>
         {% endfor %}

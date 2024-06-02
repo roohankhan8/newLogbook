@@ -109,7 +109,10 @@ SENSE{%endblock %} {% load static %} {% block content %}
           <td>{{ info.comment }}</td>
           <td>{{ info.date_updated }}</td>
           <td>
-            <button class="btn btn-danger" type="button">Delete</button>
+            <form action="{% url 'deleteInfo' 3 info.id pk sk %}" method="post" style="display:inline;">
+              {% csrf_token %}
+              <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
           </td>
         </tr>
         {% endfor %}

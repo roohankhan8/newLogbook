@@ -61,8 +61,10 @@
             >
           </td>
           <td>{{ info.date_updated }}</td>
-          <td>
-            <button class="btn btn-danger" type="button">Delete</button>
+          <td><form action="{% url 'deleteInfo' 6 info.id pk sk %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button class="btn btn-danger" type="submit">Delete</button>
+          </form>
           </td>
         </tr>
         {% endfor %}

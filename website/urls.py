@@ -18,6 +18,7 @@ urlpatterns = [
         views.statementOfOriginality,
         name="statementOfOriginality",
     ),
+    path("deleteInfo/<str:pk>/<str:sk>/<str:tk>/<str:fk>", views.deleteInfo, name="deleteInfo"),
     path("flowchart/<str:pk>/<str:sk>/", views.flowchart, name="flowchart"),
     path("stepOne/<str:pk>/<str:sk>/", views.stepOne, name="stepOne"),
     path("stepTwoOne/<str:pk>/<str:sk>/", views.stepTwoOne, name="stepTwoOne"),

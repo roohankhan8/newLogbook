@@ -35,7 +35,21 @@
             </li>
           </ul>
         </li>
-        <!-- option 1: Course outline dropdown menu -->
+        <!-- option 1: Flowchart -->
+        <li>
+          <a href="{% url 'flowchart' pk sk %}">
+            <i class="bx bx-sitemap"></i>
+            <span class="link_name">Flowchart</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li>
+              <a class="link_name" href="{% url 'flowchart' pk sk %}"
+                >Flowchart</a
+              >
+            </li>
+          </ul>
+        </li>
+        <!-- option 2: Course outline dropdown menu -->
         <li>
           <div class="iocn-link">
             <a href="{% url 'courseOutline' pk sk %}">
@@ -81,7 +95,7 @@
           </ul>
         </li>
         <!-- option 2: Notes -->
-        <li>
+        <!-- <li>
           <a href="{% url 'notes' pk sk %}">
             <i class="bx bx-edit"></i>
             <span class="link_name">Notes</span>
@@ -91,21 +105,7 @@
               <a class="link_name" href="{% url 'notes' pk sk %}">Notes</a>
             </li>
           </ul>
-        </li>
-        <!-- option 3: Flowchart -->
-        <li>
-          <a href="{% url 'flowchart' pk sk %}">
-            <i class="bx bx-sitemap"></i>
-            <span class="link_name">Flowchart</span>
-          </a>
-          <ul class="sub-menu blank">
-            <li>
-              <a class="link_name" href="{% url 'flowchart' pk sk %}"
-                >Flowchart</a
-              >
-            </li>
-          </ul>
-        </li>
+        </li> -->
         <!-- option 4: Preview Logbook -->
         <!-- <li>
           <a href="{% url 'previewLogbook' pk sk %}">
@@ -153,7 +153,9 @@
           <button class="btn btn-success mr-1" type="button">Logout</button>
         </a>
       </div>
-      {% block content %} {% endblock %}
+      <div class="">
+        {% block content %} {% endblock %}
+      </div>
       <div class="footer">
         <div class="upper">
           <img src="{%static 'images/pic5.jpeg' %}" alt="" class="img3" />
@@ -178,6 +180,5 @@
       crossorigin="anonymous"
     ></script>
     <script src="{% static 'js/script.js' %}"></script>
-    <!-- <script src="{% static 'js/Chat.js' %}"></script> -->
   </body>
 </html>

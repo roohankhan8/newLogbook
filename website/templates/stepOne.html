@@ -51,7 +51,10 @@
           <td>{{ problem.identify_problems }}</td>
           <td>{{ problem.date_updated }}</td>
           <td>
-            <button class="btn btn-danger" type="button">Delete</button>
+            <form action="{% url 'deleteInfo' 2 problem.id pk sk %}" method="post" style="display:inline;">
+              {% csrf_token %}
+              <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
           </td>
         </tr>
         {% endfor %}

@@ -1,8 +1,9 @@
 from email.utils import parsedate
 from django.db import connections
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
+from django.urls import reverse
 
 from website.utils import has_data_changed
 from .forms import *
@@ -10,10 +11,28 @@ from .models import *
 
 # Create your views here.
 
+pages = {
+    '1': 'statementOfOriginality',
+    '2': 'stepOne',
+    '3': 'stepTwoOne',
+    '4': 'stepThreeOne',
+    '5': 'stepFourTwo',
+    '6': 'stepSix',
+    '7': 'stepEightThree',
+}
 
-def index(request):
-    return render(request, "index.html")
 
+def deleteInfo(request, pk, sk, tk, fk):
+    if pk == "1": record = get_object_or_404(StatementOfOriginality, id=sk)
+    if pk == "2": record = get_object_or_404(StepOne, id=sk)
+    if pk == "3": record = get_object_or_404(Person, id=sk)
+    if pk == "4": record = get_object_or_404(Research, id=sk)
+    if pk == "5": record = get_object_or_404(Issue, id=sk)
+    if pk == "6": record = get_object_or_404(StepSix, id=sk)
+    if pk == "7": record = get_object_or_404(Customer, id=sk)
+    record.delete()
+    messages.success(request, "The statement has been deleted successfully.")
+    return redirect(pages[pk], tk, fk)
 
 def login(request):
     if request.method == "POST":
@@ -184,6 +203,8 @@ def stepTwoOne(request, pk, sk):
 
 def stepTwoTwo(request, pk, sk):
     step2 = StepTwo.objects.filter(teamId=sk).order_by("-date_updated").first()
+    if not step2:
+        step2 = StepTwo.objects.create(userId=pk, teamId=sk)
     if request.method == "POST":
         action = request.POST.get("action")
         selected_problem = request.POST.get("selected_problem")
@@ -526,9 +547,9 @@ def stepEightThree(request, pk, sk):
             if action == "add":
                 return HttpResponseRedirect(request.path_info)
             elif action == "next":
-                return redirect("notes", pk, sk)
+                return redirect("courseOutline", pk, sk)
         elif action == "next" and age == "":
-            return redirect("notes", pk, sk)
+            return redirect("courseOutline", pk, sk)
         elif action == "back":
             return redirect("stepEightTwo", pk, sk)
     if customers:
