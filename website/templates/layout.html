@@ -18,7 +18,9 @@
           <img src="{%static 'images/pic1.jpeg' %}" alt="" class="img1" />
         </div>
         <h1 class="" style="text-align: center">Logbook</h1>
+        <a href="{% url 'login' %}">
           <button class="btn btn-success mr-1" type="button">Logout</button>
+        </a>
       </div>
       {% block content %}{% endblock %}
       <div class="footer">
