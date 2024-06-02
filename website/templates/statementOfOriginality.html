@@ -85,25 +85,6 @@ Originality{%endblock%} {% load static %} {% block content %}
           <input type="text" class="form-control" name="sign" placeholder="sohani018" />
         </div>
       </div>
-      <div class="col-md-6">
-        <!-- Date Field -->
-        <div class="mb-3">
-          <label class="labels">
-            <h1
-              class="mb-3"
-              style="
-                font-family: 'Times New Roman', Times, serif;
-                color: dark green;
-                text-align: center;
-                font-size: 1.4em;
-              "
-            >
-              <b>Date</b>
-            </h1>
-          </label>
-          <input type="date" class="form-control" id="dateField" name="date" />
-        </div>
-      </div>
     </div>
     <!-- Question Answeer Box  Ends-->
     {% include 'table_buttons.html' %}
@@ -129,7 +110,7 @@ Originality{%endblock%} {% load static %} {% block content %}
           <td>{{ info.inventor }}</td>
           <td>{{ info.schoolnamegrade }}</td>
           <td>{{ info.sign }}</td>
-          <td>{{ info.date }}</td>
+          <td>{{ info.date_updated }}</td>
           <td>
             <form action="{% url 'deleteInfo' 1 info.id pk sk %}" method="post" style="display:inline;">
               {% csrf_token %}

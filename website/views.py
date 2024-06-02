@@ -129,13 +129,11 @@ def statementOfOriginality(request, pk, sk):
         inventor = request.POST.get("inventor")
         schoolnamegrade = request.POST.get("schoolnamegrade")
         sign = request.POST.get("sign")
-        date = parsedate(request.POST.get("date"))
         if action in ("add", "next") and inventor:
             new_statement = StatementOfOriginality.objects.create(userId=pk, teamId=sk)
             new_statement.inventor = inventor
             new_statement.schoolnamegrade = schoolnamegrade
             new_statement.sign = sign
-            new_statement.date = date
             new_statement.save()
             if action == "add":
                 return HttpResponseRedirect(request.path_info)

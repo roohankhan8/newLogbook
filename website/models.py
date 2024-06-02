@@ -14,14 +14,6 @@ class RecordOfInvention(models.Model):
     def __str__(self):
         return str(self.teamId)
 
-
-class Inventor(models.Model):
-    inventor = models.TextField()
-    schoolnamegrade = models.TextField()
-    sig = models.TextField()
-    date = models.TextField()
-
-
 class StatementOfOriginality(models.Model):
     userId = models.IntegerField()
     teamId = models.IntegerField()
