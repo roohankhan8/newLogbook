@@ -33,38 +33,42 @@
         placeholder="Your Answer"
         name="arrange_material"
       />
-      <input type="file" name="prototype" id="" />
+      <input class="" type="file" name="prototype" id="" />
     </div>
     {% include 'table_buttons.html' %}
   </form>
+  {% if step6 %}
+  <div class="container mt-5 text-center">
+    <h2>Issues</h2>
+    <table class="table table-bordered">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">User</th>
+          <th scope="col">Title</th>
+          <th scope="col">Image</th>
+          <th scope="col">Date</th>
+          <th scope="col">Options</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for info in step6 %}
+        <tr>
+          <td>{{ info.userId }}</td>
+          <td>{{ info.arrange_material }}</td>
+          <td>
+            <a href="{% url 'viewImage' info.id  %}"
+              ><button class="btn btn-success" type="button">View</button></a
+            >
+          </td>
+          <td>{{ info.date_updated }}</td>
+          <td>
+            <button class="btn btn-danger" type="button">Delete</button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
 </div>
-{% if step6 %}
-<div class="table border text-center">
-  <table class="">
-    <thead>
-      <tr>
-        <th>User</th>
-        <th>Title</th>
-        <th>Image</th>
-        <th>Date</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for info in step6 %}
-      <tr class="border">
-        <td>{{ info.userId }}</td>
-        <td>{{ info.arrange_material }}</td>
-        <td>
-          <a href="{% url 'viewImage' info.id  %}"
-            ><button type="button">View</button></a
-          >
-        </td>
-        <td>{{ info.date_updated }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
-{% endif %}
-<!-- Question Answeer Box  Ends-->
 {% endblock %}

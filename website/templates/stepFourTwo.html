@@ -1,4 +1,5 @@
-{% extends 'sidenavbar.html' %} {% block title %}Step 1: IDENTIFY {%endblock %} {%load static %} {% block content %}
+{% extends 'sidenavbar.html' %} {% block title %}Step 1: IDENTIFY {%endblock %}
+{%load static %} {% block content %}
 <!-- second header  -->
 <nav class="navbars">
   <div class="container-fluid-nav text-center">
@@ -26,43 +27,69 @@
       </label>
       <div class="d-flex flex-column">
         <label for="expert_name">User/Expert Name: </label>
-        <input type="text" name="expert_name" id="expert_name" placeholder="Enter here" />
+        <input
+          type="text"
+          name="expert_name"
+          id="expert_name"
+          placeholder="Enter here"
+        />
         <label for="expert_credentials">Credentials of the experts: </label>
-        <input type="text" name="expert_credentials" id="expert_credentials" placeholder="Enter here" />
+        <input
+          type="text"
+          name="expert_credentials"
+          id="expert_credentials"
+          placeholder="Enter here"
+        />
         <label for="problem_identified">Problem user/expert identified: </label>
-        <textarea name="problem_identified" rows="5" id="problem_identified" placeholder="Enter here"></textarea>
+        <textarea
+          name="problem_identified"
+          rows="5"
+          id="problem_identified"
+          placeholder="Enter here"
+        ></textarea>
         <label for="problem_faced">Problem you think you will face: </label>
-        <textarea name="problem_faced" rows="5" id="problem_faced" placeholder="Enter here"></textarea>
+        <textarea
+          name="problem_faced"
+          rows="5"
+          id="problem_faced"
+          placeholder="Enter here"
+        ></textarea>
       </div>
     </div>
     {% include 'table_buttons.html' %}
   </form>
+  <!-- Question Answeer Box  Ends-->
+  {% if issues %}
+  <div class="container mt-5 text-center">
+    <h2>Issues</h2>
+    <table class="table table-bordered">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">User</th>
+          <th scope="col">Expert</th>
+          <th scope="col">Credentials</th>
+          <th scope="col">Identified Problem</th>
+          <th scope="col">Problem Faced</th>
+          <th scope="col">Options</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for issue in issues %}
+        <tr>
+          <td>{{ issue.userId }}</td>
+          <td>{{ issue.expert_name }}</td>
+          <td>{{ issue.expert_credentials }}</td>
+          <td>{{ issue.problem_identified }}</td>
+          <td>{{ issue.problem_faced }}</td>
+          <td>{{ issue.date_updated }}</td>
+          <td>
+            <button class="btn btn-danger" type="button">Delete</button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
 </div>
-<!-- Question Answeer Box  Ends-->
-{% if issues %}
-<div class="table border text-center">
-  <table class="">
-    <thead>
-      <tr>
-        <th>User</th>
-        <th>Expert</th>
-        <th>Credentials</th>
-        <th>Identified Problem</th>
-        <th>Problem Faced</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for info in issues %}
-      <tr class="border">
-        <td>{{ info.userId }}</td>
-        <td>{{ info.expert_name }}</td>
-        <td>{{ info.expert_credentials }}</td>
-        <td>{{ info.problem_identified }}</td>
-        <td>{{ info.problem_faced }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
-{% endif %}
 {% endblock %}

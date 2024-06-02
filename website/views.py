@@ -1,3 +1,4 @@
+from email.utils import parsedate
 from django.db import connections
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -84,79 +85,48 @@ def recordOfInvention(request, pk, sk):
     record = (
         RecordOfInvention.objects.filter(teamId=sk).order_by("-date_updated").first()
     )
-    form = RecordOfInventionForm(request.POST)
+    if not record:
+        record = RecordOfInvention.objects.create(userId=pk, teamId=sk)
     if request.method == "POST":
-        if form.is_valid():
-            new_record = RecordOfInvention(userId=pk, teamId=sk, **form.cleaned_data)
-            new_record.save()
-            return redirect("statementOfOriginality", pk, sk)
-    context = {"form": form, "pk": pk, "sk": sk}
+        name_of_invention = request.POST.get("name_of_invention")
+        problem_it_solves = request.POST.get("problem_it_solves")
+        record.name_of_invention = name_of_invention
+        record.problem_it_solves = problem_it_solves
+        record.save()
+        return redirect("statementOfOriginality", pk, sk)
+    if record:
+        context = {"pk": pk, "sk": sk, "record": record}
+    else:
+        context = {"pk": pk, "sk": sk}
     return render(request, "recordOfInvention.html", context)
 
 
 def statementOfOriginality(request, pk, sk):
     statement = (
-        StatementOfOriginality.objects.filter(teamId=sk)
-        .order_by("-date_updated")
-        .first()
+        StatementOfOriginality.objects.filter(teamId=sk).order_by("-date_updated").all()
     )
     if request.method == "POST":
         action = request.POST.get("action")
-        inventor1 = request.POST.get("inventor1")
-        schoolnamegrade1 = request.POST.get("schoolnamegrade1")
-        sig1 = request.POST.get("sig1")
-        date1 = request.POST.get("date1")
-        inventor2 = request.POST.get("inventor2")
-        schoolnamegrade2 = request.POST.get("schoolnamegrade2")
-        sig2 = request.POST.get("sig2")
-        date2 = request.POST.get("date2")
-        inventor3 = request.POST.get("inventor3")
-        schoolnamegrade3 = request.POST.get("schoolnamegrade3")
-        sig3 = request.POST.get("sig3")
-        date3 = request.POST.get("date3")
-        inventor4 = request.POST.get("inventor4")
-        schoolnamegrade4 = request.POST.get("schoolnamegrade4")
-        sig4 = request.POST.get("sig4")
-        date4 = request.POST.get("date4")
-        inventor5 = request.POST.get("inventor5")
-        schoolnamegrade5 = request.POST.get("schoolnamegrade5")
-        sig5 = request.POST.get("sig5")
-        date5 = request.POST.get("date5")
-        inventor1 = Inventor.objects.create(
-            inventor=inventor1, schoolnamegrade=schoolnamegrade1, sig=sig1, date=date1
-        )
-        inventor2 = Inventor.objects.create(
-            inventor=inventor2, schoolnamegrade=schoolnamegrade2, sig=sig2, date=date2
-        )
-        inventor3 = Inventor.objects.create(
-            inventor=inventor3, schoolnamegrade=schoolnamegrade3, sig=sig3, date=date3
-        )
-        inventor4 = Inventor.objects.create(
-            inventor=inventor4, schoolnamegrade=schoolnamegrade4, sig=sig4, date=date4
-        )
-        inventor5 = Inventor.objects.create(
-            inventor=inventor5, schoolnamegrade=schoolnamegrade5, sig=sig5, date=date5
-        )
-        statement_of_originality_instance = StatementOfOriginality.objects.create(
-            userId=pk,
-            teamId=sk,
-        )
-        statement_of_originality_instance.inventors.add(
-            inventor1, inventor2, inventor3, inventor4, inventor5
-        )
-        if action == "save":
-            return HttpResponseRedirect(request.path_info)
-        elif action == "next":
+        inventor = request.POST.get("inventor")
+        schoolnamegrade = request.POST.get("schoolnamegrade")
+        sign = request.POST.get("sign")
+        date = parsedate(request.POST.get("date"))
+        if action in ("add", "next") and inventor:
+            new_statement = StatementOfOriginality.objects.create(userId=pk, teamId=sk)
+            new_statement.inventor = inventor
+            new_statement.schoolnamegrade = schoolnamegrade
+            new_statement.sign = sign
+            new_statement.date = date
+            new_statement.save()
+            if action == "add":
+                return HttpResponseRedirect(request.path_info)
+            elif action == "next":
+                return redirect("flowchart", pk=pk, sk=sk)
+        elif action == "next" and not inventor:
             return redirect("flowchart", pk=pk, sk=sk)
-    if statement:
-        context = {
-            "pk": pk,
-            "sk": sk,
-            "statement": statement,
-            "inventors": statement.inventors.all,
-        }
-    else:
-        context = {"pk": pk, "sk": sk, "statement": statement}
+        elif action == "back":
+            return redirect("recordOfInvention", pk, sk)
+    context = {"pk": pk, "sk": sk, "statement": statement}
     return render(request, "statementOfOriginality.html", context)
 
 
@@ -303,15 +273,15 @@ def stepThreeTwo(request, pk, sk):
     if request.method == "POST":
         action = request.POST.get("action")
         sources = request.POST.get("sources")
-        if action in ("save", "next") and sources!='':
+        if action in ("save", "next") and sources != "":
             step3.sources = sources
             step3.save()
             if action == "save":
                 return HttpResponseRedirect(request.path_info)
             elif action == "next":
                 return redirect("stepThreeThree", pk, sk)
-        elif action == "next" and sources=='':
-                return redirect("stepThreeThree", pk, sk)
+        elif action == "next" and sources == "":
+            return redirect("stepThreeThree", pk, sk)
         elif action == "back":
             return redirect("stepThreeOne", pk, sk)
     context = {"pk": pk, "sk": sk, "step3": step3}
@@ -323,15 +293,15 @@ def stepThreeThree(request, pk, sk):
     if request.method == "POST":
         action = request.POST.get("action")
         difference = request.POST.get("difference")
-        if action in ("save", "next") and difference!='':
+        if action in ("save", "next") and difference != "":
             step3.difference = difference
             step3.save()
             if action == "save":
                 return HttpResponseRedirect(request.path_info)
             elif action == "next":
                 return redirect("stepFourOne", pk, sk)
-        elif action == "next" and difference=='':
-                return redirect("stepFourOne", pk, sk)
+        elif action == "next" and difference == "":
+            return redirect("stepFourOne", pk, sk)
         elif action == "back":
             return redirect("stepThreeTwo", pk, sk)
     context = {"pk": pk, "sk": sk, "step3": step3}
@@ -345,15 +315,15 @@ def stepFourOne(request, pk, sk):
     if request.method == "POST":
         action = request.POST.get("action")
         details = request.POST.get("details")
-        if action in ("save", "next") and details!='':
+        if action in ("save", "next") and details != "":
             step4.details = details
             step4.save()
             if action == "save":
                 return HttpResponseRedirect(request.path_info)
             elif action == "next":
                 return redirect("stepFourTwo", pk, sk)
-        elif action == "next" and details=='':
-                return redirect("stepFourTwo", pk, sk)
+        elif action == "next" and details == "":
+            return redirect("stepFourTwo", pk, sk)
         elif action == "back":
             return redirect("stepThreeThree", pk, sk)
     if step4:
@@ -385,7 +355,7 @@ def stepFourTwo(request, pk, sk):
         elif action == "next" and expert_name == "":
             return redirect("stepFiveOne", pk, sk)
         elif action == "back":
-            return redirect("stepThreeThree", pk, sk)
+            return redirect("stepFourOne", pk, sk)
     if issues:
         context = {"pk": pk, "sk": sk, "issues": issues}
     else:
@@ -466,7 +436,7 @@ def stepSix(request, pk, sk):
 def stepSeven(request, pk, sk):
     step7 = StepSeven.objects.filter(teamId=sk).order_by("-date_updated").first()
     if not step7:
-        step7 = StepFive.objects.create(userId=pk, teamId=sk)
+        step7 = StepSeven.objects.create(userId=pk, teamId=sk)
     if request.method == "POST":
         action = request.POST.get("action")
         testing = request.POST.get("testing")
@@ -478,7 +448,7 @@ def stepSeven(request, pk, sk):
             elif action == "next":
                 return redirect("guidelines", pk, sk)
         elif action == "next" and not testing:
-                return redirect("guidelines", pk, sk)
+            return redirect("guidelines", pk, sk)
         elif action == "back":
             return redirect("stepSix", pk, sk)
     context = {"pk": pk, "sk": sk, "step7": step7}

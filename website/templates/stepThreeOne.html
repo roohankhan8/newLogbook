@@ -1,4 +1,5 @@
-{% extends 'sidenavbar.html' %} {% block title %}Step 1: IDENTIFY {%endblock %} {% load static %} {% block content %}
+{% extends 'sidenavbar.html' %} {% block title %}Step 1: IDENTIFY {%endblock %}
+{% load static %} {% block content %}
 <!-- second header  -->
 <nav class="navbars">
   <div class="container-fluid-nav text-center">
@@ -29,32 +30,36 @@
         "
         placeholder="Your Answer"
         name="research"
-      >
+      />
     </div>
     {% include 'table_buttons.html' %}
   </form>
+  {% if researches %}
+  <div class="container mt-5 text-center">
+    <h2>Researches</h2>
+    <table class="table table-bordered">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">User</th>
+          <th scope="col">Research</th>
+          <th scope="col">Date</th>
+          <th scope="col">Options</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for research in researches %}
+        <tr>
+          <td>{{ research.userId }}</td>
+          <td>{{ research.research }}</td>
+          <td>{{ research.date_updated }}</td>
+          <td>
+            <button class="btn btn-danger" type="button">Delete</button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
 </div>
-{% if researches %}
-<div class="table border text-center">
-  <table class="">
-    <thead>
-      <tr>
-        <th>User</th>
-        <th>Research</th>
-        <th>Date</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for research in researches %}
-      <tr class="border">
-        <td>{{ research.userId }}</td>
-        <td>{{ research.research }}</td>
-        <td>{{ research.date_updated }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
-{% endif %}
-<!-- Question Answeer Box  Ends-->
 {% endblock %}

@@ -33,27 +33,32 @@
     {% include 'table_buttons.html' %}
   </form>
   {% if step1 %}
-  <div class="table border text-center">
-    <table class="">
-      <thead>
+  <div class="container mt-5 text-center">
+    <h2>Problems</h2>
+    <table class="table table-bordered">
+      <thead class="thead-light">
         <tr>
-          <th>User</th>
-          <th>Problem</th>
-          <th>Date</th>
+          <th scope="col">User</th>
+          <th scope="col">Problem</th>
+          <th scope="col">Date</th>
+          <th scope="col">Options</th>
         </tr>
       </thead>
       <tbody>
         {% for problem in step1 %}
-        <tr class="border">
+        <tr>
           <td>{{ problem.userId }}</td>
           <td>{{ problem.identify_problems }}</td>
           <td>{{ problem.date_updated }}</td>
+          <td>
+            <button class="btn btn-danger" type="button">Delete</button>
+          </td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
-    {% endif %}
   </div>
+  {% endif %}
 </div>
 <!-- Question Answeer Box  Ends-->
 {% endblock %}

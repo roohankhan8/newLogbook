@@ -17,65 +17,65 @@ SENSE{%endblock %} {% load static %} {% block content %}
         pick one problem you want to move forward with and take the next
         step.</label
       >
-      <div class="accordion" id="accordionPanelsStayOpenExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header">
-            <button
-              class="accordion-button"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#panelsStayOpen-collapseOne"
-              aria-expanded="true"
-              aria-controls="panelsStayOpen-collapseOne"
-            >
-              <h6>Problem 1:&nbsp;&nbsp;&nbsp;</h6>
-            </button>
-          </h2>
-          <div
-            id="panelsStayOpen-collapseOne"
-            class="accordion-collapse collapse show"
+    </div>
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#panelsStayOpen-collapseOne"
+            aria-expanded="true"
+            aria-controls="panelsStayOpen-collapseOne"
           >
-            <div class="accordion-body">
-              <div class="container">
-                <div class="row">
-                  <!-- First Column -->
-                  <div class="col-md-4 column">
-                    <h3>Name</h3>
-                    <div class="mb-3">
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Person name 1"
-                        id="name"
-                        name="name"
-                      />
-                    </div>
+            <h6>Problem 1:&nbsp;&nbsp;&nbsp;</h6>
+          </button>
+        </h2>
+        <div
+          id="panelsStayOpen-collapseOne"
+          class="accordion-collapse collapse show"
+        >
+          <div class="accordion-body">
+            <div class="container">
+              <div class="row">
+                <!-- First Column -->
+                <div class="col-md-4 column">
+                  <h3>Name</h3>
+                  <div class="mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Person name 1"
+                      id="name"
+                      name="name"
+                    />
                   </div>
-                  <!-- Second Column -->
-                  <div class="col-md-4 column">
-                    <h3>Age</h3>
-                    <div class="mb-3">
-                      <input
-                        type="number"
-                        class="form-control"
-                        placeholder="Select age"
-                        id="age"
-                        name="age"
-                      />
-                    </div>
+                </div>
+                <!-- Second Column -->
+                <div class="col-md-4 column">
+                  <h3>Age</h3>
+                  <div class="mb-3">
+                    <input
+                      type="number"
+                      class="form-control"
+                      placeholder="Select age"
+                      id="age"
+                      name="age"
+                    />
                   </div>
+                </div>
 
-                  <!-- Third Column -->
-                  <div class="col-md-4 column">
-                    <h3>Comments</h3>
-                    <div class="mb-3">
-                      <input
-                        class="form-control"
-                        placeholder="Write comments"
-                        id="comment"
-                        name="comment"
-                      >
-                    </div>
+                <!-- Third Column -->
+                <div class="col-md-4 column">
+                  <h3>Comments</h3>
+                  <div class="mb-3">
+                    <input
+                      class="form-control"
+                      placeholder="Write comments"
+                      id="comment"
+                      name="comment"
+                    />
                   </div>
                 </div>
               </div>
@@ -83,35 +83,39 @@ SENSE{%endblock %} {% load static %} {% block content %}
           </div>
         </div>
       </div>
+    </div>
     {% include 'table_buttons.html' %}
   </form>
-</div>
   {% if persons %}
-<!-- Question Answeer Box  Ends-->
-  <div class="table border text-center">
-    <table class="">
-      <thead>
+  <div class="container mt-5 text-center">
+    <h2>Problems</h2>
+    <table class="table table-bordered">
+      <thead class="thead-light">
         <tr>
-          <th>User</th>
-          <th>Name</th>
-          <th>Age</th>
-          <th>Comment</th>
-          <th>Date</th>
+          <th scope="col">User</th>
+          <th scope="col">Name</th>
+          <th scope="col">Age</th>
+          <th scope="col">Comment</th>
+          <th scope="col">Date</th>
+          <th scope="col">Options</th>
         </tr>
       </thead>
       <tbody>
         {% for info in persons %}
-        <tr class="border">
+        <tr>
           <td>{{ info.userId }}</td>
           <td>{{ info.name }}</td>
           <td>{{ info.age }}</td>
           <td>{{ info.comment }}</td>
-          <td>{{ info.date }}</td>
+          <td>{{ info.date_updated }}</td>
+          <td>
+            <button class="btn btn-danger" type="button">Delete</button>
+          </td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
   </div>
-    {% endif %}
-
+  {% endif %}
+</div>
 {% endblock %}

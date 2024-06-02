@@ -27,9 +27,10 @@ class StatementOfOriginality(models.Model):
     teamId = models.IntegerField()
     date_updated = models.DateTimeField(auto_now_add=True)
 
-    inventors = models.ManyToManyField(
-        Inventor, related_name="statement_of_originality"
-    )
+    inventor=models.CharField(max_length=255, null=True, blank=True)
+    schoolnamegrade=models.CharField(max_length=255, null=True, blank=True)
+    date=models.DateField(max_length=255, null=True, blank=True)
+    sign=models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return str(self.teamId)

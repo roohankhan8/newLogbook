@@ -1,5 +1,5 @@
-{% extends 'sidenavbar.html' %} {% block title %}Step 1: IDENTIFY {%endblock %} {%
-load static %} {% block content %}
+{% extends 'sidenavbar.html' %} {% block title %}Step 1: IDENTIFY {%endblock %}
+{% load static %} {% block content %}
 <!-- second header  -->
 <nav class="navbars">
   <div class="container-fluid-nav text-center">
@@ -21,50 +21,88 @@ load static %} {% block content %}
         8.3 Describe your typical customer. What is their
       </label>
       <div class="d-flex flex-column">
-        <label for="expert_name">Age: </label>
-        <input type="number" name="age" id="age" placeholder="Enter here" />
-        <label for="gender">Gender: </label>
-        <input type="text" name="gender" id="gender" placeholder="Enter here" />
-        <label for="education">Education Level: </label>
-        <input type="text" name="education" rows="5" id="education" placeholder="Enter here">
-        <label for="household">Household Size: </label>
-        <input type="text" name="household" rows="5" id="household" placeholder="Enter here">
-        <label for="marital">Marital Size: </label>
-        <input type="text" name="marital" rows="5" id="marital" placeholder="Enter here">
+        <label for="expert_name"
+          >Age:
+          <input type="number" name="age" id="age" placeholder="Enter here" />
+        </label>
+        <label for="gender"
+          >Gender:
+          <input
+            type="text"
+            name="gender"
+            id="gender"
+            placeholder="Enter here"
+          />
+        </label>
+        <label for="education"
+          >Education Level:
+          <input
+            type="text"
+            name="education"
+            rows="5"
+            id="education"
+            placeholder="Enter here"
+          />
+        </label>
+        <label for="household"
+          >Household Size:
+          <input
+            type="text"
+            name="household"
+            rows="5"
+            id="household"
+            placeholder="Enter here"
+          />
+        </label>
+        <label for="marital"
+          >Marital Size:
+          <input
+            type="text"
+            name="marital"
+            rows="5"
+            id="marital"
+            placeholder="Enter here"
+          />
+        </label>
       </div>
     </div>
     {% include 'table_buttons.html' %}
   </form>
+  <!-- Question Answeer Box Ends-->
+  {% if customers %}
+  <div class="container mt-5 text-center">
+    <h2>Customers</h2>
+    <table class="table table-bordered">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">User</th>
+          <th scope="col">Age</th>
+          <th scope="col">Gender</th>
+          <th scope="col">Education Level</th>
+          <th scope="col">Household Size</th>
+          <th scope="col">Marital Status</th>
+          <th scope="col">Date</th>
+          <th scope="col">Options</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for info in customers %}
+        <tr>
+          <td>{{ info.userId }}</td>
+          <td>{{ info.age }}</td>
+          <td>{{ info.gender }}</td>
+          <td>{{ info.education }}</td>
+          <td>{{ info.household }}</td>
+          <td>{{ info.marital_status }}</td>
+          <td>{{ info.date_updated }}</td>
+          <td>
+            <button class="btn btn-danger" type="button">Delete</button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
 </div>
-<!-- Question Answeer Box Ends-->
-{% if customers %}
-<div class="table border text-center">
-  <table class="">
-    <thead>
-      <tr>
-        <th>User</th>
-        <th>Age</th>
-        <th>Gender</th>
-        <th>Education Level</th>
-        <th>Household Size</th>
-        <th>Marital Status</th>
-        <th>Date</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for info in customers %}
-      <tr class="border">
-        <td>{{ info.userId }}</td>
-        <td>{{ info.age }}</td>
-        <td>{{ info.gender }}</td>
-        <td>{{ info.education }}</td>
-        <td>{{ info.household }}</td>
-        <td>{{ info.marital_status }}</td>
-        <td>{{ info.date_updated }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
-{% endif %}
 {% endblock %}
