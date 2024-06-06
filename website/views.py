@@ -12,27 +12,31 @@ from .models import *
 # Create your views here.
 
 pages = {
-    '1': 'statementOfOriginality',
-    '2': 'stepOne',
-    '3': 'stepTwoOne',
-    '4': 'stepThreeOne',
-    '5': 'stepFourTwo',
-    '6': 'stepSix',
-    '7': 'stepEightThree',
+    "1": "statementOfOriginality",
+    "2": "stepOne",
+    "3": "stepTwoOne",
+    "4": "stepThreeOne",
+    "5": "stepFourTwo",
+    "6": "stepSix",
+    "7": "stepEightThree",
+}
+models = {
+    "1": StatementOfOriginality,
+    "2": StepOne,
+    "3": Person,
+    "4": Research,
+    "5": Issue,
+    "6": StepSix,
+    "7": Customer,
 }
 
 
 def deleteInfo(request, pk, sk, tk, fk):
-    if pk == "1": record = get_object_or_404(StatementOfOriginality, id=sk)
-    if pk == "2": record = get_object_or_404(StepOne, id=sk)
-    if pk == "3": record = get_object_or_404(Person, id=sk)
-    if pk == "4": record = get_object_or_404(Research, id=sk)
-    if pk == "5": record = get_object_or_404(Issue, id=sk)
-    if pk == "6": record = get_object_or_404(StepSix, id=sk)
-    if pk == "7": record = get_object_or_404(Customer, id=sk)
+    record = get_object_or_404(models[pk], id=sk)
     record.delete()
     messages.success(request, "The statement has been deleted successfully.")
     return redirect(pages[pk], tk, fk)
+
 
 def login(request):
     if request.method == "POST":
@@ -85,7 +89,6 @@ def courseOutline(request, pk, sk):
             "SELECT * FROM tbl_team_member WHERE student_id=%s", [student_id]
         )
         user_data = cursor.fetchone()
-        # print(user_data)
     with connections["user_database"].cursor() as cursor:
         cursor.execute("SELECT * FROM tbl_team WHERE id=%s", [team_id])
         team_data = cursor.fetchone()
@@ -172,14 +175,17 @@ def stepOne(request, pk, sk):
 
 
 def stepTwoOne(request, pk, sk):
+    step1 = StepOne.objects.filter(teamId=sk).order_by("-date_updated").all()
     persons = Person.objects.filter(teamId=sk).order_by("-date_updated").all()
     if request.method == "POST":
         action = request.POST.get("action")
+        problem=request.POST.get("problem")
         name = request.POST.get("name")
         age = request.POST.get("age")
         comment = request.POST.get("comment")
         if action in ("next", "add") and name != "":
             new_person = Person.objects.create(userId=pk, teamId=sk)
+            new_person.problem = problem
             new_person.name = name
             new_person.age = age
             new_person.comment = comment
@@ -193,9 +199,9 @@ def stepTwoOne(request, pk, sk):
         elif action == "back":
             return redirect("stepOne", pk, sk)
     if persons:
-        context = {"pk": pk, "sk": sk, "persons": persons}
+        context = {"pk": pk, "sk": sk, "step1": step1, "persons": persons}
     else:
-        context = {"pk": pk, "sk": sk}
+        context = {"pk": pk, "sk": sk, "step1": step1}
     return render(request, "stepTwoOne.html", context)
 
 

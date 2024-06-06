@@ -44,8 +44,9 @@ class Person(models.Model):
     teamId = models.IntegerField()
     date_updated = models.DateTimeField(auto_now_add=True)
 
+    problem = models.CharField(max_length=30, blank=True, null=True)
     name = models.CharField(max_length=30)
-    age = models.IntegerField(blank=True, null=True)
+    age = models.IntegerField(blank=True, null=True, default=1)
     comment = models.CharField(max_length=30)
 
     def __str__(self):

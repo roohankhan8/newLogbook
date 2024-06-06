@@ -42,7 +42,7 @@
         <tr>
           <th scope="col">User</th>
           <th scope="col">Research</th>
-          <th scope="col">Date</th>
+          <!-- <th scope="col">Date</th> -->
           <th scope="col">Options</th>
         </tr>
       </thead>
@@ -51,7 +51,7 @@
         <tr>
           <td>{{ research.userId }}</td>
           <td>{{ research.research }}</td>
-          <td>{{ research.date_updated }}</td>
+          <!-- <td>{{ research.date_updated }}</td> -->
           <td>
             <form action="{% url 'deleteInfo' 4 research.id pk sk %}" method="post" style="display:inline;">
               {% csrf_token %}

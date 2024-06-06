@@ -46,7 +46,7 @@
           <th scope="col">User</th>
           <th scope="col">Title</th>
           <th scope="col">Image</th>
-          <th scope="col">Date</th>
+          <!-- <th scope="col">Date</th> -->
           <th scope="col">Options</th>
         </tr>
       </thead>
@@ -60,7 +60,7 @@
               ><button class="btn btn-success" type="button">View</button></a
             >
           </td>
-          <td>{{ info.date_updated }}</td>
+          <!-- <td>{{ info.date_updated }}</td> -->
           <td><form action="{% url 'deleteInfo' 6 info.id pk sk %}" method="post" style="display:inline;">
             {% csrf_token %}
             <button class="btn btn-danger" type="submit">Delete</button>

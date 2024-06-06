@@ -81,7 +81,7 @@
           <td>{{ issue.expert_credentials }}</td>
           <td>{{ issue.problem_identified }}</td>
           <td>{{ issue.problem_faced }}</td>
-          <td>{{ issue.date_updated }}</td>
+          <!-- <td>{{ issue.date_updated }}</td> -->
           <td>
             <form action="{% url 'deleteInfo' 5 issue.id pk sk %}" method="post" style="display:inline;">
               {% csrf_token %}

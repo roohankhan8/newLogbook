@@ -120,7 +120,7 @@ MARKET{%endblock %} {% load static %} {% block content %}
           <th scope="col">Education Level</th>
           <th scope="col">Household Size</th>
           <th scope="col">Marital Status</th>
-          <th scope="col">Date</th>
+          <!-- <th scope="col">Date</th> -->
           <th scope="col">Options</th>
         </tr>
       </thead>
@@ -133,7 +133,7 @@ MARKET{%endblock %} {% load static %} {% block content %}
           <td>{{ info.education }}</td>
           <td>{{ info.household }}</td>
           <td>{{ info.marital_status }}</td>
-          <td>{{ info.date_updated }}</td>
+          <!-- <td>{{ info.date_updated }}</td> -->
           <td>
             <form
               action="{% url 'deleteInfo' 7 info.id pk sk %}"

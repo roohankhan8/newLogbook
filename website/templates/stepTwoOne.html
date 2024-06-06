@@ -29,7 +29,12 @@ SENSE{%endblock %} {% load static %} {% block content %}
             aria-expanded="true"
             aria-controls="panelsStayOpen-collapseOne"
           >
-            <h6>Problem 1:&nbsp;&nbsp;&nbsp;</h6>
+            <label style="font-weight: bolder;" for="problem">Choose a problem:</label>
+            <select class="p-1 rounded mx-2 " id="problem" name="problem">
+              {% for problem in step1 %}
+              <option value={{problem.identify_problems}}>{{problem.identify_problems}}</option>
+              {% endfor %}
+            </select>
           </button>
         </h2>
         <div
@@ -41,12 +46,12 @@ SENSE{%endblock %} {% load static %} {% block content %}
               <div class="row">
                 <!-- First Column -->
                 <div class="col-md-4 column">
-                  <h3>Name</h3>
+                  <h5>Name</h5>
                   <div class="mb-3">
                     <input
                       type="text"
                       class="form-control"
-                      placeholder="Person name 1"
+                      placeholder="Person name"
                       id="name"
                       name="name"
                     />
@@ -54,7 +59,7 @@ SENSE{%endblock %} {% load static %} {% block content %}
                 </div>
                 <!-- Second Column -->
                 <div class="col-md-4 column">
-                  <h3>Age</h3>
+                  <h5>Age</h5>
                   <div class="mb-3">
                     <input
                       type="number"
@@ -65,10 +70,9 @@ SENSE{%endblock %} {% load static %} {% block content %}
                     />
                   </div>
                 </div>
-
                 <!-- Third Column -->
                 <div class="col-md-4 column">
-                  <h3>Comments</h3>
+                  <h5>Comments</h5>
                   <div class="mb-3">
                     <input
                       class="form-control"
@@ -93,10 +97,11 @@ SENSE{%endblock %} {% load static %} {% block content %}
       <thead class="thead-light">
         <tr>
           <th scope="col">User</th>
+          <th scope="col">Problem</th>
           <th scope="col">Name</th>
           <th scope="col">Age</th>
           <th scope="col">Comment</th>
-          <th scope="col">Date</th>
+          <!-- <th scope="col">Date</th> -->
           <th scope="col">Options</th>
         </tr>
       </thead>
@@ -104,12 +109,17 @@ SENSE{%endblock %} {% load static %} {% block content %}
         {% for info in persons %}
         <tr>
           <td>{{ info.userId }}</td>
+          <td>{{ info.problem }}</td>
           <td>{{ info.name }}</td>
           <td>{{ info.age }}</td>
           <td>{{ info.comment }}</td>
-          <td>{{ info.date_updated }}</td>
+          <!-- <td>{{ info.date_updated }}</td> -->
           <td>
-            <form action="{% url 'deleteInfo' 3 info.id pk sk %}" method="post" style="display:inline;">
+            <form
+              action="{% url 'deleteInfo' 3 info.id pk sk %}"
+              method="post"
+              style="display: inline"
+            >
               {% csrf_token %}
               <button class="btn btn-danger" type="submit">Delete</button>
             </form>
