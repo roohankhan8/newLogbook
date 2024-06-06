@@ -114,7 +114,7 @@ MARKET{%endblock %} {% load static %} {% block content %}
     <table class="table table-bordered">
       <thead class="thead-light">
         <tr>
-          <th scope="col">User</th>
+          <!-- <th scope="col">User</th> -->
           <th scope="col">Age</th>
           <th scope="col">Gender</th>
           <th scope="col">Education Level</th>
@@ -127,7 +127,7 @@ MARKET{%endblock %} {% load static %} {% block content %}
       <tbody>
         {% for info in customers %}
         <tr>
-          <td>{{ info.userId }}</td>
+          <!-- <td>{{ info.userId }}</td> -->
           <td>{{ info.age }}</td>
           <td>{{ info.gender }}</td>
           <td>{{ info.education }}</td>

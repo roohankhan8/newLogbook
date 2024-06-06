@@ -95,7 +95,7 @@ Originality{%endblock%} {% load static %} {% block content %}
     <table class="table table-bordered">
       <thead class="thead-light">
         <tr>
-          <th scope="col">User</th>
+          <!-- <th scope="col">User</th> -->
           <th scope="col">Inventor</th>
           <th scope="col">School Name & Grade</th>
           <th scope="col">Signature</th>
@@ -106,7 +106,7 @@ Originality{%endblock%} {% load static %} {% block content %}
       <tbody>
         {% for info in statement %}
         <tr>
-          <td>{{ info.userId }}</td>
+          <!-- <td>{{ info.userId }}</td> -->
           <td>{{ info.inventor }}</td>
           <td>{{ info.schoolnamegrade }}</td>
           <td>{{ info.sign }}</td>

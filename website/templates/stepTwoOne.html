@@ -96,7 +96,7 @@ SENSE{%endblock %} {% load static %} {% block content %}
     <table class="table table-bordered">
       <thead class="thead-light">
         <tr>
-          <th scope="col">User</th>
+          <!-- <th scope="col">User</th> -->
           <th scope="col">Problem</th>
           <th scope="col">Name</th>
           <th scope="col">Age</th>
@@ -108,7 +108,7 @@ SENSE{%endblock %} {% load static %} {% block content %}
       <tbody>
         {% for info in persons %}
         <tr>
-          <td>{{ info.userId }}</td>
+          <!-- <td>{{ info.userId }}</td> -->
           <td>{{ info.problem }}</td>
           <td>{{ info.name }}</td>
           <td>{{ info.age }}</td>

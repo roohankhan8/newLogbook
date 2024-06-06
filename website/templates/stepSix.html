@@ -43,7 +43,7 @@
     <table class="table table-bordered">
       <thead class="thead-light">
         <tr>
-          <th scope="col">User</th>
+          <!-- <th scope="col">User</th> -->
           <th scope="col">Title</th>
           <th scope="col">Image</th>
           <!-- <th scope="col">Date</th> -->
@@ -53,7 +53,7 @@
       <tbody>
         {% for info in step6 %}
         <tr>
-          <td>{{ info.userId }}</td>
+          <!-- <td>{{ info.userId }}</td> -->
           <td>{{ info.arrange_material }}</td>
           <td>
             <a href="{% url 'viewImage' info.id  %}"
