@@ -155,9 +155,11 @@ def stepOne(request, pk, sk):
     if request.method == "POST":
         action = request.POST.get("action")
         identify_problems = request.POST.get("identify_problems")
+        problems = request.POST.get("problems")
         if action in ("next", "add") and identify_problems != "":
             new_problem = StepOne.objects.create(userId=pk, teamId=sk)
             new_problem.identify_problems = identify_problems
+            new_problem.problems = problems
             new_problem.save()
             if action == "add":
                 return HttpResponseRedirect(request.path_info)

@@ -34,6 +34,7 @@ class StepOne(models.Model):
     date_updated = models.DateTimeField(auto_now_add=True)
 
     identify_problems = models.CharField(max_length=255)
+    problems = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return str(self.teamId)

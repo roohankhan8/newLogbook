@@ -26,8 +26,18 @@
           font-family: 'Times New Roman', Times, serif;
           font-size: 19px;
         "
-        placeholder="Your Answer"
+        placeholder="Problem Name"
         name="identify_problems"
+      />
+      <input
+        class="form-control"
+        style="
+          height: 100%;
+          font-family: 'Times New Roman', Times, serif;
+          font-size: 19px;
+        "
+        placeholder="Problem"
+        name="problems"
       />
     </div>
     {% include 'table_buttons.html' %}
@@ -39,6 +49,7 @@
       <thead class="thead-light">
         <tr>
           <!-- <th scope="col">User</th> -->
+          <th scope="col">Problem Name</th>
           <th scope="col">Problem</th>
           <!-- <th scope="col">Date</th> -->
           <th scope="col">Options</th>
@@ -49,6 +60,7 @@
         <tr>
           <!-- <td>{{ problem.userId }}</td> -->
           <td>{{ problem.identify_problems }}</td>
+          <td>{{ problem.problems }}</td>
           <!-- <td>{{ problem.date_updated }}</td> -->
           <td>
             <form action="{% url 'deleteInfo' 2 problem.id pk sk %}" method="post" style="display:inline;">
