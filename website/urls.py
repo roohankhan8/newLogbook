@@ -13,11 +13,12 @@ urlpatterns = [
         name="recordOfInvention",
     ),
     path(
-        "statementOfOriginality/<str:pk>/<str:sk>/",
+        "statementOfOriginality/<str:pk>/<str:sk>/<str:tk>/<str:fk>",
         statementOfOriginality,
         name="statementOfOriginality",
     ),
     path("deleteInfo/<str:pk>/<str:sk>/<str:tk>/<str:fk>", deleteInfo, name="deleteInfo"),
+    path("editInfo/<str:pk>/<str:sk>/<str:tk>/<str:fk>", editInfo, name="editInfo"),
     path("flowchart/<str:pk>/<str:sk>/", flowchart, name="flowchart"),
     path("stepOne/<str:pk>/<str:sk>/", stepOne, name="stepOne"),
     path("stepTwoOne/<str:pk>/<str:sk>/", stepTwoOne, name="stepTwoOne"),

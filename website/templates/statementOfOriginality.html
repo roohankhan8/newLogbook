@@ -40,6 +40,7 @@ Originality{%endblock%} {% load static %} {% block content %}
           class="form-control"
           placeholder="Sohani"
           name="inventor"
+          value="{{record.inventor}}"
         />
       </div>
       <div class="col-md-6">
@@ -61,6 +62,7 @@ Originality{%endblock%} {% load static %} {% block content %}
           class="form-control"
           placeholder="Saline High School (11)"
           name="schoolnamegrade"
+          value="{{record.schoolnamegrade}}"
         />
       </div>
     </div>
@@ -82,7 +84,13 @@ Originality{%endblock%} {% load static %} {% block content %}
               <b>Signature</b>
             </h1>
           </label>
-          <input type="text" class="form-control" name="sign" placeholder="sohani018" />
+          <input
+            type="text"
+            class="form-control"
+            name="sign"
+            placeholder="sohani018"
+            value="{{record.sign}}"
+          />
         </div>
       </div>
     </div>
@@ -112,7 +120,17 @@ Originality{%endblock%} {% load static %} {% block content %}
           <td>{{ info.sign }}</td>
           <!-- <td>{{ info.date_updated }}</td> -->
           <td>
-            <form action="{% url 'deleteInfo' 1 info.id pk sk %}" method="post" style="display:inline;">
+            <a
+              style="display: inline"
+              href="{% url 'statementOfOriginality' pk sk 1 info.id %}"
+            >
+              <button class="btn btn-info" type="submit">Edit</button>
+            </a>
+            <form
+              action="{% url 'deleteInfo' 1 info.id pk sk %}"
+              method="post"
+              style="display: inline"
+            >
               {% csrf_token %}
               <button class="btn btn-danger" type="submit">Delete</button>
             </form>
