@@ -133,35 +133,33 @@ def statementOfOriginality(request, pk, sk, tk, fk):
     statement = (
         StatementOfOriginality.objects.filter(teamId=sk).order_by("-date_updated").all()
     )
-    if int(tk) >= 0:
+    if int(tk)>=0: 
         record = get_object_or_404(models[tk], id=fk)
-        context = {"pk": pk, "sk": sk, "statement": statement, 'record':record}
-        record.delete()
-        return render(request, "statementOfOriginality.html", context)
-    else:
-        if request.method == "POST":
-            action = request.POST.get("action")
-            inventor = request.POST.get("inventor")
-            schoolnamegrade = request.POST.get("schoolnamegrade")
-            sign = request.POST.get("sign")
-            if action in ("add", "next") and inventor:
-                new_statement = StatementOfOriginality.objects.create(
-                    userId=pk, teamId=sk
-                )
-                new_statement.inventor = inventor
-                new_statement.schoolnamegrade = schoolnamegrade
-                new_statement.sign = sign
-                new_statement.save()
-                if action == "add":
-                    return redirect("statementOfOriginality", pk=pk, sk=sk, tk=-1, fk=0)
-                elif action == "next":
-                    return redirect("flowchart", pk=pk, sk=sk)
-            elif action == "next" and not inventor:
+        context = {"pk": pk, "sk": sk, "statement": statement, "record": record}
+        if record:
+            record.delete()
+            return render(request, "statementOfOriginality.html", context)
+    if request.method == "POST":
+        action = request.POST.get("action")
+        inventor = request.POST.get("inventor")
+        schoolnamegrade = request.POST.get("schoolnamegrade")
+        sign = request.POST.get("sign")
+        if action in ("add", "next") and inventor:
+            new_statement = StatementOfOriginality.objects.create(userId=pk, teamId=sk)
+            new_statement.inventor = inventor
+            new_statement.schoolnamegrade = schoolnamegrade
+            new_statement.sign = sign
+            new_statement.save()
+            if action == "add":
+                return redirect("statementOfOriginality", pk=pk, sk=sk, tk=-1, fk=0)
+            elif action == "next":
                 return redirect("flowchart", pk=pk, sk=sk)
-            elif action == "back":
-                return redirect("recordOfInvention", pk, sk)
-        context = {"pk": pk, "sk": sk, "statement": statement}
-        return render(request, "statementOfOriginality.html", context)
+        elif action == "next" and not inventor:
+            return redirect("flowchart", pk=pk, sk=sk)
+        elif action == "back":
+            return redirect("recordOfInvention", pk, sk)
+    context = {"pk": pk, "sk": sk, "statement": statement}
+    return render(request, "statementOfOriginality.html", context)
 
 
 def stepOne(request, pk, sk):

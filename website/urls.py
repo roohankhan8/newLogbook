@@ -16,7 +16,7 @@ urlpatterns = [
         "statementOfOriginality/<str:pk>/<str:sk>/<str:tk>/<str:fk>",
         statementOfOriginality,
         name="statementOfOriginality",
-    ),
+    ),  
     path("deleteInfo/<str:pk>/<str:sk>/<str:tk>/<str:fk>", deleteInfo, name="deleteInfo"),
     path("editInfo/<str:pk>/<str:sk>/<str:tk>/<str:fk>", editInfo, name="editInfo"),
     path("flowchart/<str:pk>/<str:sk>/", flowchart, name="flowchart"),
