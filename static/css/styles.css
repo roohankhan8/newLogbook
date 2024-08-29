@@ -12,6 +12,10 @@ body {
   background: #ececec;
 }
 
+.table{
+  width: 100%;
+}
+
 .table td {
   word-wrap: break-word;
   white-space: normal;
@@ -564,6 +568,9 @@ h1 {
   align-items: center;
   padding: 10px;
   color: white;
+  /* position: fixed;
+  bottom: 0;
+  width: 100%; */
 }
 
 .upper {
@@ -581,7 +588,3 @@ h1 {
   border: 5px solid black;
   height: max-content;
 } */
-
-.table{
-  width: 100%;
-}
