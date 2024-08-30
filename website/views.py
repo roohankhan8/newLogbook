@@ -1,11 +1,12 @@
-from email.utils import parsedate
-from django.db import connections
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
+from django.db import connections
 from django.contrib import messages
-from django.urls import reverse
 
+from django.urls import reverse
+from email.utils import parsedate
 from website.utils import has_data_changed
+
 from .forms import *
 from .models import *
 
@@ -40,8 +41,8 @@ def deleteInfo(request, pk, sk, tk, fk):
 
 
 def editInfo(request, pk, sk, tk, fk):
-    record = get_object_or_404(models[pk], id=sk)
-    print(record.inventor)
+    record = get_object_or_404(models[tk], id=fk)
+    return HttpResponse(record.inventor)
 
 
 def login(request):
@@ -63,6 +64,25 @@ def login(request):
     return render(request, "login.html")
 
 
+# def teams(request, pk):
+#     student_id = pk
+#     with connections["user_database"].cursor() as cursor:
+#         # Get all team IDs associated with the student in one query
+#         cursor.execute(
+#             """
+#             SELECT tm.team_id, t.name 
+#             FROM tbl_team_member tm
+#             JOIN tbl_team t ON tm.team_id = t.id
+#             WHERE tm.student_id = %s
+#             """, [student_id]
+#         )
+#         teams_data = cursor.fetchall()
+#     # Create a dictionary with team_id as key and team name as value
+#     teams = {team_id: team_name for team_id, team_name in teams_data}
+#     context = {"pk": pk, "teams": teams}
+#     return render(request, "teams.html", context)
+
+
 def teams(request, pk):
     student_id = pk
     with connections["user_database"].cursor() as cursor:
@@ -70,9 +90,9 @@ def teams(request, pk):
             "SELECT * FROM tbl_team_member WHERE student_id=%s", [student_id]
         )
         user_data = cursor.fetchall()
+    teams = {}
     team_ids = []
     all_teams = []
-    teams = {}
     if user_data:
         for i in user_data:
             team_ids.append(i[1])
@@ -103,8 +123,6 @@ def courseOutline(request, pk, sk):
 
 
 def flowchart(request, pk, sk):
-    if request.method == "POST":
-        return redirect("step_1", pk, sk)
     context = {"pk": pk, "sk": sk}
     return render(request, "flowchart.html", context)
 
