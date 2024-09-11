@@ -1,4 +1,4 @@
-{% extends 'layout.html' %} {% block title %}TEAMS{%endblock %} {% load static %} {% block content %}
+{% extends 'layout.html' %} {% block title %}Your Logbooks{%endblock %} {% load static %} {% block content %}
 <style>
   .code {
     font-size: 0.5em;
@@ -11,16 +11,11 @@
     display: flex;
     justify-content: space-evenly;
   }
-  .footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-  }
 </style>
 <div style="padding: 2em;">
   <h1>{{user.0.3}} {{user.0.4}}</h1>
   <p>
-    <small>You are participating in this following group</small>
+    <small>You are participating in this following groups</small>
   </p>
   <div id="main-div" class="items-center py-5">
     <ul>

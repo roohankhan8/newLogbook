@@ -29,10 +29,14 @@ SENSE{%endblock %} {% load static %} {% block content %}
             aria-expanded="true"
             aria-controls="panelsStayOpen-collapseOne"
           >
-            <label style="font-weight: bolder;" for="problem">Choose a problem:</label>
-            <select class="p-1 rounded mx-2 " id="problem" name="problem">
-              {% for problem in step1 %}
-              <option value={{problem.identify_problems}}>{{problem.identify_problems}}</option>
+            <label style="font-weight: bolder" for="problem"
+              >Choose a problem:</label
+            >
+            <select class="p-1 rounded mx-2" id="problem" name="problem">
+              {% for problem in data %} 
+              <option value="{{problem.identify_problems}}">
+                {{problem.identify_problems}}
+              </option>
               {% endfor %}
             </select>
           </button>
@@ -54,6 +58,7 @@ SENSE{%endblock %} {% load static %} {% block content %}
                       placeholder="Person name"
                       id="name"
                       name="name"
+                      value="{{record.name}}"
                     />
                   </div>
                 </div>
@@ -67,6 +72,7 @@ SENSE{%endblock %} {% load static %} {% block content %}
                       placeholder="Select age"
                       id="age"
                       name="age"
+                      value="{{record.age}}"
                     />
                   </div>
                 </div>
@@ -79,6 +85,7 @@ SENSE{%endblock %} {% load static %} {% block content %}
                       placeholder="Write comments"
                       id="comment"
                       name="comment"
+                      value="{{record.comment}}"
                     />
                   </div>
                 </div>
@@ -90,14 +97,16 @@ SENSE{%endblock %} {% load static %} {% block content %}
     </div>
     {% include 'table_buttons.html' %}
   </form>
-  {% if persons %}
+  {% if all_records %}
   <div class="container mt-5 text-center">
-    <h2>Problems</h2>
+    {% regroup all_records|dictsort:'problem' by problem as grouped_problems %}
+    {% for group in grouped_problems %}
+    <h2>{{ group.grouper }}</h2>
     <table class="table table-bordered">
       <thead class="thead-light">
         <tr>
           <!-- <th scope="col">User</th> -->
-          <th scope="col">Problem</th>
+          <!-- <th scope="col">Problem</th> -->
           <th scope="col">Name</th>
           <th scope="col">Age</th>
           <th scope="col">Comment</th>
@@ -106,15 +115,21 @@ SENSE{%endblock %} {% load static %} {% block content %}
         </tr>
       </thead>
       <tbody>
-        {% for info in persons %}
+        {% for info in group.list %}
         <tr>
           <!-- <td>{{ info.userId }}</td> -->
-          <td>{{ info.problem }}</td>
+          <!-- <td>{{ info.problem }}</td> -->
           <td>{{ info.name }}</td>
           <td>{{ info.age }}</td>
           <td>{{ info.comment }}</td>
           <!-- <td>{{ info.date_updated }}</td> -->
           <td>
+            <a
+              style="display: inline"
+              href="{% url 'showInfo' pk sk 3 info.id 1 %}"
+            >
+              <button class="btn btn-success" type="submit">Edit</button>
+            </a>
             <form
               action="{% url 'deleteInfo' 3 info.id pk sk %}"
               method="post"
@@ -128,6 +143,7 @@ SENSE{%endblock %} {% load static %} {% block content %}
         {% endfor %}
       </tbody>
     </table>
+    {% endfor %}
   </div>
   {% endif %}
 </div>

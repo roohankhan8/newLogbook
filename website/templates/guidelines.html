@@ -8,52 +8,52 @@
 <!-- second header ends  -->
 <!-- Question Answeer Box -->
 <div class="QA_container mb-1 p-5">
-  <form method="post">
-    {% csrf_token %}
-    <div class="form-group">
-      <label class="form-label" for="inputlg"><b>Guidelines</b> </label>
-      <label class="form-label" for="inputlg" style="color: green">
-        Once the prototype of the product is ready, there are four decisions you
-        need to make to see how you can effectively market this product. These
-        are price, branding, value and how you will sell the product.
-        <br />
-        Decide on a catchy name for the product that will appeal to most people
-        and also convey the purpose of the product. Think about words and word
-        combinations that describe your product and the solution it provides.
-        Then use them to decide on a name.<br />
-        <br />
-      </label>
-    </div>
-    <!-- Buttons-->
-<div class="container">
-  <div class="row">
-    <div class="col-6 d-flex align-items-center justify-content-start">
-      <button
-        class="btn btn-success mr-1"
-        type="submit"
-        name="action"
-        value="back"
-      >
-        Back
-      </button>
-    </div>
-    <div class="col-6 d-flex align-items-center justify-content-end">
+  <div class="form-group">
+    <label class="form-label" for="inputlg"><b>Guidelines</b> </label>
+    <label class="form-label" for="inputlg" style="color: green">
+      Once the prototype of the product is ready, there are four decisions you
+      need to make to see how you can effectively market this product. These are
+      price, branding, value and how you will sell the product.
+      <br />
+      Decide on a catchy name for the product that will appeal to most people
+      and also convey the purpose of the product. Think about words and word
+      combinations that describe your product and the solution it provides. Then
+      use them to decide on a name.<br />
+      <br />
+    </label>
+  </div>
+  <!-- Buttons-->
+  <div class="container">
+    <div class="row">
+      <div class="col-6 d-flex align-items-center justify-content-start">
+        <a href="{% url 'stepSeven' pk sk %}">
+          <button
+            class="btn btn-success mr-1"
+            type="submit"
+            name="action"
+            value="back"
+          >
+            Back
+          </button>
+        </a>
+      </div>
       <div class="col-6 d-flex align-items-center justify-content-end">
-        <button
-          class="btn btn-success ml-2"
-          type="submit"
-          name="action"
-          value="next"
-        >
-          Next
-        </button>
+        <div class="col-6 d-flex align-items-center justify-content-end">
+          <a href="{% url 'stepEightOne' pk sk %}">
+            <button
+              class="btn btn-success ml-2"
+              type="submit"
+              name="action"
+              value="next"
+            >
+              Next
+            </button>
+          </a>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<!-- Buttons ends-->
-
-  </form>
+  <!-- Buttons ends-->
 </div>
 <!-- Question Answeer Box  Ends-->
 {% endblock %}

@@ -28,6 +28,7 @@
         "
         placeholder="Problem Name"
         name="identify_problems"
+        value="{{record.identify_problems}}"
       />
       <input
         class="form-control"
@@ -38,11 +39,13 @@
         "
         placeholder="Problem"
         name="problems"
+        value="{{record.problems}}"
+
       />
     </div>
     {% include 'table_buttons.html' %}
   </form>
-  {% if step1 %}
+  {% if all_records %}
   <div class="container mt-5 text-center">
     <h2>Problems</h2>
     <table class="table table-bordered">
@@ -56,13 +59,19 @@
         </tr>
       </thead>
       <tbody>
-        {% for problem in step1 %}
+        {% for problem in all_records %}
         <tr>
           <!-- <td>{{ problem.userId }}</td> -->
           <td>{{ problem.identify_problems }}</td>
           <td>{{ problem.problems }}</td>
           <!-- <td>{{ problem.date_updated }}</td> -->
           <td>
+            <a
+              style="display: inline"
+              href="{% url 'showInfo' pk sk 2 problem.id 0 %}"
+            >
+              <button class="btn btn-success" type="submit">Edit</button>
+            </a>
             <form action="{% url 'deleteInfo' 2 problem.id pk sk %}" method="post" style="display:inline;">
               {% csrf_token %}
               <button class="btn btn-danger" type="submit">Delete</button>

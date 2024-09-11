@@ -32,6 +32,7 @@
           name="expert_name"
           id="expert_name"
           placeholder="Enter here"
+          value="{{record.expert_name}}"
         />
         <label for="expert_credentials">Credentials of the experts: </label>
         <input
@@ -39,6 +40,7 @@
           name="expert_credentials"
           id="expert_credentials"
           placeholder="Enter here"
+          value="{{record.expert_credentials}}"
         />
         <label for="problem_identified">Problem user/expert identified: </label>
         <textarea
@@ -46,20 +48,20 @@
           rows="5"
           id="problem_identified"
           placeholder="Enter here"
-        ></textarea>
+        >{{record.problem_identified}}</textarea>
         <label for="problem_faced">Problem you think you will face: </label>
         <textarea
           name="problem_faced"
           rows="5"
           id="problem_faced"
           placeholder="Enter here"
-        ></textarea>
+        >{{record.problem_faced}}</textarea>
       </div>
     </div>
     {% include 'table_buttons.html' %}
   </form>
   <!-- Question Answeer Box  Ends-->
-  {% if issues %}
+  {% if all_records %}
   <div class="container mt-5 text-center">
     <h2>Issues</h2>
     <table class="table table-bordered">
@@ -75,7 +77,7 @@
         </tr>
       </thead>
       <tbody>
-        {% for issue in issues %}
+        {% for issue in all_records %}
         <tr>
           <!-- <td>{{ issue.userId }}</td> -->
           <td>{{ issue.expert_name }}</td>
@@ -84,6 +86,12 @@
           <td>{{ issue.problem_faced }}</td>
           <!-- <td>{{ issue.date_updated }}</td> -->
           <td>
+            <a
+              style="display: inline"
+              href="{% url 'showInfo' pk sk 5 issue.id 0 %}"
+            >
+              <button class="btn btn-success" type="submit">Edit</button>
+            </a>
             <form action="{% url 'deleteInfo' 5 issue.id pk sk %}" method="post" style="display:inline;">
               {% csrf_token %}
               <button class="btn btn-danger" type="submit">Delete</button>
