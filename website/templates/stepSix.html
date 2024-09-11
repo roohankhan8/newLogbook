@@ -32,12 +32,14 @@
         "
         placeholder="Your Answer"
         name="arrange_material"
+        value="{{record.arrange_material}}"
       />
-      <input class="" type="file" name="prototype" id="" />
+      <input class="" type="file" name="prototype" id="" value="{{record.prototype}}" />
+      {% include 'messages.html' %}
     </div>
     {% include 'table_buttons.html' %}
   </form>
-  {% if step6 %}
+  {% if all_records %}
   <div class="container mt-5 text-center">
     <h2>Issues</h2>
     <table class="table table-bordered">
@@ -51,7 +53,7 @@
         </tr>
       </thead>
       <tbody>
-        {% for info in step6 %}
+        {% for info in all_records %}
         <tr>
           <!-- <td>{{ info.userId }}</td> -->
           <td>{{ info.arrange_material }}</td>
@@ -61,7 +63,14 @@
             >
           </td>
           <!-- <td>{{ info.date_updated }}</td> -->
-          <td><form action="{% url 'deleteInfo' 6 info.id pk sk %}" method="post" style="display:inline;">
+          <td>
+            <a
+              style="display: inline"
+              href="{% url 'showInfo' pk sk 6 info.id 0 %}"
+            >
+              <button class="btn btn-success" type="submit">Edit</button>
+            </a>
+            <form action="{% url 'deleteInfo' 6 info.id pk sk %}" method="post" style="display:inline;">
             {% csrf_token %}
             <button class="btn btn-danger" type="submit">Delete</button>
           </form>

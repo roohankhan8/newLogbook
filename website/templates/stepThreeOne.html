@@ -30,11 +30,12 @@
         "
         placeholder="Your Answer"
         name="research"
+        value="{{record.research}}"
       />
     </div>
     {% include 'table_buttons.html' %}
   </form>
-  {% if researches %}
+  {% if all_records %}
   <div class="container mt-5 text-center">
     <h2>Researches</h2>
     <table class="table table-bordered">
@@ -47,12 +48,18 @@
         </tr>
       </thead>
       <tbody>
-        {% for research in researches %}
+        {% for research in all_records %}
         <tr>
           <!-- <td>{{ research.userId }}</td> -->
           <td>{{ research.research }}</td>
           <!-- <td>{{ research.date_updated }}</td> -->
           <td>
+            <a
+              style="display: inline"
+              href="{% url 'showInfo' pk sk 4 research.id 0 %}"
+            >
+              <button class="btn btn-success" type="submit">Edit</button>
+            </a>
             <form action="{% url 'deleteInfo' 4 research.id pk sk %}" method="post" style="display:inline;">
               {% csrf_token %}
               <button class="btn btn-danger" type="submit">Delete</button>

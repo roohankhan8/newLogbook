@@ -4,21 +4,21 @@ from .views import *
 urlpatterns = [
     path("", login, name="login"),
     path("teams/<str:pk>/", teams, name="teams"),
-    path(
-        "courseOutline/<str:pk>/<str:sk>/", courseOutline, name="courseOutline"
-    ),
+    path("courseOutline/<str:pk>/<str:sk>/", courseOutline, name="courseOutline"),
     path(
         "recordOfInvention/<str:pk>/<str:sk>/",
         recordOfInvention,
         name="recordOfInvention",
     ),
     path(
-        "statementOfOriginality/<str:pk>/<str:sk>/<str:tk>/<str:fk>",
+        "statementOfOriginality/<str:pk>/<str:sk>/",
         statementOfOriginality,
         name="statementOfOriginality",
-    ),  
-    path("deleteInfo/<str:pk>/<str:sk>/<str:tk>/<str:fk>", deleteInfo, name="deleteInfo"),
-    path("editInfo/<str:pk>/<str:sk>/<str:tk>/<str:fk>", editInfo, name="editInfo"),
+    ),
+    path(
+        "deleteInfo/<str:pk>/<str:sk>/<str:tk>/<str:fk>", deleteInfo, name="deleteInfo"
+    ),
+    path("showInfo/<str:pk>/<str:sk>/<str:tk>/<str:fk>/<str:args>", showInfo, name="showInfo"),
     path("flowchart/<str:pk>/<str:sk>/", flowchart, name="flowchart"),
     path("stepOne/<str:pk>/<str:sk>/", stepOne, name="stepOne"),
     path("stepTwoOne/<str:pk>/<str:sk>/", stepTwoOne, name="stepTwoOne"),
@@ -33,7 +33,7 @@ urlpatterns = [
     path("stepFiveOne/<str:pk>/<str:sk>/", stepFiveOne, name="stepFiveOne"),
     path("stepFiveTwo/<str:pk>/<str:sk>/", stepFiveTwo, name="stepFiveTwo"),
     path("stepSix/<str:pk>/<str:sk>/", stepSix, name="stepSix"),
-    path('viewImage/<int:pk>/', viewImage, name='viewImage'),
+    path("viewImage/<int:pk>/", viewImage, name="viewImage"),
     path("stepSeven/<str:pk>/<str:sk>/", stepSeven, name="stepSeven"),
     path("guidelines/<str:pk>/<str:sk>/", guidelines, name="guidelines"),
     path("stepEightOne/<str:pk>/<str:sk>/", stepEightOne, name="stepEightOne"),

@@ -27,6 +27,7 @@ MARKET{%endblock %} {% load static %} {% block content %}
           id="age"
           name="age"
           placeholder="Enter here"
+          value="{{record.age}}"
         />
       </div>
       <div class="form-group">
@@ -37,6 +38,7 @@ MARKET{%endblock %} {% load static %} {% block content %}
           id="gender"
           name="gender"
           placeholder="Enter here"
+          value="{{record.gender}}"
         />
       </div>
       <div class="form-group">
@@ -47,6 +49,7 @@ MARKET{%endblock %} {% load static %} {% block content %}
           id="education"
           name="education"
           placeholder="Enter here"
+          value="{{record.education}}"
         />
       </div>
       <div class="form-group">
@@ -57,6 +60,7 @@ MARKET{%endblock %} {% load static %} {% block content %}
           id="household"
           name="household"
           placeholder="Enter here"
+          value="{{record.household}}"
         />
       </div>
       <div class="form-group">
@@ -67,6 +71,7 @@ MARKET{%endblock %} {% load static %} {% block content %}
           id="marital"
           name="marital_status"
           placeholder="Enter here"
+          value="{{record.marital_status}}"
         />
       </div>
     </div>
@@ -108,7 +113,7 @@ MARKET{%endblock %} {% load static %} {% block content %}
     <!-- Buttons ends-->
   </form>
   <!-- Question Answeer Box Ends-->
-  {% if customers %}
+  {% if all_records %}
   <div class="container mt-5 text-center">
     <h2>Customers</h2>
     <table class="table table-bordered">
@@ -125,7 +130,7 @@ MARKET{%endblock %} {% load static %} {% block content %}
         </tr>
       </thead>
       <tbody>
-        {% for info in customers %}
+        {% for info in all_records %}
         <tr>
           <!-- <td>{{ info.userId }}</td> -->
           <td>{{ info.age }}</td>
@@ -135,6 +140,12 @@ MARKET{%endblock %} {% load static %} {% block content %}
           <td>{{ info.marital_status }}</td>
           <!-- <td>{{ info.date_updated }}</td> -->
           <td>
+            <a
+              style="display: inline"
+              href="{% url 'showInfo' pk sk 7 info.id 0 %}"
+            >
+              <button class="btn btn-success" type="submit">Edit</button>
+            </a>
             <form
               action="{% url 'deleteInfo' 7 info.id pk sk %}"
               method="post"

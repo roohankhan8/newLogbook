@@ -97,7 +97,7 @@ Originality{%endblock%} {% load static %} {% block content %}
     <!-- Question Answeer Box  Ends-->
     {% include 'table_buttons.html' %}
   </form>
-  {% if statement %}
+  {% if all_records %}
   <div class="container mt-5 text-center">
     <h2>Statements</h2>
     <table class="table table-bordered">
@@ -112,7 +112,7 @@ Originality{%endblock%} {% load static %} {% block content %}
         </tr>
       </thead>
       <tbody>
-        {% for info in statement %}
+        {% for info in all_records %}
         <tr>
           <!-- <td>{{ info.userId }}</td> -->
           <td>{{ info.inventor }}</td>
@@ -122,9 +122,9 @@ Originality{%endblock%} {% load static %} {% block content %}
           <td>
             <a
               style="display: inline"
-              href="{% url 'editInfo' pk sk 1 info.id %}"
+              href="{% url 'showInfo' pk sk 1 info.id 0 %}"
             >
-              <button class="btn btn-info" type="submit">Edit</button>
+              <button class="btn btn-success" type="submit">Edit</button>
             </a>
             <form
               action="{% url 'deleteInfo' 1 info.id pk sk %}"
